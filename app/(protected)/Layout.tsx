@@ -1,5 +1,7 @@
+"use client";
+
 const Protected = () => {
-    return <div></div>;
+    return <div className='overflow-hidden'></div>;
 };
 
 export default Protected;

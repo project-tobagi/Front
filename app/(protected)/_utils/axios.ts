@@ -2,7 +2,6 @@
 import axios from "axios";
 
 // * etc
-
 const defaultOptions = {
     baseURL: process.env.API_URL,
     headers: {
