@@ -1,7 +1,8 @@
-import NaverMapLayout from "../../components/map/Layout";
+import NaverMapLayout from "../../components/naver-map/Layout";
+import KakaoMapLayout from "../../components/kakao-map/Layout";
 
 const HomePage = () => {
-    return <NaverMapLayout />;
+    return <KakaoMapLayout />;
 };
 
 export default HomePage;
