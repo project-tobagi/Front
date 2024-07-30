@@ -60,7 +60,7 @@ const Home = () => {
                 params: { query: address },
                 headers: {
                     Authorization: `KakaoAK ${process.env.KAKAO_APP_KEY}`,
-                    KA: "sdk/1.0 os/javascript lang/ko device/desktop origin/http://localhost:3002",
+                    KA: `sdk/1.0 os/javascript lang/ko device/desktop origin/${process.env.DEPLOY_URL}`,
                 },
             }
         );
@@ -84,7 +84,7 @@ const Home = () => {
                 },
                 headers: {
                     Authorization: `KakaoAK ${process.env.KAKAO_APP_KEY}`,
-                    KA: "sdk/1.0 os/javascript lang/ko device/desktop origin/http://localhost:3002",
+                    KA: `sdk/1.0 os/javascript lang/ko device/desktop origin/${process.env.DEPLOY_URL}`,
                 },
             }
         );
@@ -112,7 +112,7 @@ const Home = () => {
                     },
                     headers: {
                         Authorization: `KakaoAK ${process.env.KAKAO_APP_KEY}`,
-                        KA: "sdk/1.0 os/javascript lang/ko device/desktop origin/http://localhost:3002",
+                        KA: `sdk/1.0 os/javascript lang/ko device/desktop origin/${process.env.DEPLOY_URL}`,
                     },
                 }
             );
