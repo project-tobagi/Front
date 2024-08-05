@@ -20,7 +20,7 @@ const Left = () => {
     ];
 
     return (
-        <div className='h-full border-[1px] border-[#eaeaea] rounded-lg flex justify-center pt-4'>
+        <div className='h-full w-16 border-[1px] border-[#eaeaea] rounded-lg flex justify-center pt-4'>
             <div className='flex flex-col gap-4'>
                 {_.map(sidebarTypes, (item: any) => {
                     return (

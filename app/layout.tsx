@@ -7,6 +7,9 @@ import Script from "next/script";
 import Protected from "./(protected)/Layout";
 import AppLayout from "./(protected)/components/layout/Layout";
 
+// * etc
+import { ENV } from "./(protected)/_utils/constants";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
