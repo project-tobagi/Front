@@ -36,7 +36,7 @@ export default function RootLayout({
                 </Protected>
                 <Script
                     type='text/javascript'
-                    src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_APP_KEY}&autoload=false`}
+                    src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_APP_KEY}&autoload=false&libraries=services`}
                 ></Script>
             </body>
         </html>

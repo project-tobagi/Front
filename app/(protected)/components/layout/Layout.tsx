@@ -13,7 +13,7 @@ const Layout = ({ children }: any) => {
             <Header />
 
             <div className='h-[calc(100%-44px)] p-4'>
-                <DivideGroup>
+                <DivideGroup className=''>
                     <DividePanel size={5}>
                         <Left />
                     </DividePanel>

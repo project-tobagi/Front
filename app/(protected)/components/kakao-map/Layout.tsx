@@ -1,16 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Maps from "./Maps";
 import Script from "next/script";
+import { useAtom, useAtomValue } from "jotai";
+import { locationState } from "../../_store/location";
 
-const Home = () => {
+const KakaoMapLayout = () => {
     const [formData, setFormData] = useState({ start: "", end: "" });
     const [midpoint, setMidpoint]: any = useState(null);
     const [places, setPlaces]: any = useState([]);
     const [subwayStation, setSubwayStation] = useState(null);
     const [loaded, setLoaded] = useState(false);
+
+    const [map, setMap] = useState<any>();
+
+    const [coordinates, setCoordinates] = useState({
+        // 지도의 초기 위치
+        center: { lat: 33.450701, lng: 126.570667 },
+        // 지도 위치 변경시 panto를 이용할지에 대해서 정의
+        isPanto: false,
+    });
+
+    const location = useAtomValue(locationState);
 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
@@ -60,7 +73,7 @@ const Home = () => {
                 params: { query: address },
                 headers: {
                     Authorization: `KakaoAK ${process.env.KAKAO_APP_KEY}`,
-                    KA: `sdk/1.0 os/javascript lang/ko device/desktop origin/${process.env.DEPLOY_URL}`,
+                    KA: `sdk/1.0 os/javascript lang/ko device/desktop origin/${process.env.KAKAO_APP_KEY}`,
                 },
             }
         );
@@ -84,7 +97,7 @@ const Home = () => {
                 },
                 headers: {
                     Authorization: `KakaoAK ${process.env.KAKAO_APP_KEY}`,
-                    KA: `sdk/1.0 os/javascript lang/ko device/desktop origin/${process.env.DEPLOY_URL}`,
+                    KA: `sdk/1.0 os/javascript lang/ko device/desktop origin/${process.env.KAKAO_APP_KEY}`,
                 },
             }
         );
@@ -112,7 +125,7 @@ const Home = () => {
                     },
                     headers: {
                         Authorization: `KakaoAK ${process.env.KAKAO_APP_KEY}`,
-                        KA: `sdk/1.0 os/javascript lang/ko device/desktop origin/${process.env.DEPLOY_URL}`,
+                        KA: `sdk/1.0 os/javascript lang/ko device/desktop origin/${process.env.KAKAO_APP_KEY}`,
                     },
                 }
             );
@@ -131,6 +144,35 @@ const Home = () => {
         }
     };
 
+    useEffect(() => {
+        if (!map) return;
+        const ps = new kakao.maps.services.Places();
+
+        ps.keywordSearch(location, (data, status, _pagination) => {
+            if (status === kakao.maps.services.Status.OK) {
+                // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+                // LatLngBounds 객체에 좌표를 추가합니다
+                const bounds = new kakao.maps.LatLngBounds();
+                let markers = [];
+
+                for (var i = 0; i < data.length; i++) {
+                    // @ts-ignore
+                    markers.push({
+                        position: {
+                            lat: data[i].y,
+                            lng: data[i].x,
+                        },
+                        content: data[i].place_name,
+                    });
+                    // @ts-ignore
+                    bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+                }
+
+                // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+                map.setBounds(bounds);
+            }
+        });
+    }, [map, location]);
     return (
         <div>
             {/* <div className=''>
@@ -161,7 +203,7 @@ const Home = () => {
             </div> */}
 
             <Script
-                src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_APP_KEY}&autoload=false`} // autoload 파라메터는 false로 지정
+                src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_APP_KEY}&autoload=false&libraries=services`} // autoload 파라메터는 false로 지정
                 onLoad={() => {
                     kakao.maps.load(() => {
                         setLoaded(true);
@@ -172,9 +214,11 @@ const Home = () => {
             <div className=''>
                 {loaded && (
                     <Maps
+                        coordinates={coordinates}
                         midpoint={midpoint}
                         places={places}
                         subwayStation={subwayStation}
+                        setMap={setMap}
                     />
                 )}
             </div>
@@ -199,4 +243,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default KakaoMapLayout;

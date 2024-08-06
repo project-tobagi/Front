@@ -3,6 +3,9 @@
 // * basic
 import { useState, useRef, useEffect } from "react";
 
+// * install libraries
+import _ from "lodash";
+
 // * components
 import Icon from "../Icon";
 import { Input } from "@/components/ui/input";
@@ -71,7 +74,33 @@ const Header = () => {
                                 onClick={handleFocus}
                                 className='w-full rounded-full border-none shadow-[0px_4px_4px_0px_#00000040] ring-1 ring-gray-100 pl-12 py-2 font-light text-sm'
                             >
-                                여기를 클릭하여 궁금한 동네를 찾아보세요.
+                                {searchContents !== null ? (
+                                    <div className='flex items-center gap-2 font-normal'>
+                                        {_.map(
+                                            searchContents,
+                                            (item, index) => {
+                                                if (item === ">") {
+                                                    return (
+                                                        <span
+                                                            key={index}
+                                                            className='text-blue-500 font-bold'
+                                                        >
+                                                            {item}
+                                                        </span>
+                                                    );
+                                                } else {
+                                                    return (
+                                                        <span key={index}>
+                                                            {item}
+                                                        </span>
+                                                    );
+                                                }
+                                            }
+                                        )}
+                                    </div>
+                                ) : (
+                                    "여기를 클릭하여 궁금한 동네를 찾아보세요"
+                                )}
                             </div>
 
                             <AreaSelector
