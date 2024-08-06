@@ -30,15 +30,18 @@ const AreaSelectorLayout = ({
 }) => {
     const [selectedSido, setSelectedSido] = useState<any>({
         sido: null,
+        codeNm: null,
     });
     const [selectedSigugun, setSelectedSigugun] = useState<any>({
         sido: null,
         sigugun: null,
+        codeNm: null,
     });
     const [selectedDong, setSelectedDong] = useState<any>({
         sido: null,
         sigugun: null,
         dong: null,
+        codeNm: null,
     });
 
     const [location, setLocation] = useAtom(locationState);
@@ -46,22 +49,24 @@ const AreaSelectorLayout = ({
     const initArea = () => {
         setSelectedSido({
             sido: null,
+            codeNm: null,
         });
         setSelectedSigugun({
             sido: null,
             sigugun: null,
+            codeNm: null,
         });
         setSelectedDong({
             sido: null,
             sigugun: null,
             dong: null,
+            codeNm: null,
         });
     };
-
     // 선택한 동네 저장
     const handleClickSaveSelectedArea = () => {
         setSearchContents(() => {
-            if (selectedDong === null) {
+            if (selectedDong?.dong === null && selectedDong?.codeNm === null) {
                 return [selectedSido.codeNm, ">", selectedSigugun.codeNm];
             } else {
                 return [
@@ -69,20 +74,25 @@ const AreaSelectorLayout = ({
                     ">",
                     selectedSigugun.codeNm,
                     ">",
-                    selectedDong.codeNm,
+                    selectedDong?.codeNm,
                 ];
             }
         });
 
-        setLocation(
-            selectedSido.codeNm +
-                " " +
-                selectedSigugun.codeNm +
-                " " +
-                selectedDong.codeNm
-        );
+        setLocation(() => {
+            if (selectedDong?.dong === null && selectedDong?.codeNm === null) {
+                return selectedSido?.codeNm + " " + selectedSigugun?.codeNm;
+            } else {
+                return (
+                    selectedSido?.codeNm +
+                    " " +
+                    selectedSigugun?.codeNm +
+                    " " +
+                    selectedDong?.codeNm
+                );
+            }
+        });
     };
-
     useEffect(() => {
         if (!open) {
             initArea();
@@ -120,7 +130,12 @@ const AreaSelectorLayout = ({
                                                     .join(" ")}
                                                 onClick={() => {
                                                     setSelectedSido(data);
-                                                    setSelectedDong(null);
+                                                    setSelectedDong({
+                                                        sido: null,
+                                                        sigugun: null,
+                                                        dong: null,
+                                                        codeNm: null,
+                                                    });
                                                     setSelectedSigugun(null);
                                                 }}
                                             >
@@ -174,9 +189,12 @@ const AreaSelectorLayout = ({
                                                             .filter(Boolean)
                                                             .join(" ")}
                                                         onClick={() => {
-                                                            setSelectedDong(
-                                                                null
-                                                            );
+                                                            setSelectedDong({
+                                                                sido: null,
+                                                                sigugun: null,
+                                                                dong: null,
+                                                                codeNm: null,
+                                                            });
                                                             setSelectedSigugun(
                                                                 data
                                                             );
@@ -232,7 +250,7 @@ const AreaSelectorLayout = ({
                                                         className={[
                                                             `py-1 px-3 hover:bg-gray-100 text-sm cursor-pointer`,
                                                             data.dong ===
-                                                                selectedDong &&
+                                                                selectedDong?.dong &&
                                                                 "bg-gray-100 flex justify-between items-center",
                                                         ]
                                                             .filter(Boolean)
@@ -246,7 +264,7 @@ const AreaSelectorLayout = ({
                                                         {data.codeNm}
 
                                                         {data.dong ===
-                                                            selectedDong && (
+                                                            selectedDong?.dong && (
                                                             <Icon
                                                                 w={3}
                                                                 h={3}
