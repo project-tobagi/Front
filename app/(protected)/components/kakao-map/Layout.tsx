@@ -6,6 +6,13 @@ import Maps from "./Maps";
 import Script from "next/script";
 import { useAtom, useAtomValue } from "jotai";
 import { locationState } from "../../_store/location";
+import _ from "lodash";
+import proj4 from "proj4";
+/**
+ * @param location '', 선택한 동네 (ex:대구광역시 북구 태전동)
+ * @param coordinates {center:{lat:0,lng:0}, isPanto: false}, 선택한 동네 좌표
+ * @returns
+ */
 
 const KakaoMapLayout = () => {
     const [formData, setFormData] = useState({ start: "", end: "" });
@@ -13,9 +20,15 @@ const KakaoMapLayout = () => {
     const [places, setPlaces]: any = useState([]);
     const [subwayStation, setSubwayStation] = useState(null);
     const [loaded, setLoaded] = useState(false);
+    const [polygonPath, setPolygonPath]: any = useState([]);
+    const [overlayCoordinates, setOverlayCoordinates] = useState<any>(null);
 
+    const [overlayVisible, setOverlayVisible] = useState(false);
+
+    // 지도 정보
     const [map, setMap] = useState<any>();
 
+    // 선택한 동네 좌표
     const [coordinates, setCoordinates] = useState({
         // 지도의 초기 위치
         center: { lat: 33.450701, lng: 126.570667 },
@@ -23,6 +36,7 @@ const KakaoMapLayout = () => {
         isPanto: false,
     });
 
+    // 선택한 동네 text
     const location = useAtomValue(locationState);
 
     const handleChange = (e: any) => {
@@ -56,8 +70,6 @@ const KakaoMapLayout = () => {
                 midpoint.lat,
                 midpoint.lng
             );
-
-            console.log(nearbySubway);
 
             setPlaces(nearbyPlaces);
             setSubwayStation(nearbySubway);
@@ -147,8 +159,10 @@ const KakaoMapLayout = () => {
     useEffect(() => {
         if (!map) return;
         const ps = new kakao.maps.services.Places();
-
-        ps.keywordSearch(location, (data, status, _pagination) => {
+        const joinLocation = [location.sido, location.sigugun, location.dong]
+            .filter(Boolean)
+            .join("");
+        ps.keywordSearch(joinLocation, (data, status, _pagination) => {
             if (status === kakao.maps.services.Status.OK) {
                 // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
                 // LatLngBounds 객체에 좌표를 추가합니다
@@ -170,11 +184,22 @@ const KakaoMapLayout = () => {
 
                 // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
                 map.setBounds(bounds);
+
+                setOverlayVisible(true);
+                setOverlayCoordinates(markers[0].position);
             }
         });
+
+        if (location !== null && location !== undefined) {
+            // * polygon api 넣을 곳
+            // setPolygonPath(() => {
+            //     return _.find(polygon, {properties : {EMD_KOR_NM : ''}});
+            // });
+        }
     }, [map, location]);
+
     return (
-        <div>
+        <div className='w-full'>
             {/* <div className=''>
                 <h1>중간 지점 찾기</h1>
                 <form onSubmit={handleSubmit}>
@@ -219,6 +244,10 @@ const KakaoMapLayout = () => {
                         places={places}
                         subwayStation={subwayStation}
                         setMap={setMap}
+                        polygonPath={polygonPath}
+                        overlayVisible={overlayVisible}
+                        setOverlayVisible={setOverlayVisible}
+                        overlayCoordinates={overlayCoordinates}
                     />
                 )}
             </div>

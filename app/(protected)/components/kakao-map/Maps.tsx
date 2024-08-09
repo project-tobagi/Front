@@ -1,12 +1,28 @@
 "use client";
 
 // * basic
-import { useEffect, useRef } from "react";
-import { Map, Polygon } from "react-kakao-maps-sdk";
+import { useState, useEffect, useRef } from "react";
+import { Map, Polygon, CustomOverlayMap } from "react-kakao-maps-sdk";
+
+// * components
+import AreaOverlay from "./AreaOverlay";
 
 const Maps = (props: any) => {
-    const { midpoint, coordinates, places, subwayStation, setMap } = props;
+    const {
+        midpoint,
+        coordinates,
+        places,
+        subwayStation,
+        setMap,
+        polygonPath,
+        overlayVisible,
+        setOverlayVisible,
+        overlayCoordinates,
+    } = props;
     const mapRef = useRef<HTMLDivElement>(null);
+
+    let defaultLevel = 3;
+    const [level, setLevel] = useState(defaultLevel);
 
     useEffect(() => {
         if (midpoint && mapRef.current && window.kakao !== undefined) {
@@ -59,10 +75,15 @@ const Maps = (props: any) => {
             className='rounded-lg w-full h-[calc(100vh-6rem)]'
             center={coordinates.center}
             isPanto={coordinates.isPanto}
-            level={5} // 지도의 확대 레벨
+            level={level} // 지도의 확대 레벨
             onCreate={setMap}
         >
-            {/* <Polygon
+            <AreaOverlay
+                visible={overlayVisible}
+                setVisible={setOverlayVisible}
+                coordinates={overlayCoordinates}
+            />
+            <Polygon
                 path={polygonPath}
                 strokeWeight={3} // 선의 두께입니다
                 strokeColor={"#39DE2A"} // 선의 색깔입니다
@@ -78,7 +99,7 @@ const Maps = (props: any) => {
                 //     console.log(mouseEvent)
                 //     setDownCount(downCount + 1)
                 //   }}
-            /> */}
+            />
         </Map>
     );
 };

@@ -14,11 +14,11 @@ const Layout = ({ children }: any) => {
 
             <div className='h-[calc(100%-44px)] p-4'>
                 <DivideGroup className=''>
-                    <DividePanel size={5}>
+                    <DividePanel>
                         <Left />
                     </DividePanel>
 
-                    <DividePanel size={95}>
+                    <DividePanel className='w-full'>
                         <Contents>{children}</Contents>
                     </DividePanel>
                 </DivideGroup>
