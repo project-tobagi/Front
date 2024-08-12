@@ -1,13 +1,20 @@
 "use client";
 
+// * basic
 import { useEffect, useState } from "react";
-import axios from "axios";
-import Maps from "./Maps";
 import Script from "next/script";
-import { useAtom, useAtomValue } from "jotai";
-import { locationState } from "../../_store/location";
+
+// * install libraries
+import axios from "axios";
 import _ from "lodash";
-import proj4 from "proj4";
+import { useAtom, useAtomValue } from "jotai";
+
+// * state
+import { locationState, midPointState } from "../../_store/location";
+
+// * components
+import Maps from "./Maps";
+
 /**
  * @param location '', 선택한 동네 (ex:대구광역시 북구 태전동)
  * @param coordinates {center:{lat:0,lng:0}, isPanto: false}, 선택한 동네 좌표
@@ -15,8 +22,9 @@ import proj4 from "proj4";
  */
 
 const KakaoMapLayout = () => {
+    const midPoint = useAtomValue(midPointState);
+
     const [formData, setFormData] = useState({ start: "", end: "" });
-    const [midpoint, setMidpoint]: any = useState(null);
     const [places, setPlaces]: any = useState([]);
     const [subwayStation, setSubwayStation] = useState(null);
     const [loaded, setLoaded] = useState(false);
@@ -52,14 +60,10 @@ const KakaoMapLayout = () => {
             const startLocation = await getCoordinates(start);
             const endLocation = await getCoordinates(end);
 
-            console.log(startLocation, endLocation);
-
             const midpoint = {
                 lat: (startLocation.lat + endLocation.lat) / 2,
                 lng: (startLocation.lng + endLocation.lng) / 2,
             };
-
-            setMidpoint(midpoint);
 
             const nearbyPlaces = await getNearbyPlaces(
                 midpoint.lat,
@@ -89,8 +93,6 @@ const KakaoMapLayout = () => {
                 },
             }
         );
-
-        console.log(response);
 
         const { x, y } = response.data.documents[0].address;
         return { lat: parseFloat(y), lng: parseFloat(x) };
@@ -198,8 +200,45 @@ const KakaoMapLayout = () => {
         }
     }, [map, location]);
 
+    useEffect(() => {
+        if (!map) return;
+        const ps = new kakao.maps.services.Places();
+
+        ps.keywordSearch(
+            midPoint?.address_name,
+            (data, status, _pagination) => {
+                if (status === kakao.maps.services.Status.OK) {
+                    // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+                    // LatLngBounds 객체에 좌표를 추가합니다
+                    const bounds = new kakao.maps.LatLngBounds();
+                    let markers = [];
+
+                    for (var i = 0; i < data.length; i++) {
+                        // @ts-ignore
+                        markers.push({
+                            position: {
+                                lat: data[i].y,
+                                lng: data[i].x,
+                            },
+                            content: data[i].place_name,
+                        });
+                        // @ts-ignore
+                        bounds.extend(
+                            new kakao.maps.LatLng(data[i].y, data[i].x)
+                        );
+                    }
+
+                    // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+                    map.setBounds(bounds);
+
+                    // setOverlayVisible(true);
+                    // setOverlayCoordinates(markers[0].position);
+                }
+            }
+        );
+    }, [midPoint]);
     return (
-        <div className='w-full'>
+        <div className='w-full relative'>
             {/* <div className=''>
                 <h1>중간 지점 찾기</h1>
                 <form onSubmit={handleSubmit}>
@@ -240,7 +279,7 @@ const KakaoMapLayout = () => {
                 {loaded && (
                     <Maps
                         coordinates={coordinates}
-                        midpoint={midpoint}
+                        midPoint={midPoint}
                         places={places}
                         subwayStation={subwayStation}
                         setMap={setMap}

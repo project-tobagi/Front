@@ -5,3 +5,8 @@ export const locationState = atom({
     sigugun: null,
     dong: null,
 });
+
+export const midPointState = atom({
+    lat: 0,
+    lng: 0,
+});

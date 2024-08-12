@@ -9,7 +9,7 @@ import AreaOverlay from "./AreaOverlay";
 
 const Maps = (props: any) => {
     const {
-        midpoint,
+        midPoint,
         coordinates,
         places,
         subwayStation,
@@ -23,51 +23,6 @@ const Maps = (props: any) => {
 
     let defaultLevel = 3;
     const [level, setLevel] = useState(defaultLevel);
-
-    useEffect(() => {
-        if (midpoint && mapRef.current && window.kakao !== undefined) {
-            const { kakao } = window;
-
-            kakao.maps.load();
-
-            if (!kakao || !kakao.maps) {
-                console.error("Kakao Maps API is not properly loaded.");
-                return;
-            }
-            // 지도 생성
-            const map = new kakao.maps.Map(mapRef.current, {
-                center: new kakao.maps.LatLng(midpoint.lat, midpoint.lng),
-                level: 4,
-            });
-
-            // 중간 지점 마커 생성
-            new kakao.maps.Marker({
-                position: new kakao.maps.LatLng(midpoint.lat, midpoint.lng),
-                map,
-            });
-
-            // 주변 장소 마커 생성
-            places.forEach((place: any) => {
-                const markerPosition = new kakao.maps.LatLng(place.y, place.x);
-                const marker = new kakao.maps.Marker({
-                    position: markerPosition,
-                    map,
-                });
-
-                // 마커 클릭 이벤트 리스너 추가 (장소 이름을 인포윈도우로 표시)
-                kakao.maps.event.addListener(marker, "click", () => {
-                    const infoWindow = new kakao.maps.InfoWindow({
-                        content: `<div style="padding:5px;z-index:1;">${place.name}</div>`,
-                    });
-                    infoWindow.open(map, marker);
-                });
-            });
-        } else {
-            console.error(
-                "Kakao Maps API is not loaded or midpoint is missing."
-            );
-        }
-    }, [midpoint, places]);
 
     return (
         <Map // 지도를 표시할 Container

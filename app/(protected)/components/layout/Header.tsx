@@ -7,8 +7,7 @@ import { useState, useRef, useEffect } from "react";
 import _ from "lodash";
 
 // * components
-import Icon from "../Icon";
-import { Input } from "@/components/ui/input";
+import Icon from "../common/Icon";
 import AreaSelector from "../area-select/Layout";
 
 const Header = () => {

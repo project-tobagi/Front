@@ -4,8 +4,8 @@
 import Header from "./Header";
 import Left from "./Left";
 import Contents from "./Contents";
-import DivideGroup from "../divides/DivideGroup";
-import DividePanel from "../divides/DividePanel";
+import DivideGroup from "../common/divides/DivideGroup";
+import DividePanel from "../common/divides/DividePanel";
 
 const Layout = ({ children }: any) => {
     return (

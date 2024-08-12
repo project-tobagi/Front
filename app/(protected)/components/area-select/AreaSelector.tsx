@@ -4,9 +4,9 @@
 import _ from "lodash";
 
 // * components
-import Icon from "../Icon";
-import DivideGroup from "../divides/DivideGroup";
-import DividePanel from "../divides/DividePanel";
+import Icon from "../common/Icon";
+import DivideGroup from "../common/divides/DivideGroup";
+import DividePanel from "../common/divides/DividePanel";
 
 interface AreaSelector {
     areaData: any;
@@ -71,9 +71,18 @@ const AreaSelector = ({
                                     }}
                                 >
                                     {data.codeNm}
-                                    {data.sido === selectedSido?.sido && (
-                                        <Icon w={3} h={3} type='ic_check' />
-                                    )}
+                                    <Icon
+                                        w={3}
+                                        h={3}
+                                        type='ic_check'
+                                        className={[
+                                            data.sido === selectedSido?.sido
+                                                ? "block"
+                                                : "hidden",
+                                        ]
+                                            .filter(Boolean)
+                                            .join(" ")}
+                                    />
                                 </li>
                             );
                         }
@@ -124,14 +133,20 @@ const AreaSelector = ({
                                             }}
                                         >
                                             {data.codeNm}
-                                            {data.sigugun ===
-                                                selectedSigugun?.sigugun && (
-                                                <Icon
-                                                    w={3}
-                                                    h={3}
-                                                    type='ic_check'
-                                                />
-                                            )}
+
+                                            <Icon
+                                                w={3}
+                                                h={3}
+                                                type='ic_check'
+                                                className={[
+                                                    data.sigugun ===
+                                                    selectedSigugun?.sigugun
+                                                        ? "block"
+                                                        : "hidden",
+                                                ]
+                                                    .filter(Boolean)
+                                                    .join(" ")}
+                                            />
                                         </li>
                                     );
                                 }
@@ -179,14 +194,19 @@ const AreaSelector = ({
                                         >
                                             {data.codeNm}
 
-                                            {data.dong ===
-                                                selectedDong?.dong && (
-                                                <Icon
-                                                    w={3}
-                                                    h={3}
-                                                    type='ic_check'
-                                                />
-                                            )}
+                                            <Icon
+                                                w={3}
+                                                h={3}
+                                                type='ic_check'
+                                                className={[
+                                                    data.dong ===
+                                                    selectedDong?.dong
+                                                        ? "block"
+                                                        : "hidden",
+                                                ]
+                                                    .filter(Boolean)
+                                                    .join(" ")}
+                                            />
                                         </li>
                                     );
                                 }

@@ -8,10 +8,10 @@ import _ from "lodash";
 import { useAtom } from "jotai";
 
 // * components
-import Icon from "../Icon";
+import Icon from "../common/Icon";
 import { Button } from "@/components/ui/button";
-import DivideGroup from "../divides/DivideGroup";
-import DividePanel from "../divides/DividePanel";
+import DivideGroup from "../common/divides/DivideGroup";
+import DividePanel from "../common/divides/DividePanel";
 import AreaSelector from "./AreaSelector";
 
 // * etc
