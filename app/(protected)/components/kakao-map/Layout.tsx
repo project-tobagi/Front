@@ -22,7 +22,7 @@ import Maps from "./Maps";
  */
 
 const KakaoMapLayout = () => {
-    const midPoint = useAtomValue(midPointState);
+    const midPoint = useAtomValue<any>(midPointState);
 
     const [formData, setFormData] = useState({ start: "", end: "" });
     const [places, setPlaces]: any = useState([]);
@@ -206,7 +206,7 @@ const KakaoMapLayout = () => {
 
         ps.keywordSearch(
             midPoint?.address_name,
-            (data, status, _pagination) => {
+            (data: any, status, _pagination): any => {
                 if (status === kakao.maps.services.Status.OK) {
                     // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
                     // LatLngBounds 객체에 좌표를 추가합니다
