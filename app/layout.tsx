@@ -8,7 +8,7 @@ import Protected from "./(protected)/Layout";
 import AppLayout from "./(protected)/components/layout/Layout";
 
 // * etc
-import { ENV } from "./(protected)/_utils/constants";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

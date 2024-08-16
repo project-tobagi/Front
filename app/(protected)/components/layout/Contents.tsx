@@ -8,8 +8,8 @@ import _ from "lodash";
 import { activeMenuState } from "../../_store/menu";
 
 // * components
-import AreaFilterLayout from "../area-filter/Layout";
-import AreaMidPoingLayout from "../area-midpoint/Layout";
+import RegionFilterLayout from "../region-filter/Layout";
+import RegionMidPoingLayout from "../region-midpoint/Layout";
 import MenuOverlay from "../common/MenuOverlay";
 
 // * etc
@@ -21,11 +21,11 @@ const Contents = ({ children }: any) => {
     const menuComponents = [
         {
             type: "menu_1",
-            component: <AreaFilterLayout />,
+            component: <RegionFilterLayout />,
         },
         {
             type: "menu_2",
-            component: <AreaMidPoingLayout />,
+            component: <RegionMidPoingLayout />,
         },
         {
             type: "menu_3",

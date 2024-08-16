@@ -8,8 +8,8 @@ import Icon from "../common/Icon";
 import DivideGroup from "../common/divides/DivideGroup";
 import DividePanel from "../common/divides/DividePanel";
 
-interface AreaSelector {
-    areaData: any;
+interface RegionSelector {
+    region: any;
     selectedSido: {
         sido: string;
         codeNm: string;
@@ -30,15 +30,15 @@ interface AreaSelector {
     setSelectedDong: any;
 }
 
-const AreaSelector = ({
-    areaData,
+const RegionSelector = ({
+    region,
     selectedSido,
     selectedSigugun,
     selectedDong,
     setSelectedSido,
     setSelectedSigugun,
     setSelectedDong,
-}: AreaSelector) => {
+}: RegionSelector) => {
     return (
         <DivideGroup className='size-full'>
             <DividePanel
@@ -47,7 +47,7 @@ const AreaSelector = ({
             >
                 <ul>
                     {_.map(
-                        areaData.sido,
+                        region.sido,
                         (data: { sido: string; codeNm: string }) => {
                             return (
                                 <li
@@ -94,7 +94,7 @@ const AreaSelector = ({
                 className='border-r-[1px] overflow-y-auto py-1.5'
                 size={33.3}
             >
-                {_.findIndex(areaData.sigugun, {
+                {_.findIndex(region.sigugun, {
                     sido: selectedSido?.sido,
                 }) === -1 ? (
                     <div className='text-xs px-4 py-1 text-gray-400'>
@@ -103,7 +103,7 @@ const AreaSelector = ({
                 ) : (
                     <ul>
                         {_.map(
-                            areaData.sigugun,
+                            region.sigugun,
                             (data: {
                                 sido: string;
                                 sigugun: string;
@@ -156,7 +156,7 @@ const AreaSelector = ({
                 )}
             </DividePanel>
             <DividePanel className='overflow-y-auto py-1.5' size={33.3}>
-                {_.findIndex(areaData.dong, {
+                {_.findIndex(region.dong, {
                     sigugun: selectedSigugun?.sigugun,
                 }) === -1 ? (
                     <div className='text-xs px-4 py-1 text-gray-400'>
@@ -165,7 +165,7 @@ const AreaSelector = ({
                 ) : (
                     <ul>
                         {_.map(
-                            areaData.dong,
+                            region.dong,
                             (data: {
                                 sido: string;
                                 sigugun: string;
@@ -219,4 +219,4 @@ const AreaSelector = ({
     );
 };
 
-export default AreaSelector;
+export default RegionSelector;

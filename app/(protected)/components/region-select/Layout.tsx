@@ -8,17 +8,14 @@ import _ from "lodash";
 import { useAtom } from "jotai";
 
 // * components
-import Icon from "../common/Icon";
 import { Button } from "@/components/ui/button";
-import DivideGroup from "../common/divides/DivideGroup";
-import DividePanel from "../common/divides/DividePanel";
-import AreaSelector from "./AreaSelector";
+import RegionSelector from "./RegionSelector";
 
 // * etc
 import { locationState } from "../../_store/location";
-import { areaData } from "@/app/(protected)/_utils/hangjungdong";
+import { region } from "@/app/(protected)/_utils/hangjungdong";
 
-const AreaSelectorLayout = ({
+const RegionSelectorLayout = ({
     open,
     setOpen,
     selectorRef,
@@ -48,7 +45,7 @@ const AreaSelectorLayout = ({
         codeNm: null,
     });
 
-    const initArea = () => {
+    const initRegion = () => {
         setSelectedSido({
             sido: null,
             codeNm: null,
@@ -67,7 +64,7 @@ const AreaSelectorLayout = ({
     };
 
     // 선택한 동네 저장
-    const handleClickSaveSelectedArea = () => {
+    const handleClickSaveSelectedRegion = () => {
         const { codeNm: sidoNm } = selectedSido || {};
         const { codeNm: sigugunNm } = selectedSigugun || {};
         const { codeNm: dongNm } = selectedDong || {};
@@ -85,7 +82,7 @@ const AreaSelectorLayout = ({
 
     useEffect(() => {
         if (!open) {
-            initArea();
+            initRegion();
         }
     }, [open]);
 
@@ -97,8 +94,8 @@ const AreaSelectorLayout = ({
             >
                 <div className='bg-white size-full flex flex-col justify-between rounded-xl'>
                     {/* 동네 선택 폼 */}
-                    <AreaSelector
-                        areaData={areaData}
+                    <RegionSelector
+                        region={region}
                         selectedSido={selectedSido}
                         selectedSigugun={selectedSigugun}
                         selectedDong={selectedDong}
@@ -115,7 +112,7 @@ const AreaSelectorLayout = ({
                                 // 선택한 시군구가 있으면서 그에 해당하는 동이 없을때
                                 selectedSigugun &&
                                     selectedSigugun.sigugun !== null &&
-                                    _.findIndex(areaData.dong, {
+                                    _.findIndex(region.dong, {
                                         sigugun: selectedSigugun.sigugun,
                                     }) === -1 &&
                                     "bg-[#00A2FF] hover:bg-sky-400 text-white pointer-events-auto",
@@ -127,9 +124,9 @@ const AreaSelectorLayout = ({
                                 .filter(Boolean)
                                 .join(" ")}
                             onClick={() => {
-                                initArea();
+                                initRegion();
                                 setOpen(false);
-                                handleClickSaveSelectedArea();
+                                handleClickSaveSelectedRegion();
                             }}
                         >
                             검색
@@ -149,4 +146,4 @@ const AreaSelectorLayout = ({
     }
 };
 
-export default AreaSelectorLayout;
+export default RegionSelectorLayout;

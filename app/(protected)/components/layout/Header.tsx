@@ -8,7 +8,7 @@ import _ from "lodash";
 
 // * components
 import Icon from "../common/Icon";
-import AreaSelector from "../area-select/Layout";
+import RegionSelector from "../region-select/Layout";
 
 const Header = () => {
     const [openDropDown, setOpenDropDown] = useState(false);
@@ -102,7 +102,7 @@ const Header = () => {
                                 )}
                             </div>
 
-                            <AreaSelector
+                            <RegionSelector
                                 open={openDropDown}
                                 setOpen={setOpenDropDown}
                                 selectorRef={dropdownRef}
@@ -117,7 +117,7 @@ const Header = () => {
                     <div className='w-10 h-10 rounded-full ring-1 ring-gray-400'></div>
                     <div className='w-10 h-10 rounded-full ring-1 ring-gray-400'></div>
                     {/* <div className='w-full h-24 mt-12'>
-                        <AreaSelector open={openDropDown} />
+                        <RegionSelector open={openDropDown} />
                     </div> */}
                 </div>
             </div>

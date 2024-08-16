@@ -31,7 +31,8 @@ const KakaoMapLayout = () => {
     const [polygonPath, setPolygonPath]: any = useState([]);
     const [overlayCoordinates, setOverlayCoordinates] = useState<any>(null);
 
-    const [overlayVisible, setOverlayVisible] = useState(false);
+    const [overlayRegionVisible, setOverlayRegionVisible] = useState(false);
+    const [overlayMidpointVisible, setOverlayMidpointVisible] = useState(false);
 
     // 지도 정보
     const [map, setMap] = useState<any>();
@@ -187,7 +188,8 @@ const KakaoMapLayout = () => {
                 // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
                 map.setBounds(bounds);
 
-                setOverlayVisible(true);
+                setOverlayMidpointVisible(false);
+                setOverlayRegionVisible(true);
                 setOverlayCoordinates(markers[0].position);
             }
         });
@@ -230,13 +232,14 @@ const KakaoMapLayout = () => {
 
                     // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
                     map.setBounds(bounds);
-
-                    // setOverlayVisible(true);
-                    // setOverlayCoordinates(markers[0].position);
+                    setOverlayRegionVisible(false);
+                    setOverlayMidpointVisible(true);
+                    setOverlayCoordinates(markers[0].position);
                 }
             }
         );
     }, [midPoint]);
+
     return (
         <div className='w-full relative'>
             {/* <div className=''>
@@ -284,8 +287,10 @@ const KakaoMapLayout = () => {
                         subwayStation={subwayStation}
                         setMap={setMap}
                         polygonPath={polygonPath}
-                        overlayVisible={overlayVisible}
-                        setOverlayVisible={setOverlayVisible}
+                        overlayRegionVisible={overlayRegionVisible}
+                        setOverlayRegionVisible={setOverlayRegionVisible}
+                        overlayMidpointVisible={overlayMidpointVisible}
+                        setOverlayMidpointVisible={setOverlayMidpointVisible}
                         overlayCoordinates={overlayCoordinates}
                     />
                 )}

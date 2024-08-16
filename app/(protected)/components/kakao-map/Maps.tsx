@@ -5,7 +5,8 @@ import { useState, useEffect, useRef } from "react";
 import { Map, Polygon, CustomOverlayMap } from "react-kakao-maps-sdk";
 
 // * components
-import AreaOverlay from "./AreaOverlay";
+import RegionOverlay from "./mapOverlay";
+import MidPointOverlay from "./MidPointOverlay";
 
 const Maps = (props: any) => {
     const {
@@ -15,8 +16,10 @@ const Maps = (props: any) => {
         subwayStation,
         setMap,
         polygonPath,
-        overlayVisible,
-        setOverlayVisible,
+        overlayRegionVisible,
+        setOverlayRegionVisible,
+        overlayMidpointVisible,
+        setOverlayMidpointVisible,
         overlayCoordinates,
     } = props;
     const mapRef = useRef<HTMLDivElement>(null);
@@ -33,11 +36,17 @@ const Maps = (props: any) => {
             level={level} // 지도의 확대 레벨
             onCreate={setMap}
         >
-            <AreaOverlay
-                visible={overlayVisible}
-                setVisible={setOverlayVisible}
+            <RegionOverlay
+                visible={overlayRegionVisible}
+                setVisible={setOverlayRegionVisible}
                 coordinates={overlayCoordinates}
             />
+            <MidPointOverlay
+                visible={overlayMidpointVisible}
+                setVisible={setOverlayMidpointVisible}
+                coordinates={overlayCoordinates}
+            />
+
             <Polygon
                 path={polygonPath}
                 strokeWeight={3} // 선의 두께입니다

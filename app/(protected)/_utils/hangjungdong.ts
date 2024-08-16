@@ -1,4 +1,4 @@
-export const areaData = {
+export const region = {
     sido: [
         { sido: "11", codeNm: "서울특별시" },
         { sido: "26", codeNm: "부산광역시" },

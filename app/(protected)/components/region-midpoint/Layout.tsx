@@ -14,6 +14,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { toast } from "react-toastify";
 
 // * state
 import { midPointState } from "../../_store/location";
@@ -21,7 +22,7 @@ import { midPointState } from "../../_store/location";
 // * etc
 import { CATEGORY_GROUP_CODES } from "../../_utils/constants";
 
-const AreaMidPoingLayout = () => {
+const RegionMidpointLayout = () => {
     const [formData, setFormData] = useState({ start: "", end: "" });
     const [selectedCategory, setSelectedCategory] = useState<any>();
     const [, setMidPoint] = useAtom(midPointState);
@@ -75,6 +76,17 @@ const AreaMidPoingLayout = () => {
             }
         );
 
+        if (response.data.documents.length === 0) {
+            toast.warn(
+                <div className='text-xs'>
+                    선택한 출발지와 도착지가 올바르지 않습니다.
+                </div>,
+                {
+                    position: "top-right",
+                }
+            );
+        }
+
         const { x, y } = response.data.documents[0].address;
 
         return { lat: parseFloat(y), lng: parseFloat(x) };
@@ -106,12 +118,16 @@ const AreaMidPoingLayout = () => {
     return (
         <div>
             <div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className='grid gap-4 '>
+                    <h1 className='font-bold text-lg text-center'>
+                        중간지점 찾기
+                    </h1>
                     <div>
                         <label>출발지:</label>
                         <input
                             type='text'
                             name='start'
+                            className='ring-1 ring-gray-300 ml-2'
                             value={formData.start}
                             onChange={handleChange}
                             required
@@ -122,35 +138,40 @@ const AreaMidPoingLayout = () => {
                         <input
                             type='text'
                             name='end'
+                            className='ring-1 ring-gray-300 ml-2'
                             value={formData.end}
                             onChange={handleChange}
                             required
                         />
                     </div>
-                    <button type='submit'>중간 지점 찾기</button>
-                </form>
 
-                <Select
-                    onValueChange={(e) => {
-                        setSelectedCategory(e);
-                    }}
-                >
-                    <SelectTrigger className='w-[180px]'>
-                        <SelectValue placeholder='Theme' />
-                    </SelectTrigger>
-                    <SelectContent>
-                        {_.map(CATEGORY_GROUP_CODES, (item: any) => {
-                            return (
-                                <SelectItem value={item.code}>
-                                    {item.type}
-                                </SelectItem>
-                            );
-                        })}
-                    </SelectContent>
-                </Select>
+                    <Select
+                        required
+                        onValueChange={(e) => {
+                            setSelectedCategory(e);
+                        }}
+                    >
+                        <SelectTrigger className='w-[180px] '>
+                            <SelectValue placeholder='카테고리 선택해주세요.' />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {_.map(CATEGORY_GROUP_CODES, (item: any) => {
+                                return (
+                                    <SelectItem value={item.code}>
+                                        {item.type}
+                                    </SelectItem>
+                                );
+                            })}
+                        </SelectContent>
+                    </Select>
+
+                    <button type='submit' className='ring-1 py-2 ring-gray-300'>
+                        중간 지점 찾기
+                    </button>
+                </form>
             </div>
         </div>
     );
 };
 
-export default AreaMidPoingLayout;
+export default RegionMidpointLayout;
