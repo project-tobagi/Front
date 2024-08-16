@@ -10,13 +10,28 @@ import Step2 from "./step-2/Layout";
 import Step3 from "./step-3/Layout";
 
 const RegionFilterLayout = () => {
-    const [step, setStep] = useState(0);
+    const [step, setStep] = useState(1);
+
+    const stepTypes = [
+        {
+            label: "관심지역 설정",
+            step: 1,
+        },
+        {
+            label: "조건 설정",
+            step: 2,
+        },
+        {
+            label: "지역 탐색",
+            step: 3,
+        },
+    ];
     return (
-        <div className='w-full'>
-            <Stepper />
-            {step === 0 ? (
+        <div className='w-[370px]'>
+            <Stepper step={step} contents={stepTypes} lastStep={3} />
+            {step === 1 ? (
                 <Step1 setStep={setStep} />
-            ) : step === 1 ? (
+            ) : step === 2 ? (
                 <Step2 setStep={setStep} />
             ) : (
                 <Step3 setStep={setStep} />

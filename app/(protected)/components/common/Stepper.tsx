@@ -1,32 +1,84 @@
 "use client";
 
-const Stepper = () => {
+// * install libraries
+import _ from "lodash";
+import { Separator } from "@/components/ui/separator";
+
+const Stepper = ({ step, contents, lastStep }: any) => {
     return (
-        <ol className='flex items-center w-full text-sm text-gray-500 font-medium sm:text-base mb-12'>
-            <li className="flex md:w-full items-center text-indigo-600  sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-4 xl:after:mx-8 ">
-                <div className="flex items-center whitespace-nowrap after:content-['/'] sm:after:hidden after:mx-2 ">
-                    <span className='w-6 h-6 bg-indigo-600 border border-indigo-200 rounded-full flex justify-center items-center mr-3 text-sm text-white lg:w-10 lg:h-10'>
-                        1
-                    </span>
-                    Personal Info
-                </div>
-            </li>
-            <li className="flex md:w-full items-center text-gray-600 sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-4 xl:after:mx-8 ">
-                <div className="flex items-center whitespace-nowrap after:content-['/'] sm:after:hidden after:mx-2 ">
-                    <span className='w-6 h-6 bg-gray-100 border border-gray-200 rounded-full flex justify-center items-center mr-3 lg:w-10 lg:h-10'>
-                        2
-                    </span>
-                    Account Info
-                </div>
-            </li>
-            <li className='flex md:w-full items-center text-gray-600 '>
-                <div className='flex items-center  '>
-                    <span className='w-6 h-6 bg-gray-100 border border-gray-200 rounded-full flex justify-center items-center mr-3 lg:w-10 lg:h-10'>
-                        3
-                    </span>{" "}
-                    Confirmation
-                </div>
-            </li>
+        <ol className='flex  items-center w-full text-xs text-gray-500 font-medium sm:text-xs mb-2'>
+            {_.map(contents, (data: any) => {
+                if (data.step === lastStep) {
+                    return (
+                        <li
+                            className={[
+                                "flex whitespace-nowrap items-center text-[#D1D6DE]",
+                                step == data.step
+                                    ? "text-black"
+                                    : "text-[#D1D6DE]",
+                            ]
+                                .filter(Boolean)
+                                .join(" ")}
+                        >
+                            <div className='flex items-center'>
+                                <span
+                                    className={[
+                                        "w-6 h-6 border rounded-full flex justify-center items-center mr-1 text-xs ",
+                                        step == data.step
+                                            ? "border-[#00A2FF] text-[#00A2FF]"
+                                            : "text-[#D1D6DE]",
+                                    ]
+                                        .filter(Boolean)
+                                        .join(" ")}
+                                >
+                                    {data.step}
+                                </span>
+                                <p> {data.label}</p>
+                            </div>
+                        </li>
+                    );
+                } else {
+                    return (
+                        <li
+                            className={[
+                                "flex w-full items-center  sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-300 after:border-1 after:hidden sm:after:inline-block  xl:after:mx-4",
+                                step == data.step
+                                    ? "text-black"
+                                    : "text-[#D1D6DE]",
+                                data.step == 2
+                                    ? "after:mr-2.5"
+                                    : "after:ml-2.5",
+                            ]
+                                .filter(Boolean)
+                                .join(" ")}
+                        >
+                            <div className="flex items-center whitespace-nowrap after:content-['/'] sm:after:hidden">
+                                <p
+                                    className={[
+                                        "flex items-center justify-center w-24",
+                                    ]
+                                        .filter(Boolean)
+                                        .join("")}
+                                >
+                                    <span
+                                        className={[
+                                            "w-6 h-6 border rounded-full flex justify-center items-center mr-1 text-xs ",
+                                            step == data.step
+                                                ? "border-[#00A2FF] text-[#00A2FF]"
+                                                : "",
+                                        ]
+                                            .filter(Boolean)
+                                            .join(" ")}
+                                    >
+                                        {data.step}
+                                    </span>
+                                    {data.label}
+                                </p>
+                            </div>
+                        </li>
+                    );
+                }
+            })}
         </ol>
     );
 };
