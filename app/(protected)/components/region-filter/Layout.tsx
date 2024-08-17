@@ -27,7 +27,7 @@ const RegionFilterLayout = () => {
         },
     ];
     return (
-        <div className='w-[370px]'>
+        <div className='w-[370px] h-[520px]'>
             <Stepper step={step} contents={stepTypes} lastStep={3} />
             {step === 1 ? (
                 <Step1 setStep={setStep} />

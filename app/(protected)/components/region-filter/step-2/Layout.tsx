@@ -3,10 +3,44 @@
 // * install libaries
 import { Button } from "@/components/ui/button";
 
+// * components
+import RegionFilterSliders from "./Sliders";
+import { useState } from "react";
+
 const Step2 = ({ setStep }: any) => {
+    const sliderTypes = [
+        {
+            label: "편의시설",
+            value: 0,
+        },
+        {
+            label: "치안",
+            value: 0,
+        },
+        {
+            label: "문화시설",
+            value: 0,
+        },
+        {
+            label: "맛집",
+            value: 0,
+        },
+        {
+            label: "교통",
+            value: 0,
+        },
+        {
+            label: "생활 인프라",
+            value: 0,
+        },
+    ];
+
+    const [conditions, setConditions] = useState(sliderTypes);
+
     return (
-        <div className='w-full'>
-            <div className='text-center'>
+        // header
+        <div className='h-[calc(100%-25px)] flex gap-6 flex-col'>
+            <div className='text-center  mt-3'>
                 <h1 className='text-lg font-semibold'>
                     관심있는 동네의 조건이 있나요?
                 </h1>
@@ -16,8 +50,20 @@ const Step2 = ({ setStep }: any) => {
                     높아져요!
                 </p>
             </div>
-            <div className='w-full flex justify-between'>
+
+            {/* contents */}
+            <div>
+                <RegionFilterSliders
+                    conditions={conditions}
+                    setConditions={setConditions}
+                />
+            </div>
+
+            {/* buttons */}
+            <div className='h-full flex justify-between items-end'>
                 <Button
+                    variant='outline'
+                    className='rounded-full px-6'
                     onClick={() => {
                         setStep((prev: number) => {
                             return (prev -= 1);
@@ -27,6 +73,7 @@ const Step2 = ({ setStep }: any) => {
                     뒤로
                 </Button>
                 <Button
+                    className='rounded-full px-6'
                     onClick={() => {
                         setStep((prev: number) => {
                             return (prev += 1);

@@ -3,10 +3,14 @@
 // * install libraries
 import { Button } from "@/components/ui/button";
 
+// * components
+import RegionCard from "./RegioCard";
+
 const Step3 = ({ setStep }: any) => {
     return (
-        <div>
-            <div className='text-center'>
+        // header
+        <div className='h-[calc(100%-25px)] flex gap-6 flex-col'>
+            <div className='text-center mt-3'>
                 <h1 className='text-lg font-semibold'>
                     동네 탐색을 완료했어요!
                 </h1>
@@ -16,8 +20,16 @@ const Step3 = ({ setStep }: any) => {
                     적절한 동네가 있는지 확인해보세요.
                 </p>
             </div>
-            <div className='flex justify-center'>
+
+            {/* contents */}
+            <div>
+                <RegionCard />
+            </div>
+
+            {/* buttons */}
+            <div className='flex justify-center h-full items-end'>
                 <Button
+                    className='rounded-full px-6'
                     onClick={() => {
                         setStep(1);
                     }}

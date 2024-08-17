@@ -9,18 +9,20 @@ import { useAtom } from "jotai";
 
 // * components
 import { Button } from "@/components/ui/button";
-import RegionSelector from "./RegionSelector";
+import Selector from "./Selector";
 
 // * etc
 import { locationState } from "../../_store/location";
 import { region } from "@/app/(protected)/_utils/hangjungdong";
 
 const RegionSelectorLayout = ({
+    depth = 3,
     open,
     setOpen,
     selectorRef,
     setSearchContents,
 }: {
+    depth?: number;
     open: boolean;
     setOpen: any;
     selectorRef: any;
@@ -94,7 +96,8 @@ const RegionSelectorLayout = ({
             >
                 <div className='bg-white size-full flex flex-col justify-between rounded-xl'>
                     {/* 동네 선택 폼 */}
-                    <RegionSelector
+                    <Selector
+                        depth={depth}
                         region={region}
                         selectedSido={selectedSido}
                         selectedSigugun={selectedSigugun}
