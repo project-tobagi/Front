@@ -10,26 +10,32 @@ import { useState } from "react";
 const Step2 = ({ setStep }: any) => {
     const sliderTypes = [
         {
+            id: 1,
             label: "편의시설",
             value: 0,
         },
         {
+            id: 2,
             label: "치안",
             value: 0,
         },
         {
+            id: 3,
             label: "문화시설",
             value: 0,
         },
         {
+            id: 4,
             label: "맛집",
             value: 0,
         },
         {
+            id: 5,
             label: "교통",
             value: 0,
         },
         {
+            id: 6,
             label: "생활 인프라",
             value: 0,
         },

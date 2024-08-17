@@ -12,7 +12,10 @@ const RegionFilterSliders = ({ conditions, setConditions }: any) => {
         <div className='grid gap-2'>
             {_.map(conditions, (condition: any) => {
                 return (
-                    <div className='flex gap-5 whitespace-nowrap items-center '>
+                    <div
+                        key={condition.id}
+                        className='flex gap-5 whitespace-nowrap items-center '
+                    >
                         <div className='flex gap-2 items-center'>
                             <input type='radio' className='w-5 h-5' />
                             <h1 className='w-[80px]'>{condition.label}</h1>
