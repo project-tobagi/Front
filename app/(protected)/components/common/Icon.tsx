@@ -6,6 +6,10 @@ import ic_location_on from "@/public/icons/ic_location_on.svg";
 import ic_search from "@/public/icons/ic_search.svg";
 import ic_check from "@/public/icons/ic_check.svg";
 import ic_info from "@/public/icons/ic_info.svg";
+import ic_kakao from "@/public/icons/ic_kakao.svg";
+import ic_naver from "@/public/icons/ic_naver.svg";
+import ic_daum from "@/public/icons/ic_daum.svg";
+import ic_google from "@/public/icons/ic_google.svg";
 
 // * logos
 import mainLogo from "@/public/logo/main_logo.svg";
@@ -19,6 +23,11 @@ const iconMap: any = {
     ic_info,
     mainLogo,
     subLogo,
+
+    ic_kakao,
+    ic_naver,
+    ic_daum,
+    ic_google,
 };
 
 const Icon = (props: any) => {

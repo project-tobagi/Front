@@ -9,9 +9,11 @@ import _ from "lodash";
 // * components
 import Icon from "../common/Icon";
 import RegionSelector from "../region-select/Layout";
+import LoginDialog from "../login/Layout";
 
 const Header = () => {
     const [openDropDown, setOpenDropDown] = useState(false);
+    const [openLogin, setOpenLogin] = useState(false);
     const [searchContents, setSearchContents] = useState<any>(null);
 
     const inputRef: any = useRef(null);
@@ -58,7 +60,6 @@ const Header = () => {
                 </div>
 
                 {/* input */}
-
                 <div>
                     <div className='relative w-96 '>
                         <div className='relative w-full'>
@@ -115,11 +116,22 @@ const Header = () => {
                 {/* profile/notification */}
                 <div className='flex gap-3'>
                     <div className='w-10 h-10 rounded-full ring-1 ring-gray-400'></div>
-                    <div className='w-10 h-10 rounded-full ring-1 ring-gray-400'></div>
+                    <button
+                        onClick={() => {
+                            setOpenLogin(true);
+                        }}
+                        className='w-10 h-10 rounded-full ring-1 ring-gray-400'
+                    >
+                        <h1 className='text-xs flex items-center justify-center h-full'>
+                            로그인
+                        </h1>
+                    </button>
                     {/* <div className='w-full h-24 mt-12'>
                         <RegionSelector open={openDropDown} />
                     </div> */}
                 </div>
+
+                <LoginDialog visible={openLogin} setVisible={setOpenLogin} />
             </div>
         </div>
     );
