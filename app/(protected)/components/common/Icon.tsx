@@ -10,6 +10,9 @@ import ic_kakao from "@/public/icons/ic_kakao.svg";
 import ic_naver from "@/public/icons/ic_naver.svg";
 import ic_daum from "@/public/icons/ic_daum.svg";
 import ic_google from "@/public/icons/ic_google.svg";
+import ic_copy_paste from "@/public/icons/ic_copy_paste.svg";
+import ic_naver_map from "@/public/icons/ic_naver_map.svg";
+import ic_kakao_map from "@/public/icons/ic_kakao_map.svg";
 
 // * logos
 import mainLogo from "@/public/logo/main_logo.svg";
@@ -21,6 +24,9 @@ const iconMap: any = {
     ic_search,
     ic_check,
     ic_info,
+    ic_copy_paste,
+    ic_naver_map,
+    ic_kakao_map,
     mainLogo,
     subLogo,
 

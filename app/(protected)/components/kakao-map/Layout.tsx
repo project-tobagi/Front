@@ -10,7 +10,11 @@ import _ from "lodash";
 import { useAtom, useAtomValue } from "jotai";
 
 // * state
-import { locationState, midPointState } from "../../_store/location";
+import {
+    locationState,
+    midPointPlaceState,
+    midPointState,
+} from "../../_store/location";
 
 // * components
 import Maps from "./Maps";
@@ -22,7 +26,7 @@ import Maps from "./Maps";
  */
 
 const KakaoMapLayout = () => {
-    const midPoint = useAtomValue<any>(midPointState);
+    const midPointPlace = useAtomValue<any>(midPointPlaceState);
 
     const [formData, setFormData] = useState({ start: "", end: "" });
     const [places, setPlaces]: any = useState([]);
@@ -207,7 +211,7 @@ const KakaoMapLayout = () => {
         const ps = new kakao.maps.services.Places();
 
         ps.keywordSearch(
-            midPoint?.address_name,
+            midPointPlace?.address_name,
             (data: any, status, _pagination): any => {
                 if (status === kakao.maps.services.Status.OK) {
                     // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
@@ -238,7 +242,7 @@ const KakaoMapLayout = () => {
                 }
             }
         );
-    }, [midPoint]);
+    }, [midPointPlace]);
 
     return (
         <div className='w-full relative'>
@@ -282,7 +286,7 @@ const KakaoMapLayout = () => {
                 {loaded && (
                     <Maps
                         coordinates={coordinates}
-                        midPoint={midPoint}
+                        midPoint={midPointPlace}
                         places={places}
                         subwayStation={subwayStation}
                         setMap={setMap}

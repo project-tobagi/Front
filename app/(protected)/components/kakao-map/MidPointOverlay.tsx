@@ -12,10 +12,10 @@ import { XIcon } from "lucide-react";
 import { useAtomValue } from "jotai";
 
 // state
-import { midPointState } from "../../_store/location";
+import { midPointPlaceState, midPointState } from "../../_store/location";
 
 const MidPointOverlay = ({ coordinates, visible, setVisible }: any) => {
-    const midPoint = useAtomValue<any>(midPointState);
+    const midPoint = useAtomValue<any>(midPointPlaceState);
 
     if (coordinates !== null && visible) {
         return (
