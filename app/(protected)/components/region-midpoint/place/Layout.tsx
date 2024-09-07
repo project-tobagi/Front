@@ -6,6 +6,7 @@ import { useState } from "react";
 // * install libraries
 import { useAtomValue } from "jotai";
 import { toast } from "react-toastify";
+import _ from "lodash";
 
 // * components
 import PlaceCategory from "./Category";
@@ -18,22 +19,30 @@ import { midPointState } from "@/app/(protected)/_store/location";
 import { getNearestPlace } from "@/app/(protected)/_utils/midpoint";
 
 const PlaceLayout = ({ stepFlow }: any) => {
-    const [selectedCategory, setSelectedCategory] = useState("");
-    const [placeResult, setPlaceResult] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState([]);
+    const [placeResult, setPlaceResult] = useState<any>(null);
     const midpoint = useAtomValue<any>(midPointState);
 
     const handleClickFindMidpointPlace = async () => {
-        const response = await getNearestPlace(
-            midpoint.lat,
-            midpoint.lng,
-            toast,
-            selectedCategory
+        const mpPlace = await Promise.all(
+            _.map(selectedCategory, (category: string) => {
+                return getNearestPlace(
+                    midpoint.lat,
+                    midpoint.lng,
+                    toast,
+                    category
+                );
+            })
         );
 
-        if (response) {
-            setPlaceResult(response);
+        if (mpPlace.length > 0) {
+            setPlaceResult(_.flatten(mpPlace));
+        } else {
+            toast.error("결과가 존재하지 않습니다.");
         }
     };
+
+    console.log(placeResult);
 
     if (stepFlow.step === 2) {
         return (

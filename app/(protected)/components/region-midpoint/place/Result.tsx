@@ -3,6 +3,7 @@
 // * install libraries
 import _ from "lodash";
 import { useAtom, useAtomValue } from "jotai";
+import { toast } from "react-toastify";
 
 // * components
 import Icon from "../../common/Icon";
@@ -19,6 +20,9 @@ import {
     locationState,
     midPointPlaceState,
 } from "@/app/(protected)/_store/location";
+
+// * etc
+import { saveClipboardText } from "@/app/(protected)/_utils/clipboard";
 
 const PlaceResult = ({ stepFlow, placeResult }: any) => {
     const address: any = useAtomValue(addressState);
@@ -50,7 +54,6 @@ const PlaceResult = ({ stepFlow, placeResult }: any) => {
                 {placeResult !== null ? (
                     <ScrollArea className='h-[400px]'>
                         {_.map(placeResult, (place: any) => {
-                            console.log(place);
                             return (
                                 <div
                                     onClick={() => {
@@ -81,7 +84,15 @@ const PlaceResult = ({ stepFlow, placeResult }: any) => {
                                                 도로명
                                             </h1>
                                             <p>{address?.road_address_name}</p>
-                                            <button>
+                                            <button
+                                                onClick={() => {
+                                                    saveClipboardText(
+                                                        address?.address_name,
+                                                        "도로명",
+                                                        toast
+                                                    );
+                                                }}
+                                            >
                                                 <Icon type='ic_copy_paste' />
                                             </button>
                                         </li>
@@ -90,7 +101,15 @@ const PlaceResult = ({ stepFlow, placeResult }: any) => {
                                                 지번
                                             </h1>
                                             <p>{address?.address_name}</p>
-                                            <button>
+                                            <button
+                                                onClick={() => {
+                                                    saveClipboardText(
+                                                        address?.address_name,
+                                                        "지번",
+                                                        toast
+                                                    );
+                                                }}
+                                            >
                                                 <Icon type='ic_copy_paste' />
                                             </button>
                                         </li>

@@ -4,7 +4,7 @@ import axios from "axios";
 // * etc
 import { generateAddress } from "./address";
 
-// 좌표 -> 중간지점 주소
+// 주소 -> 좌표
 export const getCoordinates = async (address: any, toast: any) => {
     const response = await axios.get(
         `https://dapi.kakao.com/v2/local/search/address.json`,
@@ -32,7 +32,7 @@ export const getCoordinates = async (address: any, toast: any) => {
     };
 };
 
-// 주소 -> 좌표, 주소
+// 좌표 -> 주소
 export const getAddress = async (
     coordinates: any,
     toast: any,
@@ -58,7 +58,11 @@ export const getAddress = async (
         });
     }
 
-    setState(generateAddress(response.data.documents[0]));
+    if (setState !== null) {
+        setState(generateAddress(response.data.documents[0]));
+    }
+
+    return generateAddress(response.data.documents[0]);
 };
 
 // 중간지점 근처 장소 (카테고리)

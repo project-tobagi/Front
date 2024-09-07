@@ -3,6 +3,7 @@
 // * install libraries
 import { useAtomValue } from "jotai";
 import _ from "lodash";
+import { toast } from "react-toastify";
 
 // * state
 import { addressState } from "@/app/(protected)/_store/location";
@@ -12,6 +13,9 @@ import Descriptions from "../Descriptions";
 import Icon from "../../common/Icon";
 import { CATEGORY_GROUP_CODES } from "@/app/(protected)/_utils/constants";
 
+// * etc
+import { saveClipboardText } from "@/app/(protected)/_utils/clipboard";
+
 const Category = ({
     stepFlow,
     selectedCategory,
@@ -19,6 +23,16 @@ const Category = ({
     handleClickFindMidpointPlace,
 }: any) => {
     const address: any = useAtomValue(addressState);
+
+    const handleClickSelectCategory = (ct: any) => {
+        setSelectedCategory((prev: any) => {
+            if (_.find(prev, (item) => item === ct)) {
+                return _.filter(prev, (item) => item !== ct);
+            } else {
+                return [...prev, ct];
+            }
+        });
+    };
 
     return (
         <div className='h-full flex flex-col'>
@@ -36,7 +50,15 @@ const Category = ({
                                     도로명
                                 </h1>
                                 <p>{address?.road_address_name}</p>
-                                <button>
+                                <button
+                                    onClick={() => {
+                                        saveClipboardText(
+                                            address?.road_address_name,
+                                            "도로명",
+                                            toast
+                                        );
+                                    }}
+                                >
                                     <Icon type='ic_copy_paste' />
                                 </button>
                             </li>
@@ -45,7 +67,15 @@ const Category = ({
                                     지번
                                 </h1>
                                 <p>{address?.address_name}</p>
-                                <button>
+                                <button
+                                    onClick={() => {
+                                        saveClipboardText(
+                                            address?.address_name,
+                                            "지번",
+                                            toast
+                                        );
+                                    }}
+                                >
                                     <Icon type='ic_copy_paste' />
                                 </button>
                             </li>
@@ -54,7 +84,15 @@ const Category = ({
                                     우편번호
                                 </h1>
                                 <p>{address?.zone_no}</p>
-                                <button>
+                                <button
+                                    onClick={() => {
+                                        saveClipboardText(
+                                            address?.zone_no,
+                                            "우편번호",
+                                            toast
+                                        );
+                                    }}
+                                >
                                     <Icon type='ic_copy_paste' />
                                 </button>
                             </li>
@@ -68,11 +106,14 @@ const Category = ({
                             return (
                                 <li
                                     onClick={() => {
-                                        setSelectedCategory(item.code);
+                                        handleClickSelectCategory(item.code);
                                     }}
                                     className={[
                                         "flex gap-2 ring-1 ring-gray-200 justify-center items-center px-2 py-0.5 rounded-sm hover:ring-[#00A2FF] cursor-pointer",
-                                        selectedCategory === item.code &&
+                                        _.find(
+                                            selectedCategory,
+                                            (ct) => ct === item.code
+                                        ) &&
                                             "bg-[#00A2ff] ring-[#00A2FF] text-white ",
                                     ]
                                         .filter(Boolean)

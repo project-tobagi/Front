@@ -2,6 +2,7 @@
 
 // * install libraries
 import { useAtomValue } from "jotai";
+import { toast } from "react-toastify";
 
 // * state
 import { addressState } from "@/app/(protected)/_store/location";
@@ -10,8 +11,12 @@ import { addressState } from "@/app/(protected)/_store/location";
 import Descriptions from "../Descriptions";
 import Icon from "../../common/Icon";
 
+// * etc
+import { saveClipboardText } from "@/app/(protected)/_utils/clipboard";
+
 const ResultLayout = ({ stepFlow }: any) => {
     const address = useAtomValue<any>(addressState);
+
     return (
         <div className='h-full flex flex-col'>
             <Descriptions
@@ -28,7 +33,15 @@ const ResultLayout = ({ stepFlow }: any) => {
                                     도로명
                                 </h1>
                                 <p>{address?.road_address_name}</p>
-                                <button>
+                                <button
+                                    onClick={() => {
+                                        saveClipboardText(
+                                            address?.road_address_name,
+                                            "도로명",
+                                            toast
+                                        );
+                                    }}
+                                >
                                     <Icon type='ic_copy_paste' />
                                 </button>
                             </li>
@@ -37,7 +50,15 @@ const ResultLayout = ({ stepFlow }: any) => {
                                     지번
                                 </h1>
                                 <p>{address?.address_name}</p>
-                                <button>
+                                <button
+                                    onClick={() => {
+                                        saveClipboardText(
+                                            address?.address_name,
+                                            "지번",
+                                            toast
+                                        );
+                                    }}
+                                >
                                     <Icon type='ic_copy_paste' />
                                 </button>
                             </li>
@@ -46,7 +67,15 @@ const ResultLayout = ({ stepFlow }: any) => {
                                     우편번호
                                 </h1>
                                 <p>{address?.zone_no}</p>
-                                <button>
+                                <button
+                                    onClick={() => {
+                                        saveClipboardText(
+                                            address?.zone_no,
+                                            "우편번호",
+                                            toast
+                                        );
+                                    }}
+                                >
                                     <Icon type='ic_copy_paste' />
                                 </button>
                             </li>

@@ -52,6 +52,38 @@ const MidpointForm = ({ stepFlow }: any) => {
         });
     };
 
+    const handleClickGetLocation = async (index: number) => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const my_address: any = await getAddress(
+                        {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        },
+                        toast,
+                        null
+                    );
+
+                    setStartPoints((prev: any) => {
+                        return _.map(prev, (item: any, i: number) => {
+                            if (index === i) {
+                                return { name: my_address.address_name };
+                            } else {
+                                return item;
+                            }
+                        });
+                    });
+                },
+                (error) => {
+                    console.log(error.message);
+                }
+            );
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+    };
+
     const handleClickDeleteStartPoint = (index: number) => {
         if (index !== 0 && index !== 1) {
             setStartPoints((prev: any) => {
@@ -131,7 +163,7 @@ const MidpointForm = ({ stepFlow }: any) => {
                                     >
                                         출발지 {index + 1}
                                     </label>
-                                    <div className='relative w-full flex gap-2'>
+                                    <div className='relative w-full flex items-center gap-2'>
                                         <Icon
                                             className='absolute top-[50%] translate-y-[-50%] left-3'
                                             type='ic_search'
@@ -148,6 +180,7 @@ const MidpointForm = ({ stepFlow }: any) => {
                                             required
                                             name='start'
                                         />
+
                                         {index !== 0 && index !== 1 && (
                                             <div
                                                 className='cursor-pointer'
@@ -160,6 +193,15 @@ const MidpointForm = ({ stepFlow }: any) => {
                                                 x
                                             </div>
                                         )}
+
+                                        <div
+                                            className='cursor-pointer'
+                                            onClick={() => {
+                                                handleClickGetLocation(index);
+                                            }}
+                                        >
+                                            <Icon type='ic_my_location' />
+                                        </div>
                                     </div>
                                 </div>
                             );
