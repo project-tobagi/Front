@@ -24,10 +24,12 @@ const Category = ({
 }: any) => {
     const address: any = useAtomValue(addressState);
 
+    console.log(selectedCategory);
+
     const handleClickSelectCategory = (ct: any) => {
         setSelectedCategory((prev: any) => {
-            if (_.find(prev, (item) => item === ct)) {
-                return _.filter(prev, (item) => item !== ct);
+            if (_.find(prev, (item) => item.code === ct.code)) {
+                return _.filter(prev, (item) => item.code !== ct.code);
             } else {
                 return [...prev, ct];
             }
@@ -106,13 +108,13 @@ const Category = ({
                             return (
                                 <li
                                     onClick={() => {
-                                        handleClickSelectCategory(item.code);
+                                        handleClickSelectCategory(item);
                                     }}
                                     className={[
                                         "flex gap-2 ring-1 ring-gray-200 justify-center items-center px-2 py-0.5 rounded-sm hover:ring-[#00A2FF] cursor-pointer",
                                         _.find(
                                             selectedCategory,
-                                            (ct) => ct === item.code
+                                            (ct) => ct.code === item.code
                                         ) &&
                                             "bg-[#00A2ff] ring-[#00A2FF] text-white ",
                                     ]

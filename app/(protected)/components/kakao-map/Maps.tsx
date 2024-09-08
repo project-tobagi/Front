@@ -2,7 +2,12 @@
 
 // * basic
 import { useState, useEffect, useRef } from "react";
-import { Map, Polygon, CustomOverlayMap } from "react-kakao-maps-sdk";
+import {
+    Map,
+    Polygon,
+    CustomOverlayMap,
+    MapMarker,
+} from "react-kakao-maps-sdk";
 
 // * components
 import RegionOverlay from "./mapOverlay";
@@ -45,6 +50,14 @@ const Maps = (props: any) => {
                 visible={overlayMidpointVisible}
                 setVisible={setOverlayMidpointVisible}
                 coordinates={overlayCoordinates}
+            />
+
+            <MapMarker // 마커를 생성합니다
+                position={{
+                    // 마커가 표시될 위치입니다
+                    lat: overlayCoordinates?.lat,
+                    lng: overlayCoordinates?.lng,
+                }}
             />
 
             <Polygon

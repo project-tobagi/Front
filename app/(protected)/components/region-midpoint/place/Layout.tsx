@@ -1,7 +1,7 @@
 "use client";
 
 // * basic
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // * install libraries
 import { useAtomValue } from "jotai";
@@ -21,18 +21,22 @@ import { getNearestPlace } from "@/app/(protected)/_utils/midpoint";
 const PlaceLayout = ({ stepFlow }: any) => {
     const [selectedCategory, setSelectedCategory] = useState([]);
     const [placeResult, setPlaceResult] = useState<any>(null);
+    const [filterCategory, setFilterCategory] = useState<any>(null);
     const midpoint = useAtomValue<any>(midPointState);
 
     const handleClickFindMidpointPlace = async () => {
         const mpPlace = await Promise.all(
-            _.map(selectedCategory, (category: string) => {
-                return getNearestPlace(
-                    midpoint.lat,
-                    midpoint.lng,
-                    toast,
-                    category
-                );
-            })
+            _.map(
+                selectedCategory,
+                (category: { type: string; code: string }) => {
+                    return getNearestPlace(
+                        midpoint.lat,
+                        midpoint.lng,
+                        toast,
+                        category.code
+                    );
+                }
+            )
         );
 
         if (mpPlace.length > 0) {
@@ -41,8 +45,6 @@ const PlaceLayout = ({ stepFlow }: any) => {
             toast.error("결과가 존재하지 않습니다.");
         }
     };
-
-    console.log(placeResult);
 
     if (stepFlow.step === 2) {
         return (
@@ -61,6 +63,8 @@ const PlaceLayout = ({ stepFlow }: any) => {
                 stepFlow={stepFlow}
                 selectedCategory={selectedCategory}
                 placeResult={placeResult}
+                filterCategory={filterCategory}
+                setFilterCategory={setFilterCategory}
             />
         );
     }
