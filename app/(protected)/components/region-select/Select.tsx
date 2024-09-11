@@ -49,9 +49,9 @@ const RegionSelect = ({
                 className='border-r-[1px] overflow-y-auto py-1.5'
                 size={size}
             >
-                {_.map(regionData, (data: any) => {
+                {_.map(regionData, (data: any, index: number) => {
                     return (
-                        <div>
+                        <div key={index}>
                             <div
                                 className={[
                                     `py-1 px-3 hover:bg-gray-100 text-sm cursor-pointer`,
@@ -76,9 +76,9 @@ const RegionSelect = ({
                     className='border-r-[1px] overflow-y-auto py-1.5'
                     size={size}
                 >
-                    {_.map(selectedSido.guList, (data: any) => {
+                    {_.map(selectedSido.guList, (data: any, index: number) => {
                         return (
-                            <div>
+                            <div key={index}>
                                 <div
                                     className={[
                                         `py-1 px-3 hover:bg-gray-100 text-sm cursor-pointer`,
@@ -104,26 +104,29 @@ const RegionSelect = ({
                     className='border-r-[1px] overflow-y-auto py-1.5'
                     size={size}
                 >
-                    {_.map(selectedSigugun.dongList, (data: any) => {
-                        return (
-                            <div>
-                                <div
-                                    className={[
-                                        `py-1 px-3 hover:bg-gray-100 text-sm cursor-pointer`,
-                                        data.dong === selectedDong?.dong &&
-                                            "bg-gray-100 flex justify-between items-center",
-                                    ]
-                                        .filter(Boolean)
-                                        .join(" ")}
-                                    onClick={() => {
-                                        setSelectedDong(data);
-                                    }}
-                                >
-                                    {data.dong}
+                    {_.map(
+                        selectedSigugun.dongList,
+                        (data: any, index: number) => {
+                            return (
+                                <div key={index}>
+                                    <div
+                                        className={[
+                                            `py-1 px-3 hover:bg-gray-100 text-sm cursor-pointer`,
+                                            data.dong === selectedDong?.dong &&
+                                                "bg-gray-100 flex justify-between items-center",
+                                        ]
+                                            .filter(Boolean)
+                                            .join(" ")}
+                                        onClick={() => {
+                                            setSelectedDong(data);
+                                        }}
+                                    >
+                                        {data.dong}
+                                    </div>
                                 </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        }
+                    )}
                 </DividePanel>
             )}
         </DivideGroup>
