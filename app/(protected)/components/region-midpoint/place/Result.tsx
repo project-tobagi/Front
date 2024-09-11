@@ -142,7 +142,9 @@ const PlaceResult = ({
                                             <div className='flex gap-2'>
                                                 <a
                                                     href={generateNaverMapLink(
-                                                        place.place_name
+                                                        place.address_name +
+                                                            " " +
+                                                            place.place_name
                                                     )}
                                                     target='_blank'
                                                     rel='noopener noreferrer'
@@ -153,7 +155,9 @@ const PlaceResult = ({
                                                 </a>
                                                 <a
                                                     href={generateKakaoMapLink(
-                                                        place.place_name
+                                                        place.address_name +
+                                                            " " +
+                                                            place.place_name
                                                     )}
                                                     target='_blank'
                                                     rel='noopener noreferrer'
@@ -243,7 +247,9 @@ const PlaceResult = ({
                                             <div className='flex gap-2'>
                                                 <a
                                                     href={generateNaverMapLink(
-                                                        place.place_name
+                                                        place.address_name +
+                                                            " " +
+                                                            place.place_name
                                                     )}
                                                     target='_blank'
                                                     rel='noopener noreferrer'
@@ -253,8 +259,10 @@ const PlaceResult = ({
                                                     </button>
                                                 </a>
                                                 <a
-                                                    href={generateKakaoMapLink(
-                                                        place.place_name
+                                                    href={generateNaverMapLink(
+                                                        place.address_name +
+                                                            " " +
+                                                            place.place_name
                                                     )}
                                                     target='_blank'
                                                     rel='noopener noreferrer'

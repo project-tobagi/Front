@@ -38,6 +38,7 @@ export const getAddress = async (
     toast: any,
     setState: any
 ) => {
+    console.log(1);
     const response = await axios.get(
         "https://dapi.kakao.com/v2/local/geo/coord2address.json",
         {
@@ -51,7 +52,6 @@ export const getAddress = async (
             },
         }
     );
-
     if (response.data.documents.length === 0) {
         return toast.warn("선택한 출발지와 도착지가 올바르지 않습니다.", {
             position: "top-right",

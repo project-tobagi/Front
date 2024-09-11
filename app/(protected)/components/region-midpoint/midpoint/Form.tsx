@@ -53,34 +53,40 @@ const MidpointForm = ({ stepFlow }: any) => {
     };
 
     const handleClickGetLocation = async (index: number) => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                async (position) => {
-                    const my_address: any = await getAddress(
-                        {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude,
-                        },
-                        toast,
-                        null
-                    );
-
-                    setStartPoints((prev: any) => {
-                        return _.map(prev, (item: any, i: number) => {
-                            if (index === i) {
-                                return { name: my_address.address_name };
-                            } else {
-                                return item;
-                            }
+        try {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    async (position) => {
+                        const my_address: any = await getAddress(
+                            {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude,
+                            },
+                            toast,
+                            null
+                        );
+                        setStartPoints((prev: any) => {
+                            return _.map(prev, (item: any, i: number) => {
+                                if (index === i) {
+                                    return { name: my_address.address_name };
+                                } else {
+                                    return item;
+                                }
+                            });
                         });
-                    });
-                },
-                (error) => {
-                    console.log(error.message);
-                }
-            );
-        } else {
-            console.log("Geolocation is not supported by this browser.");
+
+                        stepFlow.loadingEnd();
+                    },
+                    (error) => {
+                        console.log(error.message);
+                    }
+                );
+            } else {
+                console.log("Geolocation is not supported by this browser.");
+            }
+        } catch (error) {
+            stepFlow.loadingEnd();
+            console.log(error);
         }
     };
 
@@ -138,7 +144,14 @@ const MidpointForm = ({ stepFlow }: any) => {
 
     return (
         // header
-        <div className='h-full flex gap-6 flex-col '>
+        <div
+            className={[
+                "h-full flex gap-6 flex-col relative",
+                stepFlow.loading && "opacity-40",
+            ]
+                .filter(Boolean)
+                .join(" ")}
+        >
             <Descriptions
                 title='가장 빠르게 갈 수 있는 중간 지점을 찾아 드려요.'
                 subTitle={`두 지점의 출발지를 설정하여\n가장 빠르게 갈 수 있는 중간 지점을 찾아보세요.`}
@@ -147,9 +160,9 @@ const MidpointForm = ({ stepFlow }: any) => {
             {/* contents */}
             <form
                 onSubmit={handleSubmit}
-                className='flex flex-col  h-full justify-between'
+                className='flex flex-col h-full justify-between'
             >
-                <div className='flex flex-col gap-4  '>
+                <div className='flex flex-col gap-4'>
                     <div
                         ref={scrollRef}
                         className='flex flex-col gap-4 overflow-y-auto max-h-[260px] pb-2 w-full'
@@ -197,6 +210,7 @@ const MidpointForm = ({ stepFlow }: any) => {
                                         <div
                                             className='cursor-pointer'
                                             onClick={() => {
+                                                stepFlow.loadingStart();
                                                 handleClickGetLocation(index);
                                             }}
                                         >

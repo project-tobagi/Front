@@ -206,8 +206,6 @@ const KakaoMapLayout = () => {
         }
     }, [map, location]);
 
-    console.log(overlayCoordinates);
-
     useEffect(() => {
         if (!map) return;
         const ps = new kakao.maps.services.Places();

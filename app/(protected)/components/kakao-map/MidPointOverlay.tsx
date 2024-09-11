@@ -66,7 +66,11 @@ const MidPointOverlay = ({ coordinates, visible, setVisible }: any) => {
                         </div>
                         <div className='flex gap-2 '>
                             <a
-                                href={generateNaverMapLink(midPoint.place_name)}
+                                href={generateNaverMapLink(
+                                    midPoint.address_name +
+                                        " " +
+                                        midPoint.place_name
+                                )}
                                 target='_blank'
                                 rel='noopener noreferrer'
                             >
@@ -75,7 +79,11 @@ const MidPointOverlay = ({ coordinates, visible, setVisible }: any) => {
                                 </button>
                             </a>
                             <a
-                                href={generateKakaoMapLink(midPoint.place_name)}
+                                href={generateKakaoMapLink(
+                                    midPoint.address_name +
+                                        " " +
+                                        midPoint.place_name
+                                )}
                                 target='_blank'
                                 rel='noopener noreferrer'
                             >

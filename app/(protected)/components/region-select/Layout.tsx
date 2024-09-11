@@ -10,6 +10,7 @@ import { useAtom } from "jotai";
 // * components
 import { Button } from "@/components/ui/button";
 import Selector from "./Selector";
+import RegionSelect from "./Select";
 
 // * etc
 import { locationState } from "../../_store/location";
@@ -29,56 +30,32 @@ const RegionSelectorLayout = ({
     setSearchContents: any;
 }) => {
     const [, setLocation] = useAtom(locationState);
-    const [selectedSido, setSelectedSido] = useState<any>({
-        sido: null,
-        codeNm: null,
-    });
+    const [selectedSido, setSelectedSido] = useState<any>(null);
 
-    const [selectedSigugun, setSelectedSigugun] = useState<any>({
-        sido: null,
-        sigugun: null,
-        codeNm: null,
-    });
+    const [selectedSigugun, setSelectedSigugun] = useState<any>(null);
 
-    const [selectedDong, setSelectedDong] = useState<any>({
-        sido: null,
-        sigugun: null,
-        dong: null,
-        codeNm: null,
-    });
+    const [selectedDong, setSelectedDong] = useState<any>(null);
 
     const initRegion = () => {
-        setSelectedSido({
-            sido: null,
-            codeNm: null,
-        });
-        setSelectedSigugun({
-            sido: null,
-            sigugun: null,
-            codeNm: null,
-        });
-        setSelectedDong({
-            sido: null,
-            sigugun: null,
-            dong: null,
-            codeNm: null,
-        });
+        setSelectedSido(null);
+        setSelectedSigugun(null);
+        setSelectedDong(null);
     };
 
     // 선택한 동네 저장
     const handleClickSaveSelectedRegion = () => {
-        const { codeNm: sidoNm } = selectedSido || {};
-        const { codeNm: sigugunNm } = selectedSigugun || {};
-        const { codeNm: dongNm } = selectedDong || {};
+        const { si } = selectedSido || {};
+        const { gu } = selectedSigugun || {};
+        const { dong } = selectedDong || {};
 
-        const searchContents = [sidoNm, ">", sigugunNm];
-        if (dongNm) searchContents.push(">", dongNm);
+        const searchContents = [si, ">", gu];
+        if (dong) searchContents.push(">", dong);
         setSearchContents(searchContents);
 
         setLocation({
-            sido: sidoNm,
-            sigugun: sigugunNm,
-            dong: dongNm,
+            sido: si,
+            sigugun: gu,
+            dong: dong,
         });
     };
 
@@ -96,7 +73,17 @@ const RegionSelectorLayout = ({
             >
                 <div className='bg-white size-full flex flex-col justify-between rounded-xl'>
                     {/* 동네 선택 폼 */}
-                    <Selector
+                    {/* <Selector
+                        depth={depth}
+                        region={region}
+                        selectedSido={selectedSido}
+                        selectedSigugun={selectedSigugun}
+                        selectedDong={selectedDong}
+                        setSelectedSido={setSelectedSido}
+                        setSelectedSigugun={setSelectedSigugun}
+                        setSelectedDong={setSelectedDong}
+                    /> */}
+                    <RegionSelect
                         depth={depth}
                         region={region}
                         selectedSido={selectedSido}
