@@ -1,17 +1,21 @@
 "use client";
 
 // * basic
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 
 // * install libraries
 import axios from "axios";
 import { useAtom } from "jotai";
-import _ from "lodash";
+import _, { debounce } from "lodash";
 
 import { toast } from "react-toastify";
 
 // * state
-import { addressState, midPointState } from "../../../_store/location";
+import {
+    addressState,
+    midPointState,
+    relatedSearchListState,
+} from "../../../_store/location";
 
 // * components
 import Icon from "../../common/Icon";
@@ -33,12 +37,61 @@ const MidpointForm = ({ stepFlow }: any) => {
 
     const [, setAddress] = useAtom(addressState);
     const [, setMidpoint] = useAtom(midPointState);
+    const [, setRelatedSearchList] = useAtom(relatedSearchListState);
 
-    const handleChange = (e: any, index: number) => {
-        setStartPoints((prev: any) => {
-            return _.map(prev, (item: any, i: number) => {
+    const [searchTerm, setSearchTerm] = useState<any>("");
+
+    const [open, setOpen] = useState(false);
+    const inputRef = useRef(null);
+
+    // 검색 함수를 debounce로 감싸줍니다.
+    const debouncedSearch = useCallback(
+        debounce((term: string) => {
+            const ps = new kakao.maps.services.Places();
+            ps.keywordSearch(term, (data: any, status, _pagination): any => {
+                if (status === kakao.maps.services.Status.OK) {
+                    const bounds = new kakao.maps.LatLngBounds();
+                    let markers = [];
+
+                    for (let i = 0; i < data.length; i++) {
+                        markers.push({
+                            position: {
+                                lat: data[i].y,
+                                lng: data[i].x,
+                            },
+                            content: data[i].place_name,
+                        });
+                        bounds.extend(
+                            new kakao.maps.LatLng(data[i].y, data[i].x)
+                        );
+                    }
+
+                    // 연관검색어 set
+                    setRelatedSearchList(data);
+                }
+            });
+        }, 300),
+        []
+    );
+
+    // searchTerm이 변경될 때마다 debouncedSearch를 호출합니다.
+    useEffect(() => {
+        if (searchTerm.length > 0) {
+            debouncedSearch(searchTerm);
+        }
+    }, [searchTerm, debouncedSearch]);
+
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        index: number
+    ) => {
+        const newValue = e.target.value;
+        setSearchTerm(newValue);
+
+        setStartPoints((prev: any[]) => {
+            return prev.map((item: any, i: number) => {
                 if (index === i) {
-                    return { name: e.target.value };
+                    return { ...item, name: newValue };
                 } else {
                     return item;
                 }
@@ -165,7 +218,7 @@ const MidpointForm = ({ stepFlow }: any) => {
                 <div className='flex flex-col gap-4'>
                     <div
                         ref={scrollRef}
-                        className='flex flex-col gap-4 overflow-y-auto max-h-[260px] pb-2 w-full'
+                        className='flex flex-col gap-4 max-h-[260px] pb-2 w-full'
                     >
                         {_.map(startPoints, (item: any, index: number) => {
                             return (
@@ -176,6 +229,7 @@ const MidpointForm = ({ stepFlow }: any) => {
                                     >
                                         출발지 {index + 1}
                                     </label>
+
                                     <div className='relative w-full flex items-center gap-2'>
                                         <Icon
                                             className='absolute top-[50%] translate-y-[-50%] left-3'
@@ -192,6 +246,7 @@ const MidpointForm = ({ stepFlow }: any) => {
                                             }}
                                             required
                                             name='start'
+                                            ref={inputRef}
                                         />
 
                                         {index !== 0 && index !== 1 && (

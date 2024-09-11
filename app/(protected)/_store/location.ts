@@ -10,3 +10,5 @@ export const midPointState = atom(null);
 export const midPointPlaceState = atom(null);
 
 export const addressState = atom(null);
+
+export const relatedSearchListState = atom([]);

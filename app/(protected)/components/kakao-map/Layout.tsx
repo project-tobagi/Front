@@ -164,7 +164,7 @@ const KakaoMapLayout = () => {
     };
 
     useEffect(() => {
-        if (!map) return;
+        if (!map || location.sido === null) return;
         const ps = new kakao.maps.services.Places();
         const joinLocation = [location.sido, location.sigugun, location.dong]
             .filter(Boolean)

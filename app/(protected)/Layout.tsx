@@ -15,7 +15,7 @@ import { regionDataState } from "./_store/region";
 import { generateAreaData } from "./_utils/region";
 
 const Protected = ({ children }: any) => {
-    const [regionData, setRegionData] = useAtom(regionDataState);
+    const [, setRegionData] = useAtom(regionDataState);
     // 동읍리 api 요청 예제
     // useEffect(() => {
     //     axios.get(
