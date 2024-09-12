@@ -28,11 +28,13 @@ const ResultLayout = ({ stepFlow }: any) => {
                 <div className='ring-1 ring-[#00A2FF] p-6 mt-6  rounded-lg min-h-[140px]'>
                     <div>
                         <ul className='grid gap-2'>
-                            <li className='flex items-center gap-2'>
+                            <li className='flex items-center gap-2 truncate pl-0.5'>
                                 <h1 className='px-1 h-4 flex items-center ring-1 ring-black rounded-md text-xs'>
                                     도로명
                                 </h1>
-                                <p>{address?.road_address_name}</p>
+                                <p title={address?.road_address_name}>
+                                    {address?.road_address_name}
+                                </p>
                                 <button
                                     onClick={() => {
                                         saveClipboardText(
@@ -45,11 +47,16 @@ const ResultLayout = ({ stepFlow }: any) => {
                                     <Icon type='ic_copy_paste' />
                                 </button>
                             </li>
-                            <li className='flex items-center gap-2'>
+                            <li className='flex items-center gap-2 truncate pl-0.5'>
                                 <h1 className='px-1 h-4 flex items-center ring-1  ring-black rounded-md text-xs'>
                                     지번
                                 </h1>
-                                <p>{address?.address_name}</p>
+                                <p
+                                    className='truncate'
+                                    title={address?.address_name}
+                                >
+                                    {address?.address_name}
+                                </p>
                                 <button
                                     onClick={() => {
                                         saveClipboardText(
@@ -62,7 +69,7 @@ const ResultLayout = ({ stepFlow }: any) => {
                                     <Icon type='ic_copy_paste' />
                                 </button>
                             </li>
-                            <li className='flex items-center gap-2'>
+                            <li className='flex items-center gap-2 pl-0.5'>
                                 <h1 className='px-1 h-4 flex items-center ring-1 ring-black rounded-md text-xs'>
                                     우편번호
                                 </h1>

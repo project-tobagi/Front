@@ -50,7 +50,6 @@ const useStepFlow = () => {
 
 const RegionMidpointLayout = () => {
     const stepFlow = useStepFlow();
-    const relatedSearchList = useAtomValue(relatedSearchListState);
 
     return (
         <div className='flex h-[520px]'>
@@ -82,9 +81,6 @@ const RegionMidpointLayout = () => {
                 <MidpointLayout stepFlow={stepFlow} />
                 <PlaceLayout stepFlow={stepFlow} />
             </div>
-            {stepFlow.step === 0 && relatedSearchList.length > 0 && (
-                <RelatedSearch />
-            )}
         </div>
     );
 };

@@ -5,7 +5,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 
 // * install libraries
 import axios from "axios";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import _, { debounce } from "lodash";
 
 import { toast } from "react-toastify";
@@ -28,21 +28,24 @@ import {
     getAddress,
     getNearestPlace,
 } from "@/app/(protected)/_utils/midpoint";
+import RelatedSearch from "../RelatedSearch";
 
 const defaultStartPoints = [{ name: "" }, { name: "" }];
 
 const MidpointForm = ({ stepFlow }: any) => {
     const scrollRef = useRef<HTMLDivElement>(null);
+    const dropdownRef = useRef<any>(null);
     const [startPoints, setStartPoints] = useState(defaultStartPoints);
-
     const [, setAddress] = useAtom(addressState);
     const [, setMidpoint] = useAtom(midPointState);
-    const [, setRelatedSearchList] = useAtom(relatedSearchListState);
+    const [relatedSearchList, setRelatedSearchList] = useAtom(
+        relatedSearchListState
+    );
 
     const [searchTerm, setSearchTerm] = useState<any>("");
 
-    const [open, setOpen] = useState(false);
-    const inputRef = useRef(null);
+    const [open, setOpen] = useState({ visible: false, index: 0 });
+    const inputRef = useRef<any>(null);
 
     // 검색 함수를 debounce로 감싸줍니다.
     const debouncedSearch = useCallback(
@@ -81,12 +84,37 @@ const MidpointForm = ({ stepFlow }: any) => {
         }
     }, [searchTerm, debouncedSearch]);
 
+    useEffect(() => {
+        const handleClickOutside = (event: any) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target) &&
+                inputRef.current &&
+                !inputRef.current.contains(event.target)
+            ) {
+                setRelatedSearchList([]);
+                setOpen((prev) => ({ ...prev, visible: false }));
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement>,
         index: number
     ) => {
         const newValue = e.target.value;
         setSearchTerm(newValue);
+
+        setTimeout(() => {
+            if (newValue == "") {
+                setRelatedSearchList([]);
+            }
+        }, 300);
 
         setStartPoints((prev: any[]) => {
             return prev.map((item: any, i: number) => {
@@ -100,9 +128,12 @@ const MidpointForm = ({ stepFlow }: any) => {
     };
 
     const handleClickAddStartPoint = () => {
-        setStartPoints((prev: any) => {
-            return [...prev, { name: "" }];
-        });
+        // 최대 5개
+        if (startPoints.length < 5) {
+            setStartPoints((prev: any) => {
+                return [...prev, { name: "" }];
+            });
+        }
     };
 
     const handleClickGetLocation = async (index: number) => {
@@ -218,7 +249,7 @@ const MidpointForm = ({ stepFlow }: any) => {
                 <div className='flex flex-col gap-4'>
                     <div
                         ref={scrollRef}
-                        className='flex flex-col gap-4 max-h-[260px] pb-2 w-full'
+                        className='flex flex-col overflow-y-auto gap-4 max-h-[260px] pb-2 w-full'
                     >
                         {_.map(startPoints, (item: any, index: number) => {
                             return (
@@ -236,18 +267,43 @@ const MidpointForm = ({ stepFlow }: any) => {
                                             type='ic_search'
                                         />
 
-                                        <input
-                                            className='w-full rounded-full border-none shadow-[0px_4px_4px_0px_#00000040] ring-1 ring-gray-100 pl-12 py-2 font-light text-sm'
-                                            placeholder='출발지를 입력해주세요.'
-                                            type='text'
-                                            value={startPoints[index].name}
-                                            onChange={(e) => {
-                                                handleChange(e, index);
-                                            }}
-                                            required
-                                            name='start'
-                                            ref={inputRef}
-                                        />
+                                        <div className=' w-full'>
+                                            <input
+                                                className='w-full rounded-full border-none shadow-[0px_4px_4px_0px_#00000040] ring-1 ring-gray-100 pl-12 py-2 font-light text-sm'
+                                                placeholder='출발지를 입력해주세요.'
+                                                autoComplete='off'
+                                                type='text'
+                                                value={startPoints[index].name}
+                                                onChange={(e) => {
+                                                    handleChange(e, index);
+                                                }}
+                                                onFocus={() => {
+                                                    setOpen({
+                                                        visible: true,
+                                                        index: index,
+                                                    });
+                                                }}
+                                                required
+                                                name='start'
+                                                ref={inputRef}
+                                            />
+                                            {open.visible &&
+                                                relatedSearchList.length > 0 &&
+                                                index === open.index && (
+                                                    <div
+                                                        ref={dropdownRef}
+                                                        className='w-[278px] max-h-40 ring-1 rounded-lg ring-gray-300 fixed z-50 bg-white overflow-y-auto '
+                                                    >
+                                                        <RelatedSearch
+                                                            currentIndex={index}
+                                                            setStartPoints={
+                                                                setStartPoints
+                                                            }
+                                                            setOpen={setOpen}
+                                                        />
+                                                    </div>
+                                                )}
+                                        </div>
 
                                         {index !== 0 && index !== 1 && (
                                             <div

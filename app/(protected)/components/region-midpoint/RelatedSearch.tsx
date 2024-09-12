@@ -2,34 +2,53 @@
 
 // * install libraries
 import _ from "lodash";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 
 // * state
 import { relatedSearchListState } from "../../_store/location";
 
-const RelatedSearch = () => {
-    const relatedSearchList = useAtomValue(relatedSearchListState);
+const RelatedSearch = ({ currentIndex, setStartPoints, setOpen }: any) => {
+    const [relatedSearchList, setRelatedSearchList] = useAtom(
+        relatedSearchListState
+    );
     return (
-        <div className='relative w-[200px] h-50 bg-white px-4 h-full overflow-y-auto'>
-            <h1 className='px-3 pb-3 font-bold'>연관 검색어</h1>
-
+        <div className='relative w-full  bg-white  h-full '>
             <ul>
-                {_.map(relatedSearchList, (item: any) => {
+                {_.map(relatedSearchList, (point: any) => {
                     return (
                         <li
+                            onClick={() => {
+                                setStartPoints((prev: any[]) => {
+                                    return prev.map((item: any, i: number) => {
+                                        if (currentIndex === i) {
+                                            setOpen({
+                                                visible: false,
+                                                index: 0,
+                                            });
+                                            setRelatedSearchList([]);
+                                            return {
+                                                ...item,
+                                                name:
+                                                    point.road_address_name ||
+                                                    point.address_name,
+                                            };
+                                        } else {
+                                            return item;
+                                        }
+                                    });
+                                });
+                            }}
                             className={[
-                                `py-2 px-3 hover:bg-gray-100 text-sm cursor-pointer rounded-lg`,
-                                // data.gu === selectedSigugun?.gu &&
-                                //     "bg-gray-100 flex justify-between items-center",
+                                `w-full py-2 px-3 hover:bg-gray-100 text-sm cursor-pointer`,
                             ]
                                 .filter(Boolean)
                                 .join(" ")}
                         >
                             <div>
-                                <h1> {item.place_name}</h1>
+                                <h1> {point.place_name}</h1>
                                 <p className='text-xs text-gray-400'>
-                                    {item.road_address_name ||
-                                        item.address_name}
+                                    {point.road_address_name ||
+                                        point.address_name}
                                 </p>
                             </div>
                         </li>
