@@ -35,7 +35,7 @@ const KakaoMapLayout = () => {
     const [loaded, setLoaded] = useState(false);
     const [polygonPath, setPolygonPath]: any = useState([]);
     const [overlayCoordinates, setOverlayCoordinates] = useState<any>(null);
-    const [polygon, setPolygon] = useState([]);
+    const [polygon, setPolygon] = useState<any>(null);
     const [overlayRegionVisible, setOverlayRegionVisible] = useState(false);
     const [overlayMidpointVisible, setOverlayMidpointVisible] = useState(false);
 
@@ -205,9 +205,9 @@ const KakaoMapLayout = () => {
             //     return _.find(polygon, {properties : {EMD_KOR_NM : ''}});
             // });
         }
-        if (location.code !== null) {
+        if (location.code !== null && polygon !== null) {
             API_RESION_POLYGON(location.code).then((res) => {
-                setPolygon(() => {
+                setPolygon((prev: any) => {
                     return _.map(
                         res?.data?.response?.result?.featureCollection
                             ?.features[0]?.geometry?.coordinates[0][0],
