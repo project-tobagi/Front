@@ -3,18 +3,18 @@ export const ENV = process.env.APP_ENV;
 export const MENU_TYPES = [
     {
         type: "menu_1",
-        icon: "ic_location",
-        activeIcon: "ic_location_on",
+        icon: "ic_menu",
+        activeIcon: "ic_menu_on",
     },
     {
         type: "menu_2",
-        icon: "ic_location",
-        activeIcon: "ic_location_on",
+        icon: "ic_menu",
+        activeIcon: "ic_menu_on",
     },
     {
         type: "menu_3",
-        icon: "ic_location",
-        activeIcon: "ic_location_on",
+        icon: "ic_menu",
+        activeIcon: "ic_menu_on",
     },
 ];
 

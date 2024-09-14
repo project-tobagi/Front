@@ -46,6 +46,13 @@ const PlaceLayout = ({ stepFlow }: any) => {
         }
     };
 
+    // 스텝 0 일경우 선택한 카테고리 초기화
+    useEffect(() => {
+        if (stepFlow.step === 0) {
+            setSelectedCategory([]);
+        }
+    }, [stepFlow.step]);
+
     if (stepFlow.step === 2) {
         return (
             <PlaceCategory

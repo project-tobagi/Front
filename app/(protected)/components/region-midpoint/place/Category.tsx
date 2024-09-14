@@ -24,8 +24,6 @@ const Category = ({
 }: any) => {
     const address: any = useAtomValue(addressState);
 
-    console.log(selectedCategory);
-
     const handleClickSelectCategory = (ct: any) => {
         setSelectedCategory((prev: any) => {
             if (_.find(prev, (item) => item.code === ct.code)) {

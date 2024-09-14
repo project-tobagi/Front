@@ -40,7 +40,7 @@ const Left = () => {
                                 "ring-1 ring-[#eaeaea] rounded-full p-2 ",
                                 activeMenu.type === item.type
                                     ? "bg-black"
-                                    : "bg-white",
+                                    : "bg-white hover:bg-[#E3E3E3]",
                             ]
                                 .filter(Boolean)
                                 .join(" ")}

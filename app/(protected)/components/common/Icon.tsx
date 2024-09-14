@@ -14,6 +14,8 @@ import ic_copy_paste from "@/public/icons/ic_copy_paste.svg";
 import ic_naver_map from "@/public/icons/ic_naver_map.svg";
 import ic_kakao_map from "@/public/icons/ic_kakao_map.svg";
 import ic_my_location from "@/public/icons/ic_my_location.svg";
+import ic_menu from "@/public/icons/ic_menu.svg";
+import ic_menu_on from "@/public/icons/ic_menu_on.svg";
 
 // * logos
 import mainLogo from "@/public/logo/main_logo.svg";
@@ -31,6 +33,8 @@ const iconMap: any = {
     ic_my_location,
     mainLogo,
     subLogo,
+    ic_menu,
+    ic_menu_on,
 
     ic_kakao,
     ic_naver,
