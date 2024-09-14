@@ -205,7 +205,7 @@ const KakaoMapLayout = () => {
             //     return _.find(polygon, {properties : {EMD_KOR_NM : ''}});
             // });
         }
-        if (location.code !== null && polygon !== null) {
+        if (location.code !== null) {
             API_RESION_POLYGON(location.code).then((res) => {
                 setPolygon((prev: any) => {
                     return _.map(
