@@ -4,6 +4,7 @@ export const locationState = atom({
     sido: null,
     sigugun: null,
     dong: null,
+    code: null,
 });
 
 export const midPointState = atom(null);

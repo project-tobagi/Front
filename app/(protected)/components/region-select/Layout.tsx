@@ -46,7 +46,7 @@ const RegionSelectorLayout = ({
     const handleClickSaveSelectedRegion = () => {
         const { si } = selectedSido || {};
         const { gu } = selectedSigugun || {};
-        const { dong } = selectedDong || {};
+        const { dong, code } = selectedDong || {};
 
         const searchContents = [si, ">", gu];
         if (dong) searchContents.push(">", dong);
@@ -56,6 +56,7 @@ const RegionSelectorLayout = ({
             sido: si,
             sigugun: gu,
             dong: dong,
+            code: code,
         });
     };
 

@@ -34,7 +34,7 @@ const Contents = ({ children }: any) => {
     ];
 
     return (
-        <div className='relative'>
+        <div className='lg:relative'>
             {_.map(MENU_TYPES, (menu: any) => {
                 const currentContents = _.find(menuComponents, {
                     type: activeMenu.type,

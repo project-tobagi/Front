@@ -10,8 +10,9 @@ import _ from "lodash";
 import MidpointLayout from "./midpoint/Layout";
 import PlaceLayout from "./place/Layout";
 import RelatedSearch from "./RelatedSearch";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { relatedSearchListState } from "../../_store/location";
+import { activeMenuState } from "../../_store/menu";
 
 const useStepFlow = () => {
     const [step, setStep] = useState<number>(0);
@@ -50,9 +51,10 @@ const useStepFlow = () => {
 
 const RegionMidpointLayout = () => {
     const stepFlow = useStepFlow();
+    const [activeMenu, setActiveMenu]: any = useAtom<any>(activeMenuState);
 
     return (
-        <div className='flex h-[520px]'>
+        <div className='flex h-[520px] max-lg:h-full max-lg:justify-center max-lg:w-full'>
             <div className='w-[370px] h-full relative'>
                 {stepFlow.loading && (
                     <div className='absolute size-full flex items-center justify-center z-50'>
@@ -77,7 +79,19 @@ const RegionMidpointLayout = () => {
                         </div>
                     </div>
                 )}
-
+                <button
+                    onClick={() => {
+                        console.log("hihi");
+                        setActiveMenu({
+                            type: "",
+                            icon: "",
+                            activeIcon: "",
+                        });
+                    }}
+                    className='hidden max-lg:block absolute top-[0px] right-[-50px] w-6 h-6 z-50'
+                >
+                    x
+                </button>
                 <MidpointLayout stepFlow={stepFlow} />
                 <PlaceLayout stepFlow={stepFlow} />
             </div>

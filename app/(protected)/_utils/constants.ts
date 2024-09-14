@@ -11,11 +11,11 @@ export const MENU_TYPES = [
         icon: "ic_menu",
         activeIcon: "ic_menu_on",
     },
-    {
-        type: "menu_3",
-        icon: "ic_menu",
-        activeIcon: "ic_menu_on",
-    },
+    // {
+    //     type: "menu_3",
+    //     icon: "ic_menu",
+    //     activeIcon: "ic_menu_on",
+    // },
 ];
 
 export const CATEGORY_GROUP_CODES = [

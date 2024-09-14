@@ -27,6 +27,8 @@ axiosClient.interceptors.request.use((config: any) => {
     //     //   window.location.href = '/login'
     // }
 
+    console.log("API_URL:", process.env.API_URL);
+
     return config;
 });
 

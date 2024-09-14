@@ -20,6 +20,7 @@ const Maps = (props: any) => {
         places,
         subwayStation,
         setMap,
+        polygon,
         polygonPath,
         overlayRegionVisible,
         setOverlayRegionVisible,
@@ -31,7 +32,7 @@ const Maps = (props: any) => {
 
     let defaultLevel = 3;
     const [level, setLevel] = useState(defaultLevel);
-
+    console.log(polygon);
     return (
         <Map // 지도를 표시할 Container
             id='map'
@@ -61,13 +62,13 @@ const Maps = (props: any) => {
             />
 
             <Polygon
-                path={polygonPath}
+                path={polygon}
                 strokeWeight={3} // 선의 두께입니다
-                strokeColor={"#39DE2A"} // 선의 색깔입니다
+                strokeColor={"#f168b3"} // 선의 색깔입니다
                 strokeOpacity={0.8} // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
                 strokeStyle={"solid"} // 선의 스타일입니다
-                fillColor={"#A2FF99"} // 채우기 색깔입니다
-                fillOpacity={0.7} // 채우기 불투명도입니다
+                fillColor={"#f168b3"} // 채우기 색깔입니다
+                fillOpacity={0.2} // 채우기 불투명도입니다
                 //   fillColor={isMouseOver ? "#EFFFED" : "#A2FF99"} // 채우기 색깔입니다
                 //   fillOpacity={isMouseOver ? 0.8 : 0.7} // 채우기 불투명도입니다
                 //   onMouseover={() => setIsMouseOver(true)}
