@@ -2,7 +2,7 @@
 import axios from "axios";
 
 // * etc
-import { generateAddress } from "./address";
+import { generateAddress } from "../_utils/address";
 
 // 주소 -> 좌표
 export const getCoordinates = async (address: any, toast: any) => {

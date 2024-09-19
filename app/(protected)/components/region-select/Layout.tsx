@@ -9,7 +9,6 @@ import { useAtom } from "jotai";
 
 // * components
 import { Button } from "@/components/ui/button";
-import Selector from "./Selector";
 import RegionSelect from "./Select";
 
 // * etc
@@ -52,12 +51,14 @@ const RegionSelectorLayout = ({
         if (dong) searchContents.push(">", dong);
         setSearchContents(searchContents);
 
-        setLocation({
-            sido: si,
-            sigugun: gu,
-            dong: dong,
-            code: code,
-        });
+        if (depth === 3) {
+            setLocation({
+                sido: si,
+                sigugun: gu,
+                dong: dong,
+                code: code,
+            });
+        }
     };
 
     useEffect(() => {
@@ -120,15 +121,21 @@ const RegionSelectorLayout = ({
                                 handleClickSaveSelectedRegion();
                             }}
                         >
-                            검색
+                            {depth === 3 ? "검색" : "완료"}
                         </Button>
                         <Button
                             onClick={() => {
-                                setOpen(false);
+                                if (depth === 3) {
+                                    setOpen(false);
+                                } else {
+                                    setSearchContents(null);
+                                    setSelectedSido(null);
+                                    setSelectedSigugun(null);
+                                }
                             }}
                             className='h-7 bg-[#EAEAEA] hover:bg-[#eeeeee] hover:opacity-80 text-black '
                         >
-                            취소
+                            {depth === 3 ? "취소" : "초기화"}
                         </Button>
                     </div>
                 </div>

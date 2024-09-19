@@ -7,41 +7,55 @@ import { Button } from "@/components/ui/button";
 import RegionFilterSliders from "./Sliders";
 import { useState } from "react";
 
-const Step2 = ({ setStep }: any) => {
+// * etc
+import { API_STATION_STATUS } from "@/app/(protected)/_api";
+
+const Step2 = ({ stepFlow }: any) => {
     const sliderTypes = [
         {
             id: 1,
             label: "편의시설",
-            value: 0,
+            value: 1,
+            active: false,
         },
         {
             id: 2,
             label: "치안",
-            value: 0,
+            value: 1,
+            active: false,
         },
         {
             id: 3,
             label: "문화시설",
-            value: 0,
+            value: 1,
+            active: false,
         },
         {
             id: 4,
             label: "맛집",
-            value: 0,
+            value: 1,
+            active: false,
         },
         {
             id: 5,
             label: "교통",
-            value: 0,
+            value: 1,
+            active: false,
         },
         {
             id: 6,
             label: "생활 인프라",
-            value: 0,
+            value: 1,
+            active: false,
         },
     ];
 
     const [conditions, setConditions] = useState(sliderTypes);
+
+    // * 탐색하기
+    const handleClickFilterRegion = async () => {
+        // await API_STATION_STATUS();
+    };
 
     return (
         // header
@@ -71,9 +85,7 @@ const Step2 = ({ setStep }: any) => {
                     variant='outline'
                     className='rounded-full px-6'
                     onClick={() => {
-                        setStep((prev: number) => {
-                            return (prev -= 1);
-                        });
+                        stepFlow.back();
                     }}
                 >
                     뒤로
@@ -81,9 +93,7 @@ const Step2 = ({ setStep }: any) => {
                 <Button
                     className='rounded-full px-6'
                     onClick={() => {
-                        setStep((prev: number) => {
-                            return (prev += 1);
-                        });
+                        stepFlow.next();
                     }}
                 >
                     탐색

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 // * components
 import RegionFilterSelector from "./Selector";
 
-const Step1 = ({ setStep }: any) => {
+const Step1 = ({ stepFlow }: any) => {
     return (
         // header
         <div className='h-[calc(100%-25px)] flex gap-6 flex-col'>
@@ -30,9 +30,7 @@ const Step1 = ({ setStep }: any) => {
                 <Button
                     className='rounded-full px-6'
                     onClick={() => {
-                        setStep((prev: number) => {
-                            return (prev += 1);
-                        });
+                        stepFlow.next();
                     }}
                 >
                     다음

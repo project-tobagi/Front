@@ -91,3 +91,26 @@
     font-family: "Pretendard-Regular", "Pretendard-Medium", "Pretendard-Bold",
         "Spoqa Han Sans Neo", "sans-serif";
 }
+
+input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    outline: none;
+    transition: border-color 0.3s ease;
+    position: relative;
+}
+
+input[type="radio"]:hover:not(:checked) {
+    border: 4px solid #ccc;
+}
+
+input[type="radio"]:checked {
+    appearance: auto;
+    -webkit-appearance: auto;
+    border-color: #03a2ff;
+    border: none;
+}

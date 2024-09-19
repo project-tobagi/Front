@@ -109,43 +109,45 @@ const RegionSelect = ({
                 )}
             </DividePanel>
 
-            <DividePanel
-                className='border-r-[1px] overflow-y-auto py-1.5'
-                size={size}
-            >
-                {selectedSigugun !== null ? (
-                    <div>
-                        {_.map(
-                            selectedSigugun.dongList,
-                            (data: any, index: number) => {
-                                return (
-                                    <div key={index}>
-                                        <div
-                                            className={[
-                                                `py-1 px-3 hover:bg-gray-100 text-sm cursor-pointer`,
-                                                data.dong ===
-                                                    selectedDong?.dong &&
-                                                    "bg-gray-100 flex justify-between items-center",
-                                            ]
-                                                .filter(Boolean)
-                                                .join(" ")}
-                                            onClick={() => {
-                                                setSelectedDong(data);
-                                            }}
-                                        >
-                                            {data.dong}
+            {depth === 3 && (
+                <DividePanel
+                    className='border-r-[1px] overflow-y-auto py-1.5'
+                    size={size}
+                >
+                    {selectedSigugun !== null ? (
+                        <div>
+                            {_.map(
+                                selectedSigugun.dongList,
+                                (data: any, index: number) => {
+                                    return (
+                                        <div key={index}>
+                                            <div
+                                                className={[
+                                                    `py-1 px-3 hover:bg-gray-100 text-sm cursor-pointer`,
+                                                    data.dong ===
+                                                        selectedDong?.dong &&
+                                                        "bg-gray-100 flex justify-between items-center",
+                                                ]
+                                                    .filter(Boolean)
+                                                    .join(" ")}
+                                                onClick={() => {
+                                                    setSelectedDong(data);
+                                                }}
+                                            >
+                                                {data.dong}
+                                            </div>
                                         </div>
-                                    </div>
-                                );
-                            }
-                        )}
-                    </div>
-                ) : (
-                    <div className='text-xs px-4 py-1 text-gray-400'>
-                        시/군/구를 선택해주세요.
-                    </div>
-                )}
-            </DividePanel>
+                                    );
+                                }
+                            )}
+                        </div>
+                    ) : (
+                        <div className='text-xs px-4 py-1 text-gray-400'>
+                            시/군/구를 선택해주세요.
+                        </div>
+                    )}
+                </DividePanel>
+            )}
         </DivideGroup>
     );
 };

@@ -11,8 +11,9 @@ const Stepper = ({ step, contents, lastStep }: any) => {
                 if (data.step === lastStep) {
                     return (
                         <li
+                            key={step}
                             className={[
-                                "flex whitespace-nowrap items-center text-[#D1D6DE]",
+                                "flex whitespace-nowrap items-center  text-[#D1D6DE]",
                                 step == data.step
                                     ? "text-black"
                                     : "text-[#D1D6DE]",
@@ -31,7 +32,7 @@ const Stepper = ({ step, contents, lastStep }: any) => {
                                         .filter(Boolean)
                                         .join(" ")}
                                 >
-                                    {data.step}
+                                    {data.step + 1}
                                 </span>
                                 <p> {data.label}</p>
                             </div>
@@ -45,7 +46,7 @@ const Stepper = ({ step, contents, lastStep }: any) => {
                                 step == data.step
                                     ? "text-black"
                                     : "text-[#D1D6DE]",
-                                data.step == 2
+                                data.step == 1
                                     ? "after:mr-2.5"
                                     : "after:ml-2.5",
                             ]
@@ -70,7 +71,7 @@ const Stepper = ({ step, contents, lastStep }: any) => {
                                             .filter(Boolean)
                                             .join(" ")}
                                     >
-                                        {data.step}
+                                        {data.step + 1}
                                     </span>
                                     {data.label}
                                 </p>

@@ -32,7 +32,6 @@ const Maps = (props: any) => {
 
     let defaultLevel = 3;
     const [level, setLevel] = useState(defaultLevel);
-    console.log(polygon);
     return (
         <Map // 지도를 표시할 Container
             id='map'
@@ -58,6 +57,8 @@ const Maps = (props: any) => {
                     // 마커가 표시될 위치입니다
                     lat: overlayCoordinates?.lat,
                     lng: overlayCoordinates?.lng,
+                    // lng: 127.40170624974152,
+                    // lat: 36.4376092055655,
                 }}
             />
             {polygon !== null && (

@@ -16,7 +16,7 @@ import PlaceResult from "./Result";
 import { midPointState } from "@/app/(protected)/_store/location";
 
 // * etc
-import { getNearestPlace } from "@/app/(protected)/_utils/midpoint";
+import { getNearestPlace } from "@/app/(protected)/_api/map";
 
 const PlaceLayout = ({ stepFlow }: any) => {
     const [selectedCategory, setSelectedCategory] = useState([]);

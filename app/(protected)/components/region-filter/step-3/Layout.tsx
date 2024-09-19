@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 // * components
 import RegionCard from "./RegioCard";
 
-const Step3 = ({ setStep }: any) => {
+const Step3 = ({ stepFlow }: any) => {
     return (
         // header
         <div className='h-[calc(100%-25px)] flex gap-6 flex-col'>
@@ -31,7 +31,7 @@ const Step3 = ({ setStep }: any) => {
                 <Button
                     className='rounded-full px-6'
                     onClick={() => {
-                        setStep(1);
+                        stepFlow.reset();
                     }}
                 >
                     다시하기

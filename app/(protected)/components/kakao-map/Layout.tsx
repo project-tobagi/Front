@@ -8,6 +8,7 @@ import Script from "next/script";
 import axios from "axios";
 import _ from "lodash";
 import { useAtom, useAtomValue } from "jotai";
+import { toast } from "react-toastify";
 
 // * state
 import {
@@ -19,6 +20,9 @@ import {
 // * components
 import Maps from "./Maps";
 import { API_RESION_POLYGON } from "../../_api";
+
+// * etc
+import { getCoordinates } from "../../_api/map";
 
 /**
  * @param location '', 선택한 동네 (ex:대구광역시 북구 태전동)
@@ -53,160 +57,32 @@ const KakaoMapLayout = () => {
     // 선택한 동네 text
     const location = useAtomValue(locationState);
 
-    const handleChange = (e: any) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    const handleSubmit = async (e: any) => {
-        e.preventDefault();
-        const { start, end } = formData;
-
-        try {
-            const startLocation = await getCoordinates(start);
-            const endLocation = await getCoordinates(end);
-
-            const midpoint = {
-                lat: (startLocation.lat + endLocation.lat) / 2,
-                lng: (startLocation.lng + endLocation.lng) / 2,
-            };
-
-            const nearbyPlaces = await getNearbyPlaces(
-                midpoint.lat,
-                midpoint.lng
-            );
-
-            const nearbySubway = await getNearestSubwayStation(
-                midpoint.lat,
-                midpoint.lng
-            );
-
-            setPlaces(nearbyPlaces);
-            setSubwayStation(nearbySubway);
-        } catch (error) {
-            console.error("Error finding midpoint or places:", error);
-        }
-    };
-
-    const getCoordinates = async (address: any) => {
-        const response = await axios.get(
-            `https://dapi.kakao.com/v2/local/search/address.json`,
-            {
-                params: { query: address },
-                headers: {
-                    Authorization: `KakaoAK ${process.env.KAKAO_APP_KEY}`,
-                    KA: `sdk/1.0 os/javascript lang/ko device/desktop origin/${process.env.KAKAO_APP_KEY}`,
-                },
-            }
-        );
-
-        const { x, y } = response.data.documents[0].address;
-        return { lat: parseFloat(y), lng: parseFloat(x) };
-    };
-
-    const getNearbyPlaces = async (lat: any, lng: any) => {
-        const response = await axios.get(
-            `https://dapi.kakao.com/v2/local/search/category.json`,
-            {
-                params: {
-                    category_group_code: "FD6", // 음식점
-                    x: lng,
-                    y: lat,
-                    radius: 2000, // 검색 반경 (미터 단위)
-                    sort: "accuracy", // 정렬 기준 (accuracy 또는 distance)
-                },
-                headers: {
-                    Authorization: `KakaoAK ${process.env.KAKAO_APP_KEY}`,
-                    KA: `sdk/1.0 os/javascript lang/ko device/desktop origin/${process.env.KAKAO_APP_KEY}`,
-                },
-            }
-        );
-
-        return response.data.documents.map((doc: any) => ({
-            name: doc.place_name,
-            x: doc.x,
-            y: doc.y,
-            address: doc.address_name,
-            url: doc.place_url,
-        }));
-    };
-
-    const getNearestSubwayStation = async (lat: number, lng: number) => {
-        try {
-            const response = await axios.get(
-                `https://dapi.kakao.com/v2/local/search/category.json`,
-                {
-                    params: {
-                        category_group_code: "SW8", // 지하철역
-                        x: lng,
-                        y: lat,
-                        radius: 10000, // 검색 반경 (미터 단위)
-                        sort: "distance", // 거리 기준 정렬
-                    },
-                    headers: {
-                        Authorization: `KakaoAK ${process.env.KAKAO_APP_KEY}`,
-                        KA: `sdk/1.0 os/javascript lang/ko device/desktop origin/${process.env.KAKAO_APP_KEY}`,
-                    },
-                }
-            );
-
-            if (response.data.documents.length > 0) {
-                // 가장 가까운 지하철역 정보 반환
-                return response.data.documents[0];
-            } else {
-                throw new Error(
-                    "No subway stations found within the specified radius."
-                );
-            }
-        } catch (error) {
-            console.error("Error fetching nearest subway station:", error);
-            throw error;
-        }
-    };
-
     useEffect(() => {
         if (!map || location.sido === null) return;
-        const ps = new kakao.maps.services.Places();
         const joinLocation = [location.sido, location.sigugun, location.dong]
             .filter(Boolean)
-            .join("");
-        ps.keywordSearch(joinLocation, (data, status, _pagination) => {
-            if (status === kakao.maps.services.Status.OK) {
-                // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-                // LatLngBounds 객체에 좌표를 추가합니다
-                const bounds = new kakao.maps.LatLngBounds();
-                let markers = [];
+            .join(" ");
+        try {
+            getCoordinates(joinLocation, toast).then((res) => {
+                if (res !== null && res !== undefined) {
+                    const bounds = new kakao.maps.LatLngBounds();
+                    bounds.extend(new kakao.maps.LatLng(res.lat, res.lng));
+                    map.setBounds(bounds);
+                    map.setLevel(3);
 
-                for (var i = 0; i < data.length; i++) {
-                    // @ts-ignore
-                    markers.push({
-                        position: {
-                            lat: data[i].y,
-                            lng: data[i].x,
-                        },
-                        content: data[i].place_name,
-                    });
-                    // @ts-ignore
-                    bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+                    setOverlayMidpointVisible(false);
+                    setOverlayRegionVisible(true);
+                    setOverlayCoordinates({ lng: res.lng, lat: res.lat });
                 }
-
-                // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-                map.setBounds(bounds);
-
-                setOverlayMidpointVisible(false);
-                setOverlayRegionVisible(true);
-                setOverlayCoordinates(markers[0].position);
-            }
-        });
-
-        if (location !== null && location !== undefined) {
-            // * polygon api 넣을 곳
-            // setPolygonPath(() => {
-            //     return _.find(polygon, {properties : {EMD_KOR_NM : ''}});
-            // });
+            });
+        } catch (err) {
+            toast.error("선택한 동네의 좌표를 찾지 못했습니다.", {
+                position: "top-right",
+            });
         }
+
         if (location.code !== null) {
-            API_RESION_POLYGON(location.code).then((res) => {
+            API_RESION_POLYGON(location.code).then((res: any) => {
                 setPolygon((prev: any) => {
                     return _.map(
                         res?.data?.response?.result?.featureCollection

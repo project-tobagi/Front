@@ -27,7 +27,7 @@ import {
     getCoordinates,
     getAddress,
     getNearestPlace,
-} from "@/app/(protected)/_utils/midpoint";
+} from "@/app/(protected)/_api/map";
 import RelatedSearch from "../RelatedSearch";
 
 const defaultStartPoints = [{ name: "" }, { name: "" }];
