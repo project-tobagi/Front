@@ -46,6 +46,7 @@ const Left = () => {
                                 .join(" ")}
                         >
                             <Icon
+                                className='w-6 h-6'
                                 type={
                                     activeMenu.type === item.type
                                         ? item.activeIcon

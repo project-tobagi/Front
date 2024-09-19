@@ -8,8 +8,8 @@ export const MENU_TYPES = [
     },
     {
         type: "menu_2",
-        icon: "ic_menu",
-        activeIcon: "ic_menu_on",
+        icon: "ic_menu_2",
+        activeIcon: "ic_menu_2_on",
     },
     // {
     //     type: "menu_3",
