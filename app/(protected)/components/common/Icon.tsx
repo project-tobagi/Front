@@ -18,6 +18,9 @@ import ic_menu from "@/public/icons/ic_menu.svg";
 import ic_menu_on from "@/public/icons/ic_menu_on.svg";
 import ic_menu_2 from "@/public/icons/ic_menu_2.svg";
 import ic_menu_2_on from "@/public/icons/ic_menu_2_on.svg";
+import ic_home from "@/public/icons/ic_home.svg";
+import ic_board from "@/public/icons/ic_board.svg";
+import ic_arrow from "@/public/icons/ic_arrow.svg";
 
 // * logos
 import mainLogo from "@/public/logo/main_logo.svg";
@@ -39,7 +42,9 @@ const iconMap: any = {
     ic_menu_on,
     ic_menu_2,
     ic_menu_2_on,
-
+    ic_home,
+    ic_board,
+    ic_arrow,
     ic_kakao,
     ic_naver,
     ic_daum,

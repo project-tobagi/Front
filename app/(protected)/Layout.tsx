@@ -13,7 +13,7 @@ import { regionDataState } from "./_store/region";
 
 // * etc
 import { generateAreaData } from "./_utils/region";
-import { API_RESION_POLYGON, API_STATION_STATUS } from "./_api";
+import { API_RESION_POLYGON, API_RANK_INFO } from "./_api";
 
 const Protected = ({ children }: any) => {
     const [, setRegionData] = useAtom(regionDataState);
@@ -31,6 +31,7 @@ const Protected = ({ children }: any) => {
 
     useEffect(() => {
         // 법정동 정보 초기 로드
+        // console.log(API_RANK_INFO());
         generateAreaData(setRegionData);
     }, []);
 

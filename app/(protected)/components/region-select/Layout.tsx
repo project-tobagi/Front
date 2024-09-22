@@ -5,15 +5,20 @@ import { useState, useEffect } from "react";
 
 // * install libraries
 import _ from "lodash";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
+import { useMediaQuery } from "react-responsive";
+import { toast } from "react-toastify";
 
 // * components
 import { Button } from "@/components/ui/button";
 import RegionSelect from "./Select";
+import DesktopRegionSelect from "./select/desktop/Layout";
+import MobileRegionSelect from "./select/mobile/Layout";
 
 // * etc
 import { locationState } from "../../_store/location";
-import { region } from "@/app/(protected)/_utils/hangjungdong";
+import { polygonState } from "../../_store/region";
+import { API_RESION_POLYGON } from "../../_api";
 
 const RegionSelectorLayout = ({
     depth = 3,
@@ -28,12 +33,18 @@ const RegionSelectorLayout = ({
     selectorRef: any;
     setSearchContents: any;
 }) => {
-    const [, setLocation] = useAtom(locationState);
+    const [location, setLocation] = useAtom(locationState);
     const [selectedSido, setSelectedSido] = useState<any>(null);
 
     const [selectedSigugun, setSelectedSigugun] = useState<any>(null);
 
     const [selectedDong, setSelectedDong] = useState<any>(null);
+    const [polygon, setPolygon]: any = useAtom(polygonState);
+
+    const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 });
+    const isMobile = useMediaQuery({ maxWidth: 1224 });
+
+    const [loading, setLoading] = useState(false);
 
     const initRegion = () => {
         setSelectedSido(null);
@@ -64,10 +75,46 @@ const RegionSelectorLayout = ({
     useEffect(() => {
         if (!open) {
             initRegion();
+            setLoading(false);
         }
     }, [open]);
 
-    if (open) {
+    useEffect(() => {
+        if (isMobile && selectedDong !== null) {
+            handleClickSaveSelectedRegion();
+        }
+    }, [selectedDong]);
+
+    useEffect(() => {
+        if (location.code !== null) {
+            API_RESION_POLYGON(location.code)
+                .then((res: any) => {
+                    setPolygon((prev: any) => {
+                        return _.map(res.data[0][0], (item) => {
+                            return { lng: item[0], lat: item[1] };
+                        });
+                    });
+                })
+                .catch((err) => {
+                    toast.error("선택한 동네의 영역을 찾지 못했습니다.", {
+                        position: "top-right",
+                    });
+                })
+                .finally(() => {
+                    setOpen(false);
+                    setLoading(false);
+                });
+        }
+    }, [location]);
+
+    // useEffect(() => {
+    //     if (polygon !== null) {
+    //         setOpen(false);
+    //         setLoading(false);
+    //     }
+    // }, [polygon]);
+
+    if (open && isDesktopOrLaptop) {
         return (
             <div
                 ref={selectorRef}
@@ -75,19 +122,8 @@ const RegionSelectorLayout = ({
             >
                 <div className='bg-white size-full flex flex-col justify-between rounded-xl'>
                     {/* 동네 선택 폼 */}
-                    {/* <Selector
+                    <DesktopRegionSelect
                         depth={depth}
-                        region={region}
-                        selectedSido={selectedSido}
-                        selectedSigugun={selectedSigugun}
-                        selectedDong={selectedDong}
-                        setSelectedSido={setSelectedSido}
-                        setSelectedSigugun={setSelectedSigugun}
-                        setSelectedDong={setSelectedDong}
-                    /> */}
-                    <RegionSelect
-                        depth={depth}
-                        region={region}
                         selectedSido={selectedSido}
                         selectedSigugun={selectedSigugun}
                         selectedDong={selectedDong}
@@ -101,13 +137,13 @@ const RegionSelectorLayout = ({
                             className={[
                                 "bg-[#EAEAEA] text-black opacity-100 pointer-events-none h-7",
 
-                                // 선택한 시군구가 있으면서 그에 해당하는 동이 없을때
-                                selectedSigugun &&
-                                    selectedSigugun.sigugun !== null &&
-                                    _.findIndex(region.dong, {
-                                        sigugun: selectedSigugun.sigugun,
-                                    }) === -1 &&
-                                    "bg-[#00A2FF] hover:bg-sky-400 text-white pointer-events-auto",
+                                // // 선택한 시군구가 있으면서 그에 해당하는 동이 없을때
+                                // selectedSigugun &&
+                                //     selectedSigugun.sigugun !== null &&
+                                //     _.findIndex(region.dong, {
+                                //         sigugun: selectedSigugun.sigugun,
+                                //     }) === -1 &&
+                                //     "bg-[#00A2FF] hover:bg-sky-400 text-white pointer-events-auto",
                                 // 동까지 모두 선택했을 때
                                 selectedDong &&
                                     selectedDong.dong !== null &&
@@ -140,6 +176,22 @@ const RegionSelectorLayout = ({
                     </div>
                 </div>
             </div>
+        );
+    }
+
+    if (open && isMobile) {
+        return (
+            <MobileRegionSelect
+                loading={loading}
+                setLoading={setLoading}
+                setOpen={setOpen}
+                selectedSido={selectedSido}
+                selectedSigugun={selectedSigugun}
+                selectedDong={selectedDong}
+                setSelectedSido={setSelectedSido}
+                setSelectedSigugun={setSelectedSigugun}
+                setSelectedDong={setSelectedDong}
+            />
         );
     }
 };

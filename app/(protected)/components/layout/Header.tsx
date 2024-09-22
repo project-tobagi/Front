@@ -51,17 +51,24 @@ const Header = () => {
     }, []);
 
     return (
-        <div className='h-16 pt-4 px-4'>
-            <div className='flex justify-between items-center'>
+        <div
+            className={[
+                "h-16 pt-4 px-4  max-lg:absolute lg:top-4 z-50 max-lg:w-full",
+                openDropDown && "max-lg:p-0",
+            ]
+                .filter(Boolean)
+                .join(" ")}
+        >
+            <div className='flex justify-between max-lg:justify-center items-center max-lg:w-full'>
                 {/* logo */}
-                <div className='flex gap-2 h-full'>
+                <div className='flex gap-2 h-full max-lg:hidden'>
                     <Icon type='mainLogo' isOriginal />
                     <Icon type='subLogo' isOriginal />
                 </div>
 
                 {/* input */}
-                <div>
-                    <div className='relative w-96 '>
+                <div className='max-lg:w-full lg:w-96'>
+                    <div className='relative w-full'>
                         <div className='relative w-full'>
                             <Icon
                                 className='absolute top-[50%] translate-y-[-50%] left-3'
@@ -72,7 +79,7 @@ const Header = () => {
                                 ref={inputRef}
                                 onBlur={handleBlur}
                                 onClick={handleFocus}
-                                className='w-full rounded-full border-none shadow-[0px_4px_4px_0px_#00000040] ring-1 ring-gray-100 pl-12 py-2 font-light text-sm'
+                                className='w-full rounded-full  bg-white border-none shadow-[0px_4px_4px_0px_#00000040] ring-1 ring-gray-100 pl-12 py-2 font-light text-sm'
                             >
                                 {searchContents !== null ? (
                                     <div className='flex items-center gap-2 font-normal'>
@@ -114,7 +121,7 @@ const Header = () => {
                 </div>
 
                 {/* profile/notification */}
-                <div className='flex gap-3'>
+                <div className='flex gap-3 max-lg:hidden'>
                     <div className='w-10 h-10 rounded-full ring-1 ring-gray-400'></div>
                     <button
                         onClick={() => {
@@ -126,9 +133,6 @@ const Header = () => {
                             로그인
                         </h1>
                     </button>
-                    {/* <div className='w-full h-24 mt-12'>
-                        <RegionSelector open={openDropDown} />
-                    </div> */}
                 </div>
 
                 <LoginDialog visible={openLogin} setVisible={setOpenLogin} />

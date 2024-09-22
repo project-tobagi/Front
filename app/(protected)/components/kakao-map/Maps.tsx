@@ -15,27 +15,22 @@ import MidPointOverlay from "./MidPointOverlay";
 
 const Maps = (props: any) => {
     const {
-        midPoint,
         coordinates,
-        places,
-        subwayStation,
         setMap,
         polygon,
-        polygonPath,
         overlayRegionVisible,
         setOverlayRegionVisible,
         overlayMidpointVisible,
         setOverlayMidpointVisible,
         overlayCoordinates,
     } = props;
-    const mapRef = useRef<HTMLDivElement>(null);
 
     let defaultLevel = 3;
     const [level, setLevel] = useState(defaultLevel);
     return (
         <Map // 지도를 표시할 Container
             id='map'
-            className='rounded-lg w-full h-[calc(100vh-6rem)]'
+            className='rounded-lg w-full lg:h-[calc(100vh-6rem)] max-lg:h-screen'
             center={coordinates.center}
             isPanto={coordinates.isPanto}
             level={level} // 지도의 확대 레벨

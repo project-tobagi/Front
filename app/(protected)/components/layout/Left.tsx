@@ -17,7 +17,7 @@ const Left = () => {
     const [activeMenu, setActiveMenu]: any = useAtom<any>(activeMenuState);
 
     return (
-        <div className='h-full w-16 border-[1px] border-[#eaeaea] rounded-lg flex justify-center pt-4 mr-4'>
+        <div className='h-full w-16 border-[1px] border-[#eaeaea] rounded-lg flex justify-center pt-4 mr-4 max-lg:hidden'>
             <div className='flex flex-col gap-4'>
                 {_.map(MENU_TYPES, (item: any) => {
                     return (

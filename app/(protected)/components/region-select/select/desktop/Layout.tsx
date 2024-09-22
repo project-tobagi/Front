@@ -2,16 +2,17 @@
 
 // * install libraries
 import _ from "lodash";
+import { useAtomValue } from "jotai";
+
+// * state
+import { regionDataState } from "@/app/(protected)/_store/region";
 
 // * components
-import DivideGroup from "../common/divides/DivideGroup";
-import DividePanel from "../common/divides/DividePanel";
-import { useAtomValue } from "jotai";
-import { regionDataState } from "../../_store/region";
+import DivideGroup from "../../../common/divides/DivideGroup";
+import DividePanel from "../../../common/divides/DividePanel";
 
 interface RegionSelect {
     depth: number;
-    region: any;
     selectedSido: {
         si: string;
         guList: any;
@@ -29,9 +30,8 @@ interface RegionSelect {
     setSelectedDong: any;
 }
 
-const RegionSelect = ({
+const DesktopRegionSelect = ({
     depth,
-    region,
     selectedSido,
     selectedSigugun,
     selectedDong,
@@ -151,4 +151,4 @@ const RegionSelect = ({
     );
 };
 
-export default RegionSelect;
+export default DesktopRegionSelect;

@@ -23,6 +23,7 @@ import { API_RESION_POLYGON } from "../../_api";
 
 // * etc
 import { getCoordinates } from "../../_api/map";
+import { polygonState } from "../../_store/region";
 
 /**
  * @param location '', 선택한 동네 (ex:대구광역시 북구 태전동)
@@ -37,9 +38,8 @@ const KakaoMapLayout = () => {
     const [places, setPlaces]: any = useState([]);
     const [subwayStation, setSubwayStation] = useState(null);
     const [loaded, setLoaded] = useState(false);
-    const [polygonPath, setPolygonPath]: any = useState([]);
+    const [polygon, setPolygon]: any = useAtom(polygonState);
     const [overlayCoordinates, setOverlayCoordinates] = useState<any>(null);
-    const [polygon, setPolygon] = useState<any>(null);
     const [overlayRegionVisible, setOverlayRegionVisible] = useState(false);
     const [overlayMidpointVisible, setOverlayMidpointVisible] = useState(false);
 
@@ -68,7 +68,7 @@ const KakaoMapLayout = () => {
                     const bounds = new kakao.maps.LatLngBounds();
                     bounds.extend(new kakao.maps.LatLng(res.lat, res.lng));
                     map.setBounds(bounds);
-                    map.setLevel(3);
+                    map.setLevel(5);
 
                     setOverlayMidpointVisible(false);
                     setOverlayRegionVisible(true);
@@ -78,20 +78,6 @@ const KakaoMapLayout = () => {
         } catch (err) {
             toast.error("선택한 동네의 좌표를 찾지 못했습니다.", {
                 position: "top-right",
-            });
-        }
-
-        if (location.code !== null) {
-            API_RESION_POLYGON(location.code).then((res: any) => {
-                setPolygon((prev: any) => {
-                    return _.map(
-                        res?.data?.response?.result?.featureCollection
-                            ?.features[0]?.geometry?.coordinates[0][0],
-                        (item) => {
-                            return { lng: item[0], lat: item[1] };
-                        }
-                    );
-                });
             });
         }
     }, [map, location]);
@@ -180,7 +166,6 @@ const KakaoMapLayout = () => {
                         places={places}
                         subwayStation={subwayStation}
                         setMap={setMap}
-                        polygonPath={polygonPath}
                         overlayRegionVisible={overlayRegionVisible}
                         setOverlayRegionVisible={setOverlayRegionVisible}
                         overlayMidpointVisible={overlayMidpointVisible}

@@ -25,9 +25,11 @@ export const API_RESION_POLYGON = async (code: any) => {
     return res;
 };
 
-// * 교통정보
-export const API_STATION_STATUS = async (code: number, rank: number) => {
-    const res = await axios.get(`/station?donGrpCd=${code}&rank=${rank}`);
+// * 동네찾기 (필터링)
+export const API_RANK_INFO = async () => {
+    const res = await axios.get(
+        `/rank-info?donGrpCd=11110&facilityRank=1&restaurantRank=1&stationRank=2`
+    );
 
     return res;
 };
