@@ -7,9 +7,6 @@ import { Button } from "@/components/ui/button";
 import RegionFilterSliders from "./Sliders";
 import { useState } from "react";
 
-// * etc
-import { API_STATION_STATUS } from "@/app/(protected)/_api";
-
 const Step2 = ({ stepFlow }: any) => {
     const sliderTypes = [
         {
