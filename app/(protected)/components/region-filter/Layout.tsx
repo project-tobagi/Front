@@ -3,11 +3,15 @@
 // * basic
 import { useState } from "react";
 
+// * install libraries
+import { useMediaQuery } from "react-responsive";
+
 // * components
 import Stepper from "../common/Stepper";
 import Step1 from "./step-1/Layout";
 import Step2 from "./step-2/Layout";
 import Step3 from "./step-3/Layout";
+import MobileRegionFilterLayout from "./mobile/Layout";
 
 const useStepFlow = () => {
     const [step, setStep] = useState<number>(0);
@@ -34,6 +38,9 @@ const useStepFlow = () => {
 const RegionFilterLayout = () => {
     const stepFlow = useStepFlow();
 
+    const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 });
+    const isMobile = useMediaQuery({ maxWidth: 1224 });
+
     const stepTypes = [
         {
             label: "관심지역 설정",
@@ -48,18 +55,31 @@ const RegionFilterLayout = () => {
             step: 2,
         },
     ];
-    return (
-        <div className='w-[370px] h-[520px]'>
-            <Stepper step={stepFlow.step} contents={stepTypes} lastStep={2} />
-            {stepFlow.step === 0 ? (
-                <Step1 stepFlow={stepFlow} />
-            ) : stepFlow.step === 1 ? (
-                <Step2 stepFlow={stepFlow} />
-            ) : (
-                <Step3 stepFlow={stepFlow} />
-            )}
-        </div>
-    );
+
+    if (isDesktopOrLaptop) {
+        return (
+            <div className='w-[370px] h-[520px]'>
+                <div>
+                    <Stepper
+                        step={stepFlow.step}
+                        contents={stepTypes}
+                        lastStep={2}
+                    />
+                    {stepFlow.step === 0 ? (
+                        <Step1 stepFlow={stepFlow} />
+                    ) : stepFlow.step === 1 ? (
+                        <Step2 stepFlow={stepFlow} />
+                    ) : (
+                        <Step3 stepFlow={stepFlow} />
+                    )}
+                </div>
+            </div>
+        );
+    }
+
+    if (isMobile) {
+        return <MobileRegionFilterLayout />;
+    }
 };
 
 export default RegionFilterLayout;

@@ -33,6 +33,7 @@ const RegionSelectorLayout = ({
     selectorRef: any;
     setSearchContents: any;
 }) => {
+    console.log(open);
     const [location, setLocation] = useAtom(locationState);
     const [selectedSido, setSelectedSido] = useState<any>(null);
 

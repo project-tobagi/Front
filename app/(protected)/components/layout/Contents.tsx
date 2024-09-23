@@ -5,44 +5,41 @@ import { useAtomValue } from "jotai";
 import _ from "lodash";
 
 // * state
-import { activeMenuState } from "../../_store/menu";
+import { menuState } from "../../_store/menu";
 
 // * components
 import RegionFilterLayout from "../region-filter/Layout";
 import RegionMidPoingLayout from "../region-midpoint/Layout";
 import MenuOverlay from "../common/MenuOverlay";
 
-// * etc
-import { MENU_TYPES } from "../../_utils/constants";
-
 const Contents = ({ children }: any) => {
-    const activeMenu = useAtomValue(activeMenuState);
+    const menus = useAtomValue(menuState);
 
     const menuComponents = [
         {
-            type: "menu_1",
+            id: 1,
             component: <RegionFilterLayout />,
         },
         {
-            type: "menu_2",
+            id: 2,
             component: <RegionMidPoingLayout />,
         },
         {
-            type: "menu_3",
+            id: 3,
             component: <div>메뉴 3</div>,
         },
     ];
 
     return (
         <div className='lg:relative'>
-            {_.map(MENU_TYPES, (menu: any) => {
+            {_.map(menus, (menu: any) => {
                 const currentContents = _.find(menuComponents, {
-                    type: activeMenu.type,
+                    id: menu.id,
                 });
-                if (activeMenu.type == menu.type) {
+                if (menu.active && currentContents?.component !== undefined) {
                     return (
                         <MenuOverlay
-                            key={menu.type}
+                            key={menu.id}
                             contents={currentContents?.component}
                         />
                     );

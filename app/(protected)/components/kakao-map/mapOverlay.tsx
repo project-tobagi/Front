@@ -20,8 +20,8 @@ const RegionOverlay = ({ coordinates, visible, setVisible }: any) => {
             <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
                 // 커스텀 오버레이가 표시될 위치입니다
                 position={{
-                    lat: Number(coordinates.lat) + 0.00168,
-                    lng: Number(coordinates.lng) + 0.00005,
+                    lat: Number(coordinates.lat) + 0.0268,
+                    lng: Number(coordinates.lng) + 0.00075,
                 }}
             >
                 {/* 커스텀 오버레이에 표시할 내용입니다 */}
@@ -33,7 +33,7 @@ const RegionOverlay = ({ coordinates, visible, setVisible }: any) => {
                         <div className='flex items-center gap-1'>
                             <Badge>{location.dong}</Badge>
                             <p className='text-xs text-[#858585]'>
-                                {location.sido + location.sigugun}
+                                {location.sido + location.sigugun}123
                             </p>
                         </div>
 

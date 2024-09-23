@@ -68,7 +68,7 @@ const KakaoMapLayout = () => {
                     const bounds = new kakao.maps.LatLngBounds();
                     bounds.extend(new kakao.maps.LatLng(res.lat, res.lng));
                     map.setBounds(bounds);
-                    map.setLevel(5);
+                    map.setLevel(7);
 
                     setOverlayMidpointVisible(false);
                     setOverlayRegionVisible(true);
