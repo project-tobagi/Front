@@ -157,6 +157,7 @@ const Category = ({
                     </button>
                 </div>
 
+                {/* selectedCategory가 하나라도 있을때 버튼클릭가능 */}
                 <button
                     className='lg:hidden rounded-xl justify-end w-full px-4 py-2 bg-black text-white'
                     onClick={() => {
