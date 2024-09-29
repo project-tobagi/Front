@@ -244,7 +244,7 @@ const MidpointForm = ({ stepFlow }: any) => {
             {/* contents */}
             <form
                 onSubmit={handleSubmit}
-                className='flex flex-col h-full justify-between'
+                className='flex flex-col h-full justify-between max-lg:px-6'
             >
                 <div className='flex flex-col gap-4'>
                     <div
@@ -325,7 +325,10 @@ const MidpointForm = ({ stepFlow }: any) => {
                                                 handleClickGetLocation(index);
                                             }}
                                         >
-                                            <Icon type='ic_my_location' />
+                                            <Icon
+                                                type='ic_my_location'
+                                                className='max-lg:size-6 '
+                                            />
                                         </div>
                                     </div>
                                 </div>

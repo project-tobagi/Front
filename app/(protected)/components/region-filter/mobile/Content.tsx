@@ -13,6 +13,7 @@ import { regionDataState } from "@/app/(protected)/_store/region";
 // * components
 import RegionFilterSliders from "../step-2/Sliders";
 import Icon from "../../common/Icon";
+import Descriptions from "../../region-midpoint/Descriptions";
 
 // * etc
 import { CONDITION_TYPES } from "@/app/(protected)/_utils/constants";
@@ -33,11 +34,12 @@ const MobileRegionFilterContent = ({
     // 동네찾기 할 지역 설정 (시, 시군구)
     if (stepFlow.step === 0) {
         return (
-            <div className='h-[calc(100%-165px)]'>
+            <div className='h-[calc(100%-165px)] mt-16'>
                 <div className='h-full'>
-                    <h1 className='font-semibold text-xl p-5'>
-                        관심있는 지역은 어디인가요?
-                    </h1>
+                    <Descriptions
+                        title='관심있는 지역은 어디인가요?'
+                        subTitle=''
+                    />
                     <ul className='h-[calc(100%-80px)] overflow-y-auto mx-3 my-1'>
                         {_.map(regionData, (data: any, index: number) => {
                             return (
@@ -61,17 +63,13 @@ const MobileRegionFilterContent = ({
 
     if (stepFlow.step === 1) {
         return (
-            <div className='h-[calc(100%-165px)]'>
+            <div className='h-[calc(100%-165px)] mt-16'>
                 <div className='h-full'>
-                    <div className='p-5'>
-                        <h1 className='font-semibold text-xl'>
-                            관심있는 시/군/구는 어디인가요?
-                        </h1>
-                        <p className='text-base text-gray-400 mt-2'>
-                            자세하게 선택할수록 원하는 동네를 찾을 확률이
-                            높아져요!
-                        </p>
-                    </div>
+                    <Descriptions
+                        title='관심있는 시/군/구는 어디인가요?'
+                        subTitle=' 자세하게 선택할수록 원하는 동네를 찾을 확률이
+                            높아져요!'
+                    />
 
                     <ul className='h-[calc(100%-80px)] overflow-y-auto mx-3 my-1'>
                         {_.map(
@@ -100,11 +98,12 @@ const MobileRegionFilterContent = ({
     // 생활편의, 치안 등 조건설정
     if (stepFlow.step === 2) {
         return (
-            <div>
-                <h1 className='font-semibold text-xl p-5'>
-                    중요하게 생각하는 동네의 조건을 설정해주세요.
-                </h1>
-                <div className='p-8'>
+            <div className='h-[calc(100%-165px)] mt-16'>
+                <Descriptions
+                    title='중요하게 생각하는 동네의 조건을 설정해주세요.'
+                    subTitle=''
+                />
+                <div className='px-8 py-6'>
                     <RegionFilterSliders
                         conditions={conditions}
                         setConditions={setConditions}
@@ -128,18 +127,13 @@ const MobileRegionFilterContent = ({
     // 동네찾기 결과
     if (stepFlow.step === 3) {
         return (
-            <div>
+            <div className='h-[calc(100%-165px)] mt-16'>
+                <Descriptions
+                    title=' 동네 탐색을 완료했어요!'
+                    subTitle='설정한 조건에 일치하는 동네 탐색을 완료했어요.
+                            동네별 요약 정보를 확인해보세요!'
+                />
                 <div className='p-5'>
-                    <div className='mb-4'>
-                        <h1 className='font-semibold text-xl'>
-                            동네 탐색을 완료했어요!
-                        </h1>
-                        <p className='text-base text-gray-400 mt-2'>
-                            설정한 조건에 일치하는 동네 탐색을 완료했어요.
-                            동네별 요약 정보를 확인해보세요!
-                        </p>
-                    </div>
-
                     <div>
                         <ul>
                             {/* 반복문 사용할 곳 */}
@@ -154,7 +148,7 @@ const MobileRegionFilterContent = ({
                                 </div>
 
                                 <div>
-                                    <ul className='flex flex-col gap-2'>
+                                    <ul className='flex flex-col gap-3 text-sm'>
                                         <li className='flex gap-2'>
                                             <Icon type='ic_good' />
                                             %대중교통, 맛집, 편의시설% 지수가

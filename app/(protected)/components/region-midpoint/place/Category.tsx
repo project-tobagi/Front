@@ -41,7 +41,7 @@ const Category = ({
                 subTitle={`중간 지점 근처에서 탐색해보고픈\n카테고리를 선택해주세요.`}
             />
 
-            <div className='flex flex-col max-lg:h-[calc(100%-250px)]  justify-between '>
+            <div className='flex flex-col max-lg:h-[calc(100%-300px)]  justify-between max-lg:px-6'>
                 <div className='max-lg:hidden  ring-1 ring-[#00A2FF] p-6 mt-6  rounded-lg min-h-[140px] '>
                     <div>
                         <ul className='grid gap-2'>

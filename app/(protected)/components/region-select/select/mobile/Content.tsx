@@ -6,7 +6,9 @@ import { useAtomValue } from "jotai";
 
 // * state
 import { regionDataState } from "@/app/(protected)/_store/region";
-import { locationState } from "@/app/(protected)/_store/location";
+
+// * components
+import Descriptions from "../../../region-midpoint/Descriptions";
 
 interface RegionSelect {
     loading: any;
@@ -48,7 +50,7 @@ const MobileRegionSelectContent = ({
 
     if (loading) {
         return (
-            <div className='h-[calc(100%-165px)] p-5'>
+            <div className='h-[calc(100%-165px)] p-5 mt-16'>
                 <div className='h-full text-xl font-semibold'>
                     {selectedSido?.si +
                         " > " +
@@ -66,11 +68,12 @@ const MobileRegionSelectContent = ({
 
     if (step === 0) {
         return (
-            <div className='h-[calc(100%-165px)]'>
+            <div className='h-[calc(100%-165px)] mt-16'>
                 <div className='h-full'>
-                    <h1 className='font-semibold text-xl p-5'>
-                        관심있는 도/특별시/광역시는 어디인가요?
-                    </h1>
+                    <Descriptions
+                        title='관심있는 도/특별시/광역시는 어디인가요?'
+                        subTitle=''
+                    />
                     <ul className='h-[calc(100%-80px)] overflow-y-auto mx-3 my-1'>
                         {_.map(regionData, (data: any, index: number) => {
                             return (
@@ -94,11 +97,12 @@ const MobileRegionSelectContent = ({
 
     if (step === 1) {
         return (
-            <div className='h-[calc(100%-165px)]'>
+            <div className='h-[calc(100%-165px)] mt-16'>
                 <div className='h-full'>
-                    <h1 className='font-semibold text-xl p-5'>
-                        관심있는 시/군/구는 어디인가요?
-                    </h1>
+                    <Descriptions
+                        title='관심있는 시/군/구는 어디인가요?'
+                        subTitle=''
+                    />
                     <ul className='h-[calc(100%-80px)] overflow-y-auto mx-3 my-1'>
                         {_.map(
                             selectedSido.guList,
@@ -125,11 +129,12 @@ const MobileRegionSelectContent = ({
 
     if (step === 2) {
         return (
-            <div className='h-[calc(100%-165px)]'>
+            <div className='h-[calc(100%-165px)] mt-16'>
                 <div className='h-full'>
-                    <h1 className='font-semibold text-xl p-5'>
-                        관심있는 동네는 어디인가요?
-                    </h1>
+                    <Descriptions
+                        title=' 관심있는 동네는 어디인가요?'
+                        subTitle=''
+                    />
                     <ul className='h-[calc(100%-80px)] overflow-y-auto mx-3 my-1'>
                         {_.map(
                             selectedSigugun.dongList,

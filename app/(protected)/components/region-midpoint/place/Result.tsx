@@ -53,7 +53,7 @@ const PlaceResult = ({
     };
 
     return (
-        <div className='h-full flex flex-col '>
+        <div className='h-full flex flex-col max-lg:mt-6'>
             <Carousel
                 opts={{
                     align: "start",
@@ -105,11 +105,15 @@ const PlaceResult = ({
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CategoryPrevious />
-                <CategoryNext />
+                {
+                    <div className='max-lg:hidden'>
+                        <CategoryPrevious />
+                        <CategoryNext />
+                    </div>
+                }
             </Carousel>
 
-            <div className='flex flex-col justify-between h-full'>
+            <div className='flex flex-col justify-between h-full max-lg:px-6'>
                 {/* contents */}
                 {placeResult !== null ? (
                     <ScrollArea className='max-lg:h-[calc(100%-250px)] lg:h-[430px]'>

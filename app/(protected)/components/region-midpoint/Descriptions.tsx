@@ -1,5 +1,8 @@
 "use client";
 
+// * install libraries
+import { useMediaQuery } from "react-responsive";
+
 const Descriptions = ({
     title,
     subTitle,
@@ -7,14 +10,28 @@ const Descriptions = ({
     title: string;
     subTitle: string;
 }) => {
-    return (
-        <div className='text-center max-lg:text-start grid gap-2'>
-            <h1 className='text-lg font-semibold'>{title}</h1>
-            <p className='text-xs max-lg:text-sm text-[#808185] font-light lg:whitespace-pre-wrap'>
-                {subTitle}
-            </p>
-        </div>
-    );
+    const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 });
+    const isMobile = useMediaQuery({ maxWidth: 1224 });
+
+    if (isDesktopOrLaptop) {
+        return (
+            <div className='text-center grid gap-2'>
+                <h1 className='text-lg font-semibold'>{title}</h1>
+                <p className='text-xs  text-[#808185] font-light whitespace-pre-wrap'>
+                    {subTitle}
+                </p>
+            </div>
+        );
+    }
+
+    if (isMobile) {
+        return (
+            <div className='text-start grid gap-2 px-5 pt-5'>
+                <h1 className='text-xl font-semibold'>{title}</h1>
+                <p className='text-base text-gray-400 mt-1'>{subTitle}</p>
+            </div>
+        );
+    }
 };
 
 export default Descriptions;
