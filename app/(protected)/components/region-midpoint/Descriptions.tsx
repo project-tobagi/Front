@@ -8,9 +8,9 @@ const Descriptions = ({
     subTitle: string;
 }) => {
     return (
-        <div className='text-center grid gap-2'>
+        <div className='text-center max-lg:text-start grid gap-2'>
             <h1 className='text-lg font-semibold'>{title}</h1>
-            <p className='text-xs text-[#808185] font-light whitespace-pre-wrap'>
+            <p className='text-xs max-lg:text-sm text-[#808185] font-light lg:whitespace-pre-wrap'>
                 {subTitle}
             </p>
         </div>

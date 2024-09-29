@@ -21,6 +21,9 @@ import ic_menu_2_on from "@/public/icons/ic_menu_2_on.svg";
 import ic_home from "@/public/icons/ic_home.svg";
 import ic_board from "@/public/icons/ic_board.svg";
 import ic_arrow from "@/public/icons/ic_arrow.svg";
+import ic_good from "@/public/icons/ic_good.svg";
+import ic_soso from "@/public/icons/ic_soso.svg";
+import ic_bad from "@/public/icons/ic_bad.svg";
 
 // * logos
 import mainLogo from "@/public/logo/main_logo.svg";
@@ -49,6 +52,9 @@ const iconMap: any = {
     ic_naver,
     ic_daum,
     ic_google,
+    ic_good,
+    ic_soso,
+    ic_bad,
 };
 
 const Icon = (props: any) => {

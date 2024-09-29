@@ -33,12 +33,9 @@ const RegionSelectorLayout = ({
     selectorRef: any;
     setSearchContents: any;
 }) => {
-    console.log(open);
     const [location, setLocation] = useAtom(locationState);
     const [selectedSido, setSelectedSido] = useState<any>(null);
-
     const [selectedSigugun, setSelectedSigugun] = useState<any>(null);
-
     const [selectedDong, setSelectedDong] = useState<any>(null);
     const [polygon, setPolygon]: any = useAtom(polygonState);
 

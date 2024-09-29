@@ -230,7 +230,7 @@ const MidpointForm = ({ stepFlow }: any) => {
         // header
         <div
             className={[
-                "h-full flex gap-6 flex-col relative",
+                "lg:h-full max-lg:h-[calc(100%-200px)] flex gap-6 flex-col relative",
                 stepFlow.loading && "opacity-40",
             ]
                 .filter(Boolean)
@@ -238,7 +238,7 @@ const MidpointForm = ({ stepFlow }: any) => {
         >
             <Descriptions
                 title='가장 빠르게 갈 수 있는 중간 지점을 찾아 드려요.'
-                subTitle={`두 지점의 출발지를 설정하여\n가장 빠르게 갈 수 있는 중간 지점을 찾아보세요.`}
+                subTitle={`아래에서 출발지를 설정해주세요.`}
             />
 
             {/* contents */}
@@ -347,8 +347,11 @@ const MidpointForm = ({ stepFlow }: any) => {
                 </div>
 
                 {/* buttons */}
-                <div className='flex justify-center h-full items-end'>
-                    <Button type='submit' className='rounded-full px-6'>
+                <div className='flex justify-center h-full items-end '>
+                    <Button
+                        type='submit'
+                        className=' max-lg:w-full rounded-full px-2 max-lg:rounded-xl'
+                    >
                         중간지점탐색
                     </Button>
                 </div>

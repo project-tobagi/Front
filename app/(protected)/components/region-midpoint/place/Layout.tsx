@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 
 // * install libraries
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { toast } from "react-toastify";
 import _ from "lodash";
 
@@ -14,6 +14,7 @@ import PlaceResult from "./Result";
 
 // * state
 import { midPointState } from "@/app/(protected)/_store/location";
+import { menuState } from "@/app/(protected)/_store/menu";
 
 // * etc
 import { getNearestPlace } from "@/app/(protected)/_api/map";

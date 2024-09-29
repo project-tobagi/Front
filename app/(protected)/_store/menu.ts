@@ -7,6 +7,7 @@ export const menuState = atomWithReset<any>([
         icon: "ic_home",
         activeIcon: "ic_home",
         active: true,
+        disable: false,
     },
     {
         id: 1,
@@ -14,6 +15,7 @@ export const menuState = atomWithReset<any>([
         icon: "ic_menu",
         activeIcon: "ic_menu_on",
         active: false,
+        disable: false,
     },
     {
         id: 2,
@@ -21,6 +23,7 @@ export const menuState = atomWithReset<any>([
         icon: "ic_menu_2",
         activeIcon: "ic_menu_2_on",
         active: false,
+        disable: false,
     },
     {
         id: 3,
@@ -28,5 +31,6 @@ export const menuState = atomWithReset<any>([
         icon: "ic_board",
         activeIcon: "ic_board",
         active: false,
+        disable: true,
     },
 ]);

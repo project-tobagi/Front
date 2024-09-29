@@ -55,6 +55,9 @@ const Maps = (props: any) => {
                     // lng: 127.40170624974152,
                     // lat: 36.4376092055655,
                 }}
+                onClick={() => {
+                    console.log("onClick");
+                }}
             />
             {polygon !== null && (
                 <Polygon

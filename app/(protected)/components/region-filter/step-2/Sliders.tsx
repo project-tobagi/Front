@@ -9,7 +9,7 @@ import { Slider } from "@/components/ui/slider";
 
 const RegionFilterSliders = ({ conditions, setConditions }: any) => {
     return (
-        <div className='grid gap-2'>
+        <div className='grid max-lg:gap-8 lg:gap-2'>
             {_.map(conditions, (condition: any) => {
                 return (
                     <div

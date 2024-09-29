@@ -7,47 +7,11 @@ import { Button } from "@/components/ui/button";
 import RegionFilterSliders from "./Sliders";
 import { useState } from "react";
 
-const Step2 = ({ stepFlow }: any) => {
-    const sliderTypes = [
-        {
-            id: 1,
-            label: "편의시설",
-            value: 1,
-            active: false,
-        },
-        {
-            id: 2,
-            label: "치안",
-            value: 1,
-            active: false,
-        },
-        {
-            id: 3,
-            label: "문화시설",
-            value: 1,
-            active: false,
-        },
-        {
-            id: 4,
-            label: "맛집",
-            value: 1,
-            active: false,
-        },
-        {
-            id: 5,
-            label: "교통",
-            value: 1,
-            active: false,
-        },
-        {
-            id: 6,
-            label: "생활 인프라",
-            value: 1,
-            active: false,
-        },
-    ];
+// * etc
+import { CONDITION_TYPES } from "@/app/(protected)/_utils/constants";
 
-    const [conditions, setConditions] = useState(sliderTypes);
+const Step2 = ({ stepFlow }: any) => {
+    const [conditions, setConditions] = useState(CONDITION_TYPES);
 
     // * 탐색하기
     const handleClickFilterRegion = async () => {

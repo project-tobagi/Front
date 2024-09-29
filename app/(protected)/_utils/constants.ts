@@ -94,3 +94,42 @@ export const CATEGORY_GROUP_CODES = [
         type: "숙박",
     },
 ];
+
+export const CONDITION_TYPES = [
+    {
+        id: 1,
+        label: "편의시설",
+        value: 1,
+        active: false,
+    },
+    {
+        id: 2,
+        label: "치안",
+        value: 1,
+        active: false,
+    },
+    {
+        id: 3,
+        label: "문화시설",
+        value: 1,
+        active: false,
+    },
+    {
+        id: 4,
+        label: "맛집",
+        value: 1,
+        active: false,
+    },
+    {
+        id: 5,
+        label: "교통",
+        value: 1,
+        active: false,
+    },
+    {
+        id: 6,
+        label: "생활 인프라",
+        value: 1,
+        active: false,
+    },
+];

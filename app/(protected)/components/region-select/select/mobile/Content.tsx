@@ -128,7 +128,7 @@ const MobileRegionSelectContent = ({
             <div className='h-[calc(100%-165px)]'>
                 <div className='h-full'>
                     <h1 className='font-semibold text-xl p-5'>
-                        관심있는 시/군/구는 어디인가요?
+                        관심있는 동네는 어디인가요?
                     </h1>
                     <ul className='h-[calc(100%-80px)] overflow-y-auto mx-3 my-1'>
                         {_.map(

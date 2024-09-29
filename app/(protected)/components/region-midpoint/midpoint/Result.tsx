@@ -18,10 +18,10 @@ const ResultLayout = ({ stepFlow }: any) => {
     const address = useAtomValue<any>(addressState);
 
     return (
-        <div className='h-full flex flex-col'>
+        <div className='lg:h-full max-lg:h-[calc(100%-200px)] flex flex-col'>
             <Descriptions
                 title='가장 빠르게 갈 수 있는 중간 지점을 찾았어요!'
-                subTitle={`중간 지점 근처에 대해서 알아보고 싶다면\n하단의 더 ‘주변 탐색하기’를 선택해보세요.`}
+                subTitle=''
             />
 
             <div className='flex flex-col justify-between h-full '>
@@ -90,9 +90,14 @@ const ResultLayout = ({ stepFlow }: any) => {
                     </div>
                 </div>
 
+                <div className='lg:hidden text-lg text-center'>
+                    중간 지점 근처에 대해서 알아보고 싶다면 하단의 더 ‘주변
+                    탐색’을 클릭해 보세요.
+                </div>
+
                 <div className='w-full flex justify-between'>
                     <button
-                        className='ring-1 rounded-full ring-gray-300 px-4 py-1'
+                        className='max-lg:hidden ring-1 rounded-full ring-gray-300 px-4 py-1'
                         onClick={() => {
                             stepFlow.back();
                         }}
@@ -101,7 +106,7 @@ const ResultLayout = ({ stepFlow }: any) => {
                     </button>
 
                     <button
-                        className='rounded-full px-4 py-1 bg-black text-white'
+                        className='rounded-full max-lg:w-full max-lg:rounded-xl  px-4 py-1 max-lg:py-2 bg-black text-white'
                         onClick={() => {
                             stepFlow.next();
                         }}

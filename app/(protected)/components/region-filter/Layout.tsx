@@ -41,6 +41,9 @@ const RegionFilterLayout = () => {
     const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 });
     const isMobile = useMediaQuery({ maxWidth: 1224 });
 
+    const [selectedSido, setSelectedSido] = useState<any>(null);
+    const [selectedSigugun, setSelectedSigugun] = useState<any>(null);
+
     const stepTypes = [
         {
             label: "관심지역 설정",
@@ -66,7 +69,11 @@ const RegionFilterLayout = () => {
                         lastStep={2}
                     />
                     {stepFlow.step === 0 ? (
-                        <Step1 stepFlow={stepFlow} />
+                        <Step1
+                            stepFlow={stepFlow}
+                            setSelectedSido={setSelectedSido}
+                            setSelectedSigugun={setSelectedSigugun}
+                        />
                     ) : stepFlow.step === 1 ? (
                         <Step2 stepFlow={stepFlow} />
                     ) : (
@@ -78,7 +85,14 @@ const RegionFilterLayout = () => {
     }
 
     if (isMobile) {
-        return <MobileRegionFilterLayout />;
+        return (
+            <MobileRegionFilterLayout
+                stepFlow={stepFlow}
+                selectedSido={selectedSido}
+                setSelectedSido={setSelectedSido}
+                setSelectedSigugun={setSelectedSigugun}
+            />
+        );
     }
 };
 

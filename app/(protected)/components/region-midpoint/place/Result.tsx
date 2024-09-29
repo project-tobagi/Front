@@ -27,6 +27,7 @@ import {
 
 // * etc
 import { saveClipboardText } from "@/app/(protected)/_utils/clipboard";
+import { menuState } from "@/app/(protected)/_store/menu";
 
 const PlaceResult = ({
     stepFlow,
@@ -36,6 +37,8 @@ const PlaceResult = ({
     setFilterCategory,
 }: any) => {
     const address: any = useAtomValue(addressState);
+    const [, setMenus] = useAtom(menuState);
+
     const [midPointPlace, setMidPointPlace]: any =
         useAtom<any>(midPointPlaceState);
 
@@ -109,7 +112,7 @@ const PlaceResult = ({
             <div className='flex flex-col justify-between h-full'>
                 {/* contents */}
                 {placeResult !== null ? (
-                    <ScrollArea className='h-[430px]'>
+                    <ScrollArea className='max-lg:h-[calc(100%-250px)] lg:h-[430px]'>
                         {_.map(placeResult, (place: any) => {
                             // 전체
                             if (filterCategory === null) {
@@ -117,6 +120,24 @@ const PlaceResult = ({
                                     <div
                                         onClick={() => {
                                             setMidPointPlace(place);
+                                            setMenus((menus: any) => {
+                                                return _.map(
+                                                    menus,
+                                                    (menu: any) => {
+                                                        if (menu.id === 0) {
+                                                            return {
+                                                                ...menu,
+                                                                active: true,
+                                                            };
+                                                        } else {
+                                                            return {
+                                                                ...menu,
+                                                                active: false,
+                                                            };
+                                                        }
+                                                    }
+                                                );
+                                            });
                                         }}
                                         className={[
                                             "ring-1  hover:ring-black rounded-lg mt-1 mx-2 mb-3 px-3 py-2 cursor-pointer",

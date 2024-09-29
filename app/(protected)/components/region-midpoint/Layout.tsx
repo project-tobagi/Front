@@ -88,7 +88,7 @@ const RegionMidpointLayout = () => {
     }
 
     if (isMobile) {
-        return <MobileRegionMidpointLayout />;
+        return <MobileRegionMidpointLayout stepFlow={stepFlow} />;
     }
 };
 
