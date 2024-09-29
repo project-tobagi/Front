@@ -9,7 +9,7 @@ import { Slider } from "@/components/ui/slider";
 
 const RegionFilterSliders = ({ conditions, setConditions }: any) => {
     return (
-        <div className='grid max-lg:gap-8 lg:gap-2'>
+        <div className='grid max-lg:gap-3 lg:gap-2'>
             {_.map(conditions, (condition: any) => {
                 return (
                     <div
@@ -77,7 +77,10 @@ const RegionFilterSliders = ({ conditions, setConditions }: any) => {
                         </div>
 
                         <button>
-                            <Icon type='ic_info' className='w-6 h-6' />
+                            <Icon
+                                type='ic_info'
+                                className='size-6 max-lg:size-8'
+                            />
                         </button>
                     </div>
                 );

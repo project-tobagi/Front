@@ -107,8 +107,8 @@ const Category = ({
                     </div>
                 </div>
 
-                <div className='px-8 max-lg:px-3 max-lg:mt-10'>
-                    <ul className='flex flex-wrap  justify-center items-center gap-3'>
+                <div className='px-8 max-lg:px-3 max-lg:py-6 max-lg:mt-4 overflow-y-auto'>
+                    <ul className='flex flex-wrap  justify-center items-center gap-3 '>
                         {_.map(CATEGORY_GROUP_CODES, (item: any) => {
                             return (
                                 <li
@@ -159,7 +159,7 @@ const Category = ({
 
                 {/* selectedCategory가 하나라도 있을때 버튼클릭가능 */}
                 <button
-                    className='lg:hidden rounded-xl justify-end w-full px-4 py-2 bg-black text-white'
+                    className='lg:hidden fixed bottom-24 rounded-xl justify-end left-0 right-0 mx-4 py-2 bg-black text-white'
                     onClick={() => {
                         stepFlow.next();
                         handleClickFindMidpointPlace();

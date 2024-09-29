@@ -98,7 +98,7 @@ const MobileRegionFilterContent = ({
     // 생활편의, 치안 등 조건설정
     if (stepFlow.step === 2) {
         return (
-            <div className='h-[calc(100%-200px)] mt-16'>
+            <div className='h-[calc(100%-200px)] mt-16 overflow-y-auto'>
                 <Descriptions
                     title='중요하게 생각하는 동네의 조건을 설정해주세요.'
                     subTitle=''
@@ -110,7 +110,7 @@ const MobileRegionFilterContent = ({
                     />
                 </div>
 
-                <div className='px-4 '>
+                <div className='px-4 fixed bottom-24 left-0 right-0 '>
                     <button
                         onClick={() => {
                             stepFlow.next();

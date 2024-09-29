@@ -244,12 +244,12 @@ const MidpointForm = ({ stepFlow }: any) => {
             {/* contents */}
             <form
                 onSubmit={handleSubmit}
-                className='flex flex-col h-full justify-between max-lg:px-6'
+                className='flex flex-col h-full overflow-y-auto  justify-between max-lg:px-6'
             >
-                <div className='flex flex-col gap-4'>
+                <div className='flex flex-col gap-4 '>
                     <div
                         ref={scrollRef}
-                        className='flex flex-col overflow-y-auto gap-4 max-h-[260px] pb-2 w-full'
+                        className='flex flex-col gap-4 max-h-[260px] pb-2 w-full'
                     >
                         {_.map(startPoints, (item: any, index: number) => {
                             return (
@@ -350,7 +350,7 @@ const MidpointForm = ({ stepFlow }: any) => {
                 </div>
 
                 {/* buttons */}
-                <div className='flex justify-center h-full items-end '>
+                <div className='fixed bottom-24 left-0 right-0 mx-4 flex justify-center  items-end '>
                     <Button
                         type='submit'
                         className=' max-lg:w-full rounded-full px-2 max-lg:rounded-xl'
