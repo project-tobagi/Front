@@ -68,7 +68,7 @@ const MobileRegionSelectContent = ({
 
     if (step === 0) {
         return (
-            <div className='h-[calc(100%-165px)] mt-16'>
+            <div className='h-[calc(100%-200px)] mt-16'>
                 <div className='h-full'>
                     <Descriptions
                         title='관심있는 도/특별시/광역시는 어디인가요?'

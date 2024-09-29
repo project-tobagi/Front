@@ -13,7 +13,7 @@ import { useResetAtom } from "jotai/utils";
 const MobileRegionFilterHeader = ({ setOpen }: any) => {
     const resetMenus = useResetAtom(menuState);
     return (
-        <div className='fixed w-full flex justify-center items-center py-4 border-b-[1px] border-gray-300 '>
+        <div className='fixed w-full flex justify-center items-center py-4 border-b-[1px] border-gray-300 bg-white '>
             <button className='absolute left-4' onClick={resetMenus}>
                 <Icon type='ic_arrow' />
             </button>
