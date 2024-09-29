@@ -51,7 +51,7 @@ const MobileRegionSelectContent = ({
     if (loading) {
         return (
             <div className='h-[calc(100%-165px)] p-5 mt-16'>
-                <div className='h-full text-xl font-semibold'>
+                <div className='h-full text-xl max-sm:text-base font-semibold'>
                     {selectedSido?.si +
                         " > " +
                         selectedSigugun?.gu +

@@ -18,7 +18,7 @@ const MobileRegionMidpointHeader = ({ setOpen }: any) => {
                 <Icon type='ic_arrow' />
             </button>
 
-            <h1 className='text-lg font-bold'>중간지점</h1>
+            <h1 className='text-lg max-sm:text-base font-bold'>중간지점</h1>
         </div>
     );
 };

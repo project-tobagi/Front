@@ -342,7 +342,7 @@ const MidpointForm = ({ stepFlow }: any) => {
                         }}
                         className='flex gap-3 justify-center items-center mt-3 hover:text-[#00A2FF] group cursor-pointer'
                     >
-                        <p className='w-6 h-6 ring-1 ring-black group-hover:bg-[#00A2FF] hover:ring-[#00A2FF] rounded-full flex items-center justify-center text-xl pb-0.5 group-hover:text-white group-hover:ring-[#00A2FF]'>
+                        <p className='w-6 h-6 ring-1 ring-black group-hover:bg-[#00A2FF] hover:ring-[#00A2FF] rounded-full flex items-center justify-center text-xl max-sm:text-base pb-0.5 group-hover:text-white group-hover:ring-[#00A2FF]'>
                             +
                         </p>
                         <h1>출발지 추가하기</h1>

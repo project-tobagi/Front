@@ -90,7 +90,7 @@ const ResultLayout = ({ stepFlow }: any) => {
                     </div>
                 </div>
 
-                <div className='lg:hidden text-lg text-center'>
+                <div className='lg:hidden text-lg max-sm:text-sm text-center'>
                     중간 지점 근처에 대해서 알아보고 싶다면 하단의 더 ‘주변
                     탐색’을 클릭해 보세요.
                 </div>

@@ -27,8 +27,12 @@ const Descriptions = ({
     if (isMobile) {
         return (
             <div className='text-start grid gap-2 px-5 pt-5'>
-                <h1 className='text-xl font-semibold'>{title}</h1>
-                <p className='text-base text-gray-400 mt-1'>{subTitle}</p>
+                <h1 className='max-sm:text-base text-xl  font-semibold'>
+                    {title}
+                </h1>
+                <p className='max-sm:text-sm text-base text-gray-400 mt-1'>
+                    {subTitle}
+                </p>
             </div>
         );
     }

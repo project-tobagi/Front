@@ -18,7 +18,7 @@ const MobileRegionFilterHeader = ({ setOpen }: any) => {
                 <Icon type='ic_arrow' />
             </button>
 
-            <h1 className='text-lg font-bold'>동네 찾기</h1>
+            <h1 className='text-lg max-sm:text-base font-bold'>동네 찾기</h1>
         </div>
     );
 };
