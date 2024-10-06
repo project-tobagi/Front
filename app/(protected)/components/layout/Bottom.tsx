@@ -14,7 +14,7 @@ import { menuState } from "../../_store/menu";
 const Bottom = () => {
     const [menus, setMenus] = useAtom(menuState);
     return (
-        <div className='fixed bottom-0.5 left-0.5 right-0.5 ring-2  ring-gray-300 shadow-md z-[999999] w-full  bg-white h-[85px] lg:hidden rounded-t-3xl p-5'>
+        <div className='fixed bottom-0.5 left-0.5 right-0.5 ring-1 ring-gray-200 shadow-xl z-[999999] w-full  bg-white h-[85px] lg:hidden rounded-t-3xl p-5'>
             <div className='w-full flex items-center justify-around'>
                 {_.map(menus, (item: any) => {
                     return (
@@ -47,7 +47,9 @@ const Bottom = () => {
                         >
                             <Icon type={item.icon} />
 
-                            <h1 className='text-sm'>{item.label}</h1>
+                            <h1 className='text-sm max-sm:text-xs'>
+                                {item.label}
+                            </h1>
                         </div>
                     );
                 })}

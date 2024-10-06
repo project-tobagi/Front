@@ -8,15 +8,12 @@ import { CustomOverlayMap } from "react-kakao-maps-sdk";
 import { useAtomValue } from "jotai";
 import { Badge } from "@/components/ui/badge";
 import { XIcon } from "lucide-react";
-import { useMediaQuery } from "react-responsive";
 
 // * state
 import { locationState } from "../../_store/location";
 
 const RegionOverlay = ({ coordinates, visible, setVisible }: any) => {
     const location = useAtomValue(locationState);
-    const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 });
-    const isMobile = useMediaQuery({ maxWidth: 1224 });
 
     if (coordinates !== null && location.sido !== null && visible) {
         return (
@@ -58,22 +55,6 @@ const RegionOverlay = ({ coordinates, visible, setVisible }: any) => {
             </CustomOverlayMap>
         );
     }
-
-    // if (coordinates !== null && location.sido !== null && visible && isMobile) {
-    //     return (
-    //         <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
-    //             // 커스텀 오버레이가 표시될 위치입니다
-    //             position={{
-    //                 lat: Number(coordinates.lat) + 0.0268,
-    //                 lng: Number(coordinates.lng) + 0.00075,
-    //             }}
-    //         >
-    //             <div className='w-screen h-screen bg-white z-[9999]'>
-    //                 {location.sido + location.sigugun}
-    //             </div>
-    //         </CustomOverlayMap>
-    //     );
-    // }
 };
 
 export default RegionOverlay;

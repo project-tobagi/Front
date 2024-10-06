@@ -24,6 +24,7 @@ import ic_arrow from "@/public/icons/ic_arrow.svg";
 import ic_good from "@/public/icons/ic_good.svg";
 import ic_soso from "@/public/icons/ic_soso.svg";
 import ic_bad from "@/public/icons/ic_bad.svg";
+import ic_marker from "@/public/icons/ic_marker.svg";
 
 // * logos
 import mainLogo from "@/public/logo/main_logo.svg";
@@ -55,6 +56,7 @@ const iconMap: any = {
     ic_good,
     ic_soso,
     ic_bad,
+    ic_marker,
 };
 
 const Icon = (props: any) => {

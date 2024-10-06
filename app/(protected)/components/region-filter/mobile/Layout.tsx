@@ -11,7 +11,8 @@ const MobileRegionFilterLayout = ({
     stepFlow,
     selectedSido,
     setSelectedSido,
-    setSelectedSigungu,
+    selectedSigugun,
+    setSelectedSigugun,
 }: any) => {
     return (
         <div className='absolute top-0 left-0 bg-white w-screen h-screen overflow-hidden'>
@@ -23,7 +24,8 @@ const MobileRegionFilterLayout = ({
                 stepFlow={stepFlow}
                 selectedSido={selectedSido}
                 setSelectedSido={setSelectedSido}
-                setSelectedSigungu={setSelectedSigungu}
+                selectedSigugun={selectedSigugun}
+                setSelectedSigugun={setSelectedSigugun}
             />
         </div>
     );

@@ -2,9 +2,10 @@
     "name": "nawabari",
     "version": "0.1.0",
     "private": true,
+    "output": "export",
     "scripts": {
         "dev": "next dev",
-        "build": "next build",
+        "build": "next build ",
         "start": "next start",
         "lint": "next lint"
     },
@@ -30,6 +31,7 @@
         "react": "^18",
         "react-dom": "^18",
         "react-kakao-maps-sdk": "^1.1.27",
+        "react-loader-spinner": "^6.1.6",
         "react-naver-maps": "^0.1.3",
         "react-responsive": "^10.0.0",
         "react-toastify": "^10.0.5",

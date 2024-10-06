@@ -269,7 +269,7 @@ const MidpointForm = ({ stepFlow }: any) => {
 
                                         <div className=' w-full'>
                                             <input
-                                                className='w-full rounded-full border-none shadow-[0px_4px_4px_0px_#00000040] ring-1 ring-gray-100 pl-12 py-2 font-light text-sm'
+                                                className='w-full rounded-full border-none shadow-[0px_4px_4px_0px_#00000040] ring-1 ring-gray-100 pl-12 py-2 font-light text-sm max-lg:text-xs'
                                                 placeholder='출발지를 입력해주세요.'
                                                 autoComplete='off'
                                                 type='text'

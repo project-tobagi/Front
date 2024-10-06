@@ -39,7 +39,7 @@ export const generateAreaData = (setState: any) => {
                     // gu가 빈값인 경우
                     if (gu !== "") {
                         if (!guItem) {
-                            guItem = { gu, dongList: [] };
+                            guItem = { gu, dongList: [], code };
                             city.guList.push(guItem);
                         }
 

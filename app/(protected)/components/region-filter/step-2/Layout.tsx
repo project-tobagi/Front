@@ -14,9 +14,7 @@ const Step2 = ({ stepFlow }: any) => {
     const [conditions, setConditions] = useState(CONDITION_TYPES);
 
     // * 탐색하기
-    const handleClickFilterRegion = async () => {
-        // await API_STATION_STATUS();
-    };
+    const handleClickFilterRegion = async () => {};
 
     return (
         // header

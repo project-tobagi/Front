@@ -9,9 +9,14 @@ import {
     MapMarker,
 } from "react-kakao-maps-sdk";
 
+// * install libraries
+import { useMediaQuery } from "react-responsive";
+
 // * components
 import RegionOverlay from "./mapOverlay";
 import MidPointOverlay from "./MidPointOverlay";
+import { useAtom } from "jotai";
+import { regionSummaryVisible } from "../../_store/visible";
 
 const Maps = (props: any) => {
     const {
@@ -27,6 +32,8 @@ const Maps = (props: any) => {
 
     let defaultLevel = 3;
     const [level, setLevel] = useState(defaultLevel);
+    const isDesktop = useMediaQuery({ query: "(min-width: 1224px)" });
+    const [, summaryVisible] = useAtom(regionSummaryVisible);
     return (
         <Map // 지도를 표시할 Container
             id='map'
@@ -36,11 +43,14 @@ const Maps = (props: any) => {
             level={level} // 지도의 확대 레벨
             onCreate={setMap}
         >
-            <RegionOverlay
-                visible={overlayRegionVisible}
-                setVisible={setOverlayRegionVisible}
-                coordinates={overlayCoordinates}
-            />
+            {isDesktop && (
+                <RegionOverlay
+                    visible={overlayRegionVisible}
+                    setVisible={setOverlayRegionVisible}
+                    coordinates={overlayCoordinates}
+                />
+            )}
+
             <MidPointOverlay
                 visible={overlayMidpointVisible}
                 setVisible={setOverlayMidpointVisible}
@@ -55,8 +65,18 @@ const Maps = (props: any) => {
                     // lng: 127.40170624974152,
                     // lat: 36.4376092055655,
                 }}
+                image={{
+                    src: "/marker.png",
+                    size: { width: 70, height: 80 },
+                    options: {
+                        offset: {
+                            x: 33,
+                            y: 95,
+                        },
+                    },
+                }}
                 onClick={() => {
-                    console.log("onClick");
+                    summaryVisible(true);
                 }}
             />
             {polygon !== null && (

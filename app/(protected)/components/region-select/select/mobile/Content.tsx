@@ -3,6 +3,7 @@
 // * install libraries
 import _ from "lodash";
 import { useAtomValue } from "jotai";
+import { Audio, Oval, Puff } from "react-loader-spinner";
 
 // * state
 import { regionDataState } from "@/app/(protected)/_store/region";
@@ -51,6 +52,18 @@ const MobileRegionSelectContent = ({
     if (loading) {
         return (
             <div className='h-[calc(100%-165px)] p-5 mt-16'>
+                {/* loading 화면 */}
+
+                <Oval
+                    visible={true}
+                    height='100'
+                    width='100'
+                    color='#858585'
+                    secondaryColor='#e3e3e3'
+                    ariaLabel='puff-loading'
+                    wrapperStyle={{}}
+                    wrapperClass='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 '
+                />
                 <div className='h-full text-xl max-sm:text-base font-semibold'>
                     {selectedSido?.si +
                         " > " +
@@ -59,9 +72,6 @@ const MobileRegionSelectContent = ({
                         selectedDong?.dong}
                     에 대한 요약정보를 가져오고있어요
                 </div>
-
-                {/* loading 화면 */}
-                <div className='absolute top-60 left-16 w-96 h-96 rounded-full bg-gray-300'></div>
             </div>
         );
     }
@@ -145,7 +155,7 @@ const MobileRegionSelectContent = ({
                                         className='p-4 hover:bg-gray-100 hover:text-[15px] rounded-xl cursor-pointer'
                                         onClick={() => {
                                             setLoading(true);
-                                            setStep(2);
+                                            setStep(0);
                                             setSelectedDong(data);
                                             // setOpen(false);
                                         }}

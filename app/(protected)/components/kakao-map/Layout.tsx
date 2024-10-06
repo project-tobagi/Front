@@ -122,33 +122,6 @@ const KakaoMapLayout = () => {
 
     return (
         <div className='w-full relative'>
-            {/* <div className=''>
-                <h1>중간 지점 찾기</h1>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>출발지:</label>
-                        <input
-                            type='text'
-                            name='start'
-                            value={formData.start}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>도착지:</label>
-                        <input
-                            type='text'
-                            name='end'
-                            value={formData.end}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <button type='submit'>중간 지점 찾기</button>
-                </form>
-            </div> */}
-
             <Script
                 src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_APP_KEY}&autoload=false&libraries=services`} // autoload 파라메터는 false로 지정
                 onLoad={() => {
@@ -175,23 +148,6 @@ const KakaoMapLayout = () => {
                     />
                 )}
             </div>
-
-            {/* <div>
-                <h2>추천 장소</h2>
-                <ul>
-                    {places.map((place: any, index: number) => (
-                        <li key={index}>
-                            <a
-                                href={place.url}
-                                target='_blank'
-                                rel='noopener noreferrer'
-                            >
-                                {place.name} - {place.address}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-            </div> */}
         </div>
     );
 };

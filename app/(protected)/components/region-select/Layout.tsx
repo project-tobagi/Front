@@ -99,8 +99,10 @@ const RegionSelectorLayout = ({
                     });
                 })
                 .finally(() => {
-                    setOpen(false);
-                    setLoading(false);
+                    setTimeout(() => {
+                        setOpen(false);
+                        setLoading(false);
+                    }, 1500);
                 });
         }
     }, [location]);

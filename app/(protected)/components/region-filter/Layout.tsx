@@ -90,6 +90,7 @@ const RegionFilterLayout = () => {
                 stepFlow={stepFlow}
                 selectedSido={selectedSido}
                 setSelectedSido={setSelectedSido}
+                selectedSigugun={selectedSigugun}
                 setSelectedSigugun={setSelectedSigugun}
             />
         );
