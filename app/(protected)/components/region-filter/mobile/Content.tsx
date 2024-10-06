@@ -232,11 +232,10 @@ const MobileRegionFilterContent = ({
                                                                         )}
                                                                     </p>
                                                                     <p>
-                                                                        지수가 '
-                                                                        {
-                                                                            data.rankTxt
-                                                                        }
-                                                                        '
+                                                                        지수가
+                                                                        {"'" +
+                                                                            data.rankTxt +
+                                                                            "'"}
                                                                         이에요.
                                                                     </p>
                                                                 </li>
