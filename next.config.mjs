@@ -3,6 +3,7 @@ import { env } from "process";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: false,
+    output: "export",
     env: {
         API_URL: process.env.API_URL,
         NAVER_CLIENT_ID: process.env.NAVER_CLIENT_ID,

@@ -5,8 +5,8 @@
     "output": "export",
     "scripts": {
         "dev": "next dev",
-        "build": "next build ",
-        "start": "next start",
+        "build": "next build",
+        "start": "node ./web.js",
         "lint": "next lint"
     },
     "proxy": "https://api.vworld.kr",
@@ -22,6 +22,7 @@
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.1",
         "embla-carousel-react": "^8.2.0",
+        "express": "^4.21.0",
         "jotai": "^2.9.1",
         "lodash": "^4.17.21",
         "lucide-react": "^0.417.0",
