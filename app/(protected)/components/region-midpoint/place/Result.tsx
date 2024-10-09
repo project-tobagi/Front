@@ -38,7 +38,7 @@ const PlaceResult = ({
     setFilterCategory,
 }: any) => {
     const address: any = useAtomValue(addressState);
-    const isDesktop = useMediaQuery({ query: "(min-width: 1224px)" });
+    const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" });
     const [, setMenus] = useAtom(menuState);
 
     const [midPointPlace, setMidPointPlace]: any =

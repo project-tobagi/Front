@@ -11,82 +11,69 @@ import { toast } from "react-toastify";
 
 // * components
 import { Button } from "@/components/ui/button";
-import DesktopRegionSelect from "./select/desktop/Layout";
-import MobileRegionSelect from "./select/mobile/Layout";
+import DesktopRegionSelect from "../../../region-select/select/desktop/Layout";
 
 // * etc
-import { locationState } from "../../_store/location";
-import { polygonState } from "../../_store/region";
-import { API_RESION_POLYGON, API_SUMMARY_RANK_INFO } from "../../_api";
-import { generateRegionRank } from "../../_utils/rank";
-import { summaryDataState } from "../../_store/summary";
+import { locationState } from "@/app/(protected)/_store/location";
+import { polygonState } from "@/app/(protected)/_store/region";
+import {
+    API_RESION_POLYGON,
+    API_SUMMARY_RANK_INFO,
+} from "@/app/(protected)/_api";
+import { generateRegionRank } from "@/app/(protected)/_utils/rank";
+import { summaryDataState } from "@/app/(protected)/_store/summary";
 import { useUpdateEffect } from "react-use";
-import { menuState } from "../../_store/menu";
+import { menuState } from "@/app/(protected)/_store/menu";
 
 const RegionSelectorLayout = ({
-    depth = 3,
     open,
     setOpen,
     selectorRef,
     setSearchContents,
+    selectedSido,
+    setSelectedSido,
+    selectedSigugun,
+    setSelectedSigugun,
 }: {
-    depth?: number;
     open: boolean;
     setOpen: any;
     selectorRef: any;
     setSearchContents: any;
+    selectedSido: any;
+    setSelectedSido: any;
+    selectedSigugun: any;
+    setSelectedSigugun: any;
 }) => {
+    const depth = 2;
     const [location, setLocation] = useAtom(locationState);
-    const [selectedSido, setSelectedSido] = useState<any>(null);
-    const [selectedSigugun, setSelectedSigugun] = useState<any>(null);
-    const [selectedDong, setSelectedDong] = useState<any>(null);
+
     const [polygon, setPolygon]: any = useAtom(polygonState);
     const [, setSummaryData] = useAtom(summaryDataState);
     const menus = useAtomValue(menuState);
 
     const isDesktopOrLaptop = useMediaQuery({ minWidth: 1024 });
-    const isMobile = useMediaQuery({ maxWidth: 1024 });
 
     const [loading, setLoading] = useState(false);
 
     const initRegion = () => {
         setSelectedSido(null);
         setSelectedSigugun(null);
-        setSelectedDong(null);
     };
 
-    // 선택한 동네 저장
     const handleClickSaveSelectedRegion = () => {
         const { si } = selectedSido || {};
         const { gu } = selectedSigugun || {};
-        const { dong, code } = selectedDong || {};
 
         const searchContents = [si, ">", gu];
-        if (dong) searchContents.push(">", dong);
         setSearchContents(searchContents);
-
-        if (depth === 3) {
-            setLocation({
-                sido: si,
-                sigugun: gu,
-                dong: dong,
-                code: code,
-            });
-        }
     };
 
     useEffect(() => {
         if (!open) {
-            initRegion();
+            // initRegion();
             setLoading(false);
         }
     }, [open]);
-
-    useEffect(() => {
-        if (isMobile && selectedDong !== null) {
-            handleClickSaveSelectedRegion();
-        }
-    }, [selectedDong]);
 
     useEffect(() => {
         if (location.code !== null) {
@@ -145,76 +132,42 @@ const RegionSelectorLayout = ({
                         depth={depth}
                         selectedSido={selectedSido}
                         selectedSigugun={selectedSigugun}
-                        selectedDong={selectedDong}
                         setSelectedSido={setSelectedSido}
                         setSelectedSigugun={setSelectedSigugun}
-                        setSelectedDong={setSelectedDong}
                     />
 
                     <div className='flex justify-center gap-1.5 py-1.5 border-t-[1px] border-gray-300'>
                         <Button
                             className={[
                                 "bg-[#EAEAEA] text-black opacity-100 pointer-events-none h-7",
-
-                                // // 선택한 시군구가 있으면서 그에 해당하는 동이 없을때
-                                // selectedSigugun &&
-                                //     selectedSigugun.sigugun !== null &&
-                                //     _.findIndex(region.dong, {
-                                //         sigugun: selectedSigugun.sigugun,
-                                //     }) === -1 &&
-                                //     "bg-[#00A2FF] hover:bg-sky-400 text-white pointer-events-auto",
-                                // 동까지 모두 선택했을 때
                                 depth === 2 &&
                                     selectedSigugun &&
                                     selectedSigugun.gu !== null &&
-                                    "bg-[#00A2FF] hover:bg-sky-400 text-white pointer-events-auto",
-                                selectedDong &&
-                                    selectedDong.dong !== null &&
                                     "bg-[#00A2FF] hover:bg-sky-400 text-white pointer-events-auto",
                             ]
                                 .filter(Boolean)
                                 .join(" ")}
                             onClick={() => {
-                                initRegion();
+                                // initRegion();
                                 setOpen(false);
                                 handleClickSaveSelectedRegion();
                             }}
                         >
-                            {depth === 3 ? "검색" : "완료"}
+                            완료
                         </Button>
                         <Button
                             onClick={() => {
-                                if (depth === 3) {
-                                    setOpen(false);
-                                } else {
-                                    setSearchContents(null);
-                                    setSelectedSido(null);
-                                    setSelectedSigugun(null);
-                                }
+                                setSearchContents(null);
+                                setSelectedSido(null);
+                                setSelectedSigugun(null);
                             }}
                             className='h-7 bg-[#EAEAEA] hover:bg-[#eeeeee] hover:opacity-80 text-black '
                         >
-                            {depth === 3 ? "취소" : "초기화"}
+                            초기화
                         </Button>
                     </div>
                 </div>
             </div>
-        );
-    }
-
-    if (open && isMobile) {
-        return (
-            <MobileRegionSelect
-                loading={loading}
-                setLoading={setLoading}
-                setOpen={setOpen}
-                selectedSido={selectedSido}
-                selectedSigugun={selectedSigugun}
-                selectedDong={selectedDong}
-                setSelectedSido={setSelectedSido}
-                setSelectedSigugun={setSelectedSigugun}
-                setSelectedDong={setSelectedDong}
-            />
         );
     }
 };

@@ -17,6 +17,8 @@ const SummaryOverlay = () => {
     const location = useAtomValue<any>(locationState);
     const summaryData = useAtomValue(summaryDataState);
 
+    console.log(summaryData);
+
     return (
         <div
             className={`

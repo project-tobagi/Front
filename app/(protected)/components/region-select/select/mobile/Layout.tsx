@@ -4,7 +4,6 @@
 import MobileRegionSelectHeader from "./Header";
 import MobileRegionSelectContent from "./Content";
 import { useState } from "react";
-import MobileRegionSelectResult from "./Result";
 
 interface RegionSelect {
     loading: any;

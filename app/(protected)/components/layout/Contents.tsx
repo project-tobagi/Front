@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import _ from "lodash";
 import { useResetAtom } from "jotai/utils";
+import { useMediaQuery } from "react-responsive";
 
 // * state
 import { menuState } from "../../_store/menu";
@@ -28,9 +29,11 @@ import MenuOverlay from "../common/MenuOverlay";
 import SummaryOverlay from "../common/SummaryOverlay";
 
 const Contents = ({ children }: any) => {
-    const [summaryVisible, setSummaryVisible] = useAtom(regionSummaryVisible);
-    const menus = useAtomValue(menuState);
+    const [, setSummaryVisible] = useAtom(regionSummaryVisible);
+    const [menus, setMenus] = useAtom(menuState);
     const [polygon, setPolygon] = useAtom(polygonState);
+
+    const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
 
     // reset state
     const resetLocation = useResetAtom(locationState);
@@ -57,7 +60,7 @@ const Contents = ({ children }: any) => {
     ];
 
     useEffect(() => {
-        if (polygon !== null) {
+        if (polygon !== null && isMobile) {
             setTimeout(() => {
                 setSummaryVisible(true);
             }, 1500);
@@ -75,6 +78,20 @@ const Contents = ({ children }: any) => {
         resetFilteredRegionList();
         setSummaryVisible(false);
         setPolygon(null);
+
+        // 모든메뉴가 활성화 되지 않을시  홈으로 이동
+        setMenus((prev: any) => {
+            if (!_.find(prev, { active: true })) {
+                return _.map(prev, (menu) => {
+                    if (menu.id === 0) {
+                        return { ...menu, active: true };
+                    }
+                    return menu;
+                });
+            }
+
+            return prev;
+        });
     }, [menus]);
 
     return (

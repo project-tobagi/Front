@@ -1,12 +1,26 @@
 "use client";
+// * basic
+import { useState } from "react";
 
 // * install libaries
 import { Button } from "@/components/ui/button";
+import { useAtomValue } from "jotai";
+
+// * state
+import { locationState } from "@/app/(protected)/_store/location";
 
 // * components
-import RegionFilterSelector from "./Selector";
+import RegionFilterSelector from "./selector/Layout";
 
-const Step1 = ({ stepFlow }: any) => {
+const Step1 = ({
+    stepFlow,
+    selectedSido,
+    setSelectedSido,
+    selectedSigugun,
+    setSelectedSigugun,
+}: any) => {
+    const location = useAtomValue(locationState);
+
     return (
         // header
         <div className='h-[calc(100%-25px)] flex gap-6 flex-col'>
@@ -22,13 +36,24 @@ const Step1 = ({ stepFlow }: any) => {
 
             {/* contents */}
             <div>
-                <RegionFilterSelector />
+                <RegionFilterSelector
+                    selectedSido={selectedSido}
+                    setSelectedSido={setSelectedSido}
+                    selectedSigugun={selectedSigugun}
+                    setSelectedSigugun={setSelectedSigugun}
+                />
             </div>
 
             {/* buttons */}
             <div className='flex justify-end h-full items-end'>
                 <Button
-                    className='rounded-full px-6'
+                    disabled={selectedSigugun === null}
+                    className={[
+                        selectedSigugun === null && "bg-gray-500",
+                        "rounded-full px-6",
+                    ]
+                        .filter(Boolean)
+                        .join(" ")}
                     onClick={() => {
                         stepFlow.next();
                     }}

@@ -10,8 +10,8 @@ const Descriptions = ({
     title: string;
     subTitle: string;
 }) => {
-    const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 });
-    const isMobile = useMediaQuery({ maxWidth: 1224 });
+    const isDesktopOrLaptop = useMediaQuery({ minWidth: 1024 });
+    const isMobile = useMediaQuery({ maxWidth: 1024 });
 
     if (isDesktopOrLaptop) {
         return (

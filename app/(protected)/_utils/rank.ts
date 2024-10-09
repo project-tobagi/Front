@@ -87,7 +87,7 @@ const processRankCategory = (rank: any) => {
                 storeTypeNm: _.uniq(
                     _.map(group, (item) => item.value.storeTypeNm)
                 ),
-                count: _.uniq(_.map(group, (item) => item.value.count)),
+                count: _.map(group, (item) => item.value.count),
                 donCd: group[0].value.donCd,
             }))
             .value(),

@@ -7,10 +7,15 @@ import { useState, useRef, useEffect } from "react";
 import _ from "lodash";
 
 // * components
-import Icon from "../../common/Icon";
-import RegionSelector from "../../region-select/Layout";
+import Icon from "../../../common/Icon";
+import RegionSelectorLayout from "./Selector";
 
-const RegionFilterSelector = () => {
+const RegionFilterSelector = ({
+    selectedSido,
+    setSelectedSido,
+    selectedSigugun,
+    setSelectedSigugun,
+}: any) => {
     const inputRef: any = useRef(null);
     const dropdownRef: any = useRef(null);
 
@@ -84,13 +89,15 @@ const RegionFilterSelector = () => {
                             "여기를 클릭하여 관심 지역을 선택하세요."
                         )}
                     </div>
-
-                    <RegionSelector
-                        depth={2}
+                    <RegionSelectorLayout
                         open={openDropDown}
                         setOpen={setOpenDropDown}
                         selectorRef={dropdownRef}
                         setSearchContents={setSearchContents}
+                        selectedSido={selectedSido}
+                        setSelectedSido={setSelectedSido}
+                        selectedSigugun={selectedSigugun}
+                        setSelectedSigugun={setSelectedSigugun}
                     />
                 </div>
             </div>

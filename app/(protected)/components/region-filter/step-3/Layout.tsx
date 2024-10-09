@@ -1,12 +1,39 @@
 "use client";
 
 // * install libraries
+import _ from "lodash";
 import { Button } from "@/components/ui/button";
+import { useAtom } from "jotai";
+
+// * state
+import { filteredRegionListState } from "@/app/(protected)/_store/region";
+import { locationState } from "@/app/(protected)/_store/location";
 
 // * components
 import RegionCard from "./RegioCard";
+import Icon from "../../common/Icon";
 
-const Step3 = ({ stepFlow }: any) => {
+// * etc
+import { generateRegionRank } from "@/app/(protected)/_utils/rank";
+
+const Step3 = ({ stepFlow, selectedSido, selectedSigugun }: any) => {
+    const [filteredRegionList, setFilteredRegionList] = useAtom(
+        filteredRegionListState
+    );
+    const [, setLocation]: any = useAtom<any>(locationState);
+
+    const handleClickDetailRegion = async (item: any) => {
+        try {
+            // stepFlow.next();
+            setLocation({
+                sido: selectedSido.si,
+                sigugun: selectedSigugun.gu,
+                dong: item.label,
+                code: `${item.value[0].donCd}00`,
+            });
+        } catch {}
+    };
+
     return (
         // header
         <div className='h-[calc(100%-25px)] flex gap-6 flex-col'>
@@ -14,20 +41,34 @@ const Step3 = ({ stepFlow }: any) => {
                 <h1 className='text-lg font-semibold'>
                     동네 탐색을 완료했어요!
                 </h1>
-                <p className='text-sm text-[#808185] font-light'>
-                    설정한 동네 조건과 알맞는 동네 탐색을 완료하였어요!
-                    <br />
-                    적절한 동네가 있는지 확인해보세요.
+                <p className='text-sm text-gray-400'>
+                    설정한 조건에 일치하는 동네 탐색을 완료했어요. 동네별 요약
+                    정보를 확인해보세요!
                 </p>
             </div>
 
             {/* contents */}
-            <div>
-                <RegionCard />
+            <div className='flex overflow-y-auto flex-col gap-2 h-full'>
+                {_.map(
+                    generateRegionRank(filteredRegionList),
+                    (item: any, index: number) => {
+                        return (
+                            <RegionCard
+                                key={`region-${index}`}
+                                item={item}
+                                index={index}
+                                selectedSido={selectedSido}
+                                selectedSigugun={selectedSigugun}
+                                handleClickDetailRegion={
+                                    handleClickDetailRegion
+                                }
+                            />
+                        );
+                    }
+                )}
             </div>
-
             {/* buttons */}
-            <div className='flex justify-center h-full items-end'>
+            <div className='flex justify-center items-end'>
                 <Button
                     className='rounded-full px-6'
                     onClick={() => {

@@ -5,6 +5,10 @@ import { useState, useRef, useEffect } from "react";
 
 // * install libraries
 import _ from "lodash";
+import { useAtom } from "jotai";
+
+// * state
+import { menuState } from "../../_store/menu";
 
 // * components
 import Icon from "../common/Icon";
@@ -15,12 +19,22 @@ const Header = () => {
     const [openDropDown, setOpenDropDown] = useState(false);
     const [openLogin, setOpenLogin] = useState(false);
     const [searchContents, setSearchContents] = useState<any>(null);
-
     const inputRef: any = useRef(null);
     const dropdownRef: any = useRef(null);
 
+    const [, setMenus] = useAtom(menuState);
+
     const handleFocus = () => {
         setOpenDropDown(true);
+        setMenus((prev: any) => {
+            return _.map(prev, (menu) => {
+                if (menu.id === 0) {
+                    return { ...menu, active: true };
+                } else {
+                    return { ...menu, active: false };
+                }
+            });
+        });
     };
 
     const handleBlur = (event: any) => {
@@ -63,7 +77,10 @@ const Header = () => {
                 {/* logo */}
                 <div className='flex gap-2 h-full max-lg:hidden'>
                     <Icon type='mainLogo' isOriginal />
-                    <Icon type='subLogo' isOriginal />
+                    <div className='flex flex-col gap-1 items-center mt-1'>
+                        <Icon type='mainLogoTitle' isOriginal />
+                        <Icon type='subLogo' isOriginal />
+                    </div>
                 </div>
 
                 {/* input */}
@@ -122,7 +139,6 @@ const Header = () => {
 
                 {/* profile/notification */}
                 <div className='flex gap-3 max-lg:hidden'>
-                    <div className='w-10 h-10 rounded-full ring-1 ring-gray-400'></div>
                     <button
                         onClick={() => {
                             setOpenLogin(true);

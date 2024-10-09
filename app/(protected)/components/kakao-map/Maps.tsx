@@ -36,10 +36,14 @@ const Maps = (props: any) => {
 
     let defaultLevel = 3;
     const [level, setLevel] = useState(defaultLevel);
-    const isDesktop = useMediaQuery({ query: "(min-width: 1224px)" });
+    const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" });
     const [, summaryVisible] = useAtom(regionSummaryVisible);
     const menus = useAtomValue(menuState);
     function updateMarkerImage(active: boolean) {
+        if (isDesktop) {
+            return null;
+        }
+
         return active
             ? null
             : ({

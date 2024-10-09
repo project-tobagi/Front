@@ -1,23 +1,67 @@
 "use client";
 
+// * install libraries
+import _ from "lodash";
+
 // * components
+import Icon from "../../common/Icon";
 import { Badge } from "@/components/ui/badge";
 
-const RegionCard = () => {
+const RegionCard = ({
+    item,
+    index,
+    selectedSido,
+    selectedSigugun,
+    handleClickDetailRegion,
+}: any) => {
     return (
-        <div className='h-[90px] ring-1 ring-gray-300 hover:ring-blue-400 rounded-lg py-2 px-2'>
-            <div className='relative flex gap-2 flex-col justify-between'>
+        <div
+            onClick={() => {
+                handleClickDetailRegion(item);
+            }}
+            className=' ring-1 cursor-pointer ring-gray-300 hover:ring-blue-400 rounded-lg py-2 px-2 m-1'
+        >
+            <div className='h-full relative flex gap-2 flex-col justify-between'>
                 {/* header */}
                 <div className='flex items-center gap-1'>
-                    <Badge>예관동</Badge>
-                    <p className='text-xs text-[#858585]'>서울특별시 중구</p>
+                    <Badge>{item.label}</Badge>
+                    <p className='text-xs text-[#858585]'>
+                        {selectedSido.si + "" + selectedSigugun.gu}
+                    </p>
                 </div>
 
                 {/* contents */}
-                <div>
-                    <h1 className='text-xs '>
-                        치안, 편의시설 조건이 주변 지역보다 좋은 동네
-                    </h1>
+                <div className=''>
+                    <ul className='flex flex-col gap-1 text-xs'>
+                        {_.map(item.value, (data: any) => {
+                            return (
+                                <li
+                                    key={`description-${data.rank}`}
+                                    className='flex gap-2'
+                                >
+                                    <Icon
+                                        type={
+                                            data.rank === 3
+                                                ? "ic_bad"
+                                                : data.rank === 2
+                                                ? "ic_soso"
+                                                : "ic_good"
+                                        }
+                                    />
+                                    <p>
+                                        {_.map(data.category, (cate: any) => {
+                                            return cate + ", ";
+                                        })}
+                                    </p>
+                                    <p>
+                                        지수가
+                                        {"'" + data.rankTxt + "'"}
+                                        이에요.
+                                    </p>
+                                </li>
+                            );
+                        })}
+                    </ul>
                 </div>
             </div>
         </div>

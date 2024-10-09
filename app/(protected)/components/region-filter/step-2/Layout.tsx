@@ -2,6 +2,11 @@
 
 // * install libaries
 import { Button } from "@/components/ui/button";
+import _ from "lodash";
+import { useAtom } from "jotai";
+
+// * state
+import { filteredRegionListState } from "@/app/(protected)/_store/region";
 
 // * components
 import RegionFilterSliders from "./Sliders";
@@ -9,13 +14,59 @@ import { useState } from "react";
 
 // * etc
 import { CONDITION_TYPES } from "@/app/(protected)/_utils/constants";
+import { API_RANK_INFO, API_RESION_POLYGON } from "@/app/(protected)/_api";
 
-const Step2 = ({ stepFlow }: any) => {
+const Step2 = ({
+    stepFlow,
+    selectedSido,
+    setSelectedSido,
+    selectedSigugun,
+    setSelectedSigugun,
+}: any) => {
     const [conditions, setConditions] = useState(CONDITION_TYPES);
+    const [filteredRegionList, setFilteredRegionList] = useAtom(
+        filteredRegionListState
+    );
 
-    // * 탐색하기
-    const handleClickFilterRegion = async () => {};
+    const filterParams = () => {
+        const activeOptions = _.filter(
+            conditions,
+            (condition) => condition.active
+        );
+        let params = { donGrpCd: selectedSigugun.code.slice(0, 5) };
 
+        _.forEach(activeOptions, (item: any) => {
+            params = { ...params, [item.code]: item.value };
+        });
+
+        return params;
+    };
+
+    // 필터에 해당되는 동네 찾기
+    const handleClickFilterRegion = async () => {
+        try {
+            const res = await API_RANK_INFO(filterParams());
+            if (res !== null && res !== undefined) {
+                setFilteredRegionList(() => {
+                    return _.map(
+                        _.groupBy(res.data, "donCd"),
+                        (list, label) => ({
+                            label: _.find(selectedSigugun.dongList, (dong) => {
+                                return (
+                                    _.slice(dong.code, 0, 8).join("") === label
+                                );
+                            })?.dong,
+                            list,
+                        })
+                    );
+                });
+
+                stepFlow.next();
+            }
+        } catch {
+            console.log("동네 필터 실패");
+        }
+    };
     return (
         // header
         <div className='h-[calc(100%-25px)] flex gap-6 flex-col'>
@@ -52,7 +103,7 @@ const Step2 = ({ stepFlow }: any) => {
                 <Button
                     className='rounded-full px-6'
                     onClick={() => {
-                        stepFlow.next();
+                        handleClickFilterRegion();
                     }}
                 >
                     탐색

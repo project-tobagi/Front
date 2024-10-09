@@ -31,6 +31,7 @@ import ic_list from "@/public/icons/ic_list.svg";
 // * logos
 import mainLogo from "@/public/logo/main_logo.svg";
 import subLogo from "@/public/logo/sub_logo.svg";
+import mainLogoTitle from "@/public/logo/main_logo_title.svg";
 
 const iconMap: any = {
     ic_location,
@@ -45,6 +46,7 @@ const iconMap: any = {
     ic_my_location,
     mainLogo,
     subLogo,
+    mainLogoTitle,
     ic_menu,
     ic_menu_on,
     ic_menu_2,

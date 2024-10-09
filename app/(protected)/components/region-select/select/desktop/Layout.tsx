@@ -21,13 +21,13 @@ interface RegionSelect {
         gu: string;
         dongList: any;
     };
-    selectedDong: {
+    selectedDong?: {
         dong: string;
         code: string;
     };
     setSelectedSido: any;
     setSelectedSigugun: any;
-    setSelectedDong: any;
+    setSelectedDong?: any;
 }
 
 const DesktopRegionSelect = ({

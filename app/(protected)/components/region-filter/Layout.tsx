@@ -38,8 +38,8 @@ const useStepFlow = () => {
 const RegionFilterLayout = () => {
     const stepFlow = useStepFlow();
 
-    const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 });
-    const isMobile = useMediaQuery({ maxWidth: 1224 });
+    const isDesktopOrLaptop = useMediaQuery({ minWidth: 1024 });
+    const isMobile = useMediaQuery({ maxWidth: 1024 });
 
     const [selectedSido, setSelectedSido] = useState<any>(null);
     const [selectedSigugun, setSelectedSigugun] = useState<any>(null);
@@ -62,7 +62,7 @@ const RegionFilterLayout = () => {
     if (isDesktopOrLaptop) {
         return (
             <div className='w-[370px] h-[520px]'>
-                <div>
+                <div className='h-full'>
                     <Stepper
                         step={stepFlow.step}
                         contents={stepTypes}
@@ -71,13 +71,22 @@ const RegionFilterLayout = () => {
                     {stepFlow.step === 0 ? (
                         <Step1
                             stepFlow={stepFlow}
+                            selectedSido={selectedSido}
+                            selectedSigugun={selectedSigugun}
                             setSelectedSido={setSelectedSido}
                             setSelectedSigugun={setSelectedSigugun}
                         />
                     ) : stepFlow.step === 1 ? (
-                        <Step2 stepFlow={stepFlow} />
+                        <Step2
+                            stepFlow={stepFlow}
+                            selectedSigugun={selectedSigugun}
+                        />
                     ) : (
-                        <Step3 stepFlow={stepFlow} />
+                        <Step3
+                            stepFlow={stepFlow}
+                            selectedSido={selectedSido}
+                            selectedSigugun={selectedSigugun}
+                        />
                     )}
                 </div>
             </div>

@@ -368,7 +368,7 @@ const MidpointForm = ({ stepFlow }: any) => {
                 </div>
 
                 {/* buttons */}
-                <div className='fixed bottom-24 left-0 right-0 mx-4 flex justify-center  items-end '>
+                <div className='max-lg:fixed bottom-24 left-0 right-0 mx-4 flex justify-center  items-end '>
                     <Button
                         type='submit'
                         className=' max-lg:w-full rounded-full px-2 max-lg:rounded-xl'
