@@ -35,7 +35,10 @@ const CategorySelector = ({ setSelectedCategory }: any) => {
                     <SelectContent>
                         {_.map(CATEGORY_GROUP_CODES, (item: any) => {
                             return (
-                                <SelectItem value={item.code}>
+                                <SelectItem
+                                    key={`select-item-${item.code}`}
+                                    value={item.code}
+                                >
                                     {item.type}
                                 </SelectItem>
                             );

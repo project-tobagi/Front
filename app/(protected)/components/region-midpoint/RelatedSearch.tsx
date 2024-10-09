@@ -14,9 +14,10 @@ const RelatedSearch = ({ currentIndex, setStartPoints, setOpen }: any) => {
     return (
         <div className='relative w-full  bg-white  h-full '>
             <ul>
-                {_.map(relatedSearchList, (point: any) => {
+                {_.map(relatedSearchList, (point: any, index: number) => {
                     return (
                         <li
+                            key={`search-list-${index}`}
                             onClick={() => {
                                 setStartPoints((prev: any[]) => {
                                     return prev.map((item: any, i: number) => {

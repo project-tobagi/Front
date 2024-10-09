@@ -253,7 +253,10 @@ const MidpointForm = ({ stepFlow }: any) => {
                     >
                         {_.map(startPoints, (item: any, index: number) => {
                             return (
-                                <div className='relative w-full flex gap-4 items-center'>
+                                <div
+                                    key={index}
+                                    className='relative w-full flex gap-4 items-center'
+                                >
                                     <label
                                         className='text-xs  ml-2 whitespace-nowrap'
                                         htmlFor=''

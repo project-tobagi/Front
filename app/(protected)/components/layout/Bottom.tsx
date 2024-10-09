@@ -19,6 +19,7 @@ const Bottom = () => {
                 {_.map(menus, (item: any) => {
                     return (
                         <div
+                            key={`menu-${item.id}`}
                             onClick={() => {
                                 if (!item.disable) {
                                     setMenus((menus: any) => {

@@ -39,8 +39,6 @@ const MobileRegionFilterContent = ({
         filteredRegionListState
     );
 
-    console.log(filteredRegionList);
-
     const [, setLocation]: any = useAtom<any>(locationState);
     if (loading) {
         return <div>로딩중...</div>;
@@ -205,9 +203,10 @@ const MobileRegionFilterContent = ({
                         <ul className='grid gap-3 '>
                             {_.map(
                                 generateRegionRank(filteredRegionList),
-                                (item: any) => {
+                                (item: any, index: number) => {
                                     return (
                                         <li
+                                            key={`region-${index}`}
                                             onClick={() => {
                                                 handleClickDetailRegion(item);
                                             }}
@@ -230,7 +229,10 @@ const MobileRegionFilterContent = ({
                                                         item.value,
                                                         (data: any) => {
                                                             return (
-                                                                <li className='flex gap-2'>
+                                                                <li
+                                                                    key={`description-${data.rank}`}
+                                                                    className='flex gap-2'
+                                                                >
                                                                     <Icon
                                                                         type={
                                                                             data.rank ===

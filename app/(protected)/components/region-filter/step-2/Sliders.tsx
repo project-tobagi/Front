@@ -53,6 +53,7 @@ const RegionFilterSliders = ({ conditions, setConditions }: any) => {
                         <div className='flex gap-2 items-center'>
                             <input
                                 checked={condition.active}
+                                onChange={() => {}}
                                 onClick={(e) => {
                                     setConditions((prev: any) => {
                                         return _.map(prev, (item: any) => {

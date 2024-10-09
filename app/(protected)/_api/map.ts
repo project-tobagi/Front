@@ -38,7 +38,6 @@ export const getAddress = async (
     toast: any,
     setState: any
 ) => {
-    console.log(1);
     const response = await axios.get(
         "https://dapi.kakao.com/v2/local/geo/coord2address.json",
         {

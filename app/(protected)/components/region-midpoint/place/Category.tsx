@@ -112,6 +112,7 @@ const Category = ({
                         {_.map(CATEGORY_GROUP_CODES, (item: any) => {
                             return (
                                 <li
+                                    key={`category-${item.code}`}
                                     onClick={() => {
                                         handleClickSelectCategory(item);
                                     }}

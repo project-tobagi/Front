@@ -124,6 +124,7 @@ const PlaceResult = ({
                             if (filterCategory === null) {
                                 return (
                                     <div
+                                        key={`place-${place.id}`}
                                         onClick={() => {
                                             setMidPointPlace(place);
 

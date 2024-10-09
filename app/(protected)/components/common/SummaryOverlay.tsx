@@ -51,7 +51,10 @@ const SummaryOverlay = () => {
                 <div className='mt-10 flex flex-col gap-8 max-w-lg m-auto'>
                     {_.map(summaryData, (data, index: number) => {
                         return (
-                            <div className='flex flex-col justify-center text-center gap-2'>
+                            <div
+                                key={`data-${data.rank}`}
+                                className='flex flex-col justify-center text-center gap-2'
+                            >
                                 <div className='flex gap-3 justify-start items-center font-bold text-lg'>
                                     <Icon
                                         className='w-8 h-8'
@@ -64,21 +67,21 @@ const SummaryOverlay = () => {
                                         }
                                     />
                                     <h1>
-                                        {_.join(data.category, ", ")}
+                                        {_.join(data.category, ", ") + " "}
                                         지수가
                                         {data.rank === 1
-                                            ? "좋아요."
+                                            ? " 좋아요."
                                             : data.rank === 2
-                                            ? "보통이에요."
-                                            : "나빠요."}
+                                            ? " 보통이에요."
+                                            : " 나빠요."}
                                     </h1>
                                 </div>
-                                <div className='text-sm flex justify-start ml-11'>
+                                <div className='text-sm flex gap-1 justify-start ml-11'>
                                     {_.map(
                                         data.category,
                                         (num, index: number) => {
                                             return (
-                                                <p>
+                                                <p key={index}>
                                                     {data.storeTypeNm[index] +
                                                         data.count[index]}
                                                     개
@@ -87,8 +90,8 @@ const SummaryOverlay = () => {
                                                     ) -
                                                         1 !==
                                                     index
-                                                        ? " ,"
-                                                        : "가"}
+                                                        ? ","
+                                                        : ""}
                                                 </p>
                                             );
                                         }
