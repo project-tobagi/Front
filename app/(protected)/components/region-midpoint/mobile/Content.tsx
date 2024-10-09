@@ -4,7 +4,11 @@
 import MidpointLayout from "../midpoint/Layout";
 import PlaceLayout from "../place/Layout";
 
-const MobileRegionMidpointContent = ({ stepFlow }: any) => {
+const MobileRegionMidpointContent = ({
+    stepFlow,
+    placeResult,
+    setPlaceResult,
+}: any) => {
     return (
         <div className='flex h-[520px] mt-16  max-lg:h-full '>
             <div className='w-[370px] max-lg:w-full h-full relative'>
@@ -33,7 +37,11 @@ const MobileRegionMidpointContent = ({ stepFlow }: any) => {
                 )}
 
                 <MidpointLayout stepFlow={stepFlow} />
-                <PlaceLayout stepFlow={stepFlow} />
+                <PlaceLayout
+                    stepFlow={stepFlow}
+                    placeResult={placeResult}
+                    setPlaceResult={setPlaceResult}
+                />
             </div>
         </div>
     );

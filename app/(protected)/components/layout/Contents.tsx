@@ -12,7 +12,7 @@ import { regionSummaryVisible } from "../../_store/visible";
 import RegionFilterLayout from "../region-filter/Layout";
 import RegionMidPoingLayout from "../region-midpoint/Layout";
 import MenuOverlay from "../common/MenuOverlay";
-import MobileRegionSummary from "../region-select/select/mobile/Result";
+import SummaryOverlay from "../common/SummaryOverlay";
 import { useEffect, useState } from "react";
 import { polygonState } from "../../_store/region";
 
@@ -63,7 +63,7 @@ const Contents = ({ children }: any) => {
             {children}
 
             {/* overlay */}
-            <MobileRegionSummary />
+            <SummaryOverlay />
         </div>
     );
 };

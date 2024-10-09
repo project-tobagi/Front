@@ -19,9 +19,8 @@ import { menuState } from "@/app/(protected)/_store/menu";
 // * etc
 import { getNearestPlace } from "@/app/(protected)/_api/map";
 
-const PlaceLayout = ({ stepFlow }: any) => {
+const PlaceLayout = ({ stepFlow, placeResult, setPlaceResult }: any) => {
     const [selectedCategory, setSelectedCategory] = useState([]);
-    const [placeResult, setPlaceResult] = useState<any>(null);
     const [filterCategory, setFilterCategory] = useState<any>(null);
     const midpoint = useAtomValue<any>(midPointState);
 

@@ -22,76 +22,94 @@ export const CATEGORY_GROUP_CODES = [
     {
         code: "FD6",
         type: "음식점",
+        icon: "🍽️",
     },
     {
         code: "CE7",
         type: "카페",
+        icon: "☕",
     },
     {
         code: "CS2",
         type: "편의점",
+        icon: "🏪",
     },
 
     {
         code: "HP8",
         type: "병원",
+        icon: "🏥",
     },
     {
         code: "MT1",
         type: "대형마트",
+        icon: "🛒",
     },
 
     {
         code: "PM9",
         type: "약국",
+        icon: "💊",
     },
     {
         code: "SW8",
         type: "지하철역",
+        icon: "🚇",
     },
     {
         code: "SC4",
         type: "학교",
+        icon: "🏫",
     },
     {
         code: "CT1",
         type: "문화시설",
+        icon: "🎡",
     },
     {
         code: "AC5",
         type: "학원",
+        icon: "🤓",
     },
     {
         code: "OL7",
         type: "주유소, 충전소",
+        icon: "⛽",
     },
     {
         code: "BK9",
         type: "은행",
+        icon: "🏦",
     },
     {
         code: "PK6",
         type: "주차장",
+        icon: "🅿️",
     },
     {
         code: "AG2",
         type: "부동산",
+        icon: "🏠",
     },
     {
         code: "AT4",
         type: "관광명소",
+        icon: "🧳",
     },
     {
         code: "PO3",
         type: "공공기관",
+        icon: "🏢",
     },
     {
         code: "PS3",
         type: "어린이집, 유치원",
+        icon: "🐥",
     },
     {
         code: "AD5",
         type: "숙박",
+        icon: "🏨",
     },
 ];
 

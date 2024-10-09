@@ -7,6 +7,7 @@ import { useState } from "react";
 import _ from "lodash";
 import { useAtom, useAtomValue } from "jotai";
 import { toast } from "react-toastify";
+import { useMediaQuery } from "react-responsive";
 
 // * components
 import Icon from "../../common/Icon";
@@ -37,6 +38,7 @@ const PlaceResult = ({
     setFilterCategory,
 }: any) => {
     const address: any = useAtomValue(addressState);
+    const isDesktop = useMediaQuery({ query: "(min-width: 1224px)" });
     const [, setMenus] = useAtom(menuState);
 
     const [midPointPlace, setMidPointPlace]: any =
@@ -124,24 +126,29 @@ const PlaceResult = ({
                                     <div
                                         onClick={() => {
                                             setMidPointPlace(place);
-                                            setMenus((menus: any) => {
-                                                return _.map(
-                                                    menus,
-                                                    (menu: any) => {
-                                                        if (menu.id === 0) {
-                                                            return {
-                                                                ...menu,
-                                                                active: true,
-                                                            };
-                                                        } else {
-                                                            return {
-                                                                ...menu,
-                                                                active: false,
-                                                            };
-                                                        }
-                                                    }
-                                                );
-                                            });
+
+                                            if (isDesktop) {
+                                                // setMenus((menus: any) => {
+                                                //     return _.map(
+                                                //         menus,
+                                                //         (menu: any) => {
+                                                //             if (menu.id === 0) {
+                                                //                 return {
+                                                //                     ...menu,
+                                                //                     active: true,
+                                                //                 };
+                                                //             } else {
+                                                //                 return {
+                                                //                     ...menu,
+                                                //                     active: false,
+                                                //                 };
+                                                //             }
+                                                //         }
+                                                //     );
+                                                // });
+                                            } else {
+                                                stepFlow.next();
+                                            }
                                         }}
                                         className={[
                                             "ring-1  hover:ring-black rounded-lg mt-1 mx-2 mb-3 px-3 py-2 cursor-pointer",
@@ -154,13 +161,16 @@ const PlaceResult = ({
                                     >
                                         <div className='flex justify-between '>
                                             <div className='flex items-center gap-2'>
-                                                <h1 title={place.place_name}>
+                                                <h1
+                                                    title={place?.place_name}
+                                                    className='max-lg:text-sm'
+                                                >
                                                     {_.truncate(
                                                         place.place_name,
-                                                        { length: 16 }
+                                                        { length: 12 }
                                                     )}
                                                 </h1>
-                                                <p className='ring-1 h-4 ring-gray-300 rounded-full text-xs text-gray-500 px-1 flex items-center '>
+                                                <p className='ring-1  h-4 ring-gray-300 rounded-full text-xs max-lg:text-[9px] text-gray-500 px-1 flex items-center '>
                                                     {place.category_group_name}
                                                 </p>
                                             </div>
@@ -196,7 +206,7 @@ const PlaceResult = ({
 
                                         <div className='flex flex-col gap-1 mt-1 text-xs'>
                                             <li className='flex items-center gap-2'>
-                                                <h1 className='px-1 h-4 flex items-center ring-1 ring-black rounded-md text-xs'>
+                                                <h1 className=' px-1 h-4 flex items-center ring-1 ring-black rounded-md text-xs max-lg:text-[9px]'>
                                                     도로명
                                                 </h1>
                                                 <p>{place?.address_name}</p>
@@ -213,7 +223,7 @@ const PlaceResult = ({
                                                 </button>
                                             </li>
                                             <li className='flex items-center gap-2'>
-                                                <h1 className='px-1 h-4 flex items-center ring-1  ring-black rounded-md text-xs'>
+                                                <h1 className=' px-1 h-4 flex items-center ring-1  ring-black rounded-md text-xs max-lg:text-[9px]'>
                                                     지번
                                                 </h1>
                                                 <p>

@@ -62,3 +62,10 @@ export const API_RANK_INFO = async (param: any) => {
 
     return res;
 };
+
+// * 특정 동에 대한 정보 가져오기
+export const API_SUMMARY_RANK_INFO = async (param: any) => {
+    const res = await axios.get("/summary-info", { params: param });
+
+    return res;
+};

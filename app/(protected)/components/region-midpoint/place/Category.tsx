@@ -107,7 +107,7 @@ const Category = ({
                     </div>
                 </div>
 
-                <div className='px-8 max-lg:px-3 max-lg:py-6 max-lg:mt-4 overflow-y-auto'>
+                <div className='px-8 max-lg:px-2 max-lg:py-6 max-lg:mt-4 overflow-y-auto'>
                     <ul className='flex flex-wrap  justify-center items-center gap-3 '>
                         {_.map(CATEGORY_GROUP_CODES, (item: any) => {
                             return (
@@ -116,7 +116,7 @@ const Category = ({
                                         handleClickSelectCategory(item);
                                     }}
                                     className={[
-                                        "flex gap-2 ring-1 ring-gray-200 justify-center items-center px-2 py-0.5 max-lg:py-3 max-lg:px-4 rounded-sm hover:ring-[#00A2FF] cursor-pointer",
+                                        "flex gap-2 ring-1 ring-gray-200 justify-center items-center px-2 py-0.5 max-lg:py-1.5 max-lg:px-3 rounded-sm hover:ring-[#00A2FF] cursor-pointer",
                                         _.find(
                                             selectedCategory,
                                             (ct) => ct.code === item.code
@@ -126,7 +126,9 @@ const Category = ({
                                         .filter(Boolean)
                                         .join(" ")}
                                 >
-                                    <div className='w-3 h-3 bg-gray-300 rounded-full ring-1'></div>
+                                    <div className='w-3 h-3 flex justify-between items-center mr-1'>
+                                        {item?.icon}
+                                    </div>
                                     <p className='inline-block text-sm'>
                                         {item.type}
                                     </p>

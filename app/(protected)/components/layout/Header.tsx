@@ -79,7 +79,7 @@ const Header = () => {
                                 ref={inputRef}
                                 onBlur={handleBlur}
                                 onClick={handleFocus}
-                                className='w-full rounded-full  bg-white border-none shadow-[0px_4px_4px_0px_#00000040] ring-1 ring-gray-100 pl-12 py-2 font-light text-sm'
+                                className='w-full rounded-full  bg-white border-none shadow-[0px_4px_4px_0px_#00000040] ring-1 ring-gray-100 pl-10 pr-4 py-2 font-light text-sm'
                             >
                                 {searchContents !== null ? (
                                     <div className='flex items-center gap-2 font-normal'>

@@ -106,7 +106,7 @@ const ResultLayout = ({ stepFlow }: any) => {
                     </button>
 
                     <button
-                        className='rounded-full max-lg:w-full max-lg:rounded-xl  px-4 py-1 max-lg:py-2 bg-black text-white'
+                        className='rounded-full max-lg:fixed max-lg:mx-4 max-lg:left-0 max-lg:right-0 max-lg:rounded-xl  px-4 py-1 max-lg:py-2 bg-black text-white'
                         onClick={() => {
                             stepFlow.next();
                         }}

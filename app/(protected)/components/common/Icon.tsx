@@ -6,6 +6,7 @@ import ic_location_on from "@/public/icons/ic_location_on.svg";
 import ic_search from "@/public/icons/ic_search.svg";
 import ic_check from "@/public/icons/ic_check.svg";
 import ic_info from "@/public/icons/ic_info.svg";
+import ic_info_active from "@/public/icons/ic_info_active.svg";
 import ic_kakao from "@/public/icons/ic_kakao.svg";
 import ic_naver from "@/public/icons/ic_naver.svg";
 import ic_daum from "@/public/icons/ic_daum.svg";
@@ -25,6 +26,7 @@ import ic_good from "@/public/icons/ic_good.svg";
 import ic_soso from "@/public/icons/ic_soso.svg";
 import ic_bad from "@/public/icons/ic_bad.svg";
 import ic_marker from "@/public/icons/ic_marker.svg";
+import ic_list from "@/public/icons/ic_list.svg";
 
 // * logos
 import mainLogo from "@/public/logo/main_logo.svg";
@@ -36,6 +38,7 @@ const iconMap: any = {
     ic_search,
     ic_check,
     ic_info,
+    ic_info_active,
     ic_copy_paste,
     ic_naver_map,
     ic_kakao_map,
@@ -57,6 +60,7 @@ const iconMap: any = {
     ic_soso,
     ic_bad,
     ic_marker,
+    ic_list,
 };
 
 const Icon = (props: any) => {

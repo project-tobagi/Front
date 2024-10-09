@@ -305,31 +305,46 @@ const MidpointForm = ({ stepFlow }: any) => {
                                                 )}
                                         </div>
 
-                                        {index !== 0 && index !== 1 && (
+                                        {index !== 0 && index !== 1 ? (
                                             <div
-                                                className='cursor-pointer'
+                                                className='cursor-pointer mr-[1px]'
                                                 onClick={() => {
                                                     handleClickDeleteStartPoint(
                                                         index
                                                     );
                                                 }}
                                             >
-                                                x
+                                                <svg
+                                                    xmlns='http://www.w3.org/2000/svg'
+                                                    fill='none'
+                                                    viewBox='0 0 22 22'
+                                                    strokeWidth='2'
+                                                    stroke='currentColor'
+                                                    className='size-[20px]'
+                                                >
+                                                    <path
+                                                        strokeLinecap='round'
+                                                        strokeLinejoin='round'
+                                                        d='m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z'
+                                                    />
+                                                </svg>
+                                            </div>
+                                        ) : (
+                                            <div
+                                                className='cursor-pointer'
+                                                onClick={() => {
+                                                    stepFlow.loadingStart();
+                                                    handleClickGetLocation(
+                                                        index
+                                                    );
+                                                }}
+                                            >
+                                                <Icon
+                                                    type='ic_my_location'
+                                                    className='max-lg:size-6 '
+                                                />
                                             </div>
                                         )}
-
-                                        <div
-                                            className='cursor-pointer'
-                                            onClick={() => {
-                                                stepFlow.loadingStart();
-                                                handleClickGetLocation(index);
-                                            }}
-                                        >
-                                            <Icon
-                                                type='ic_my_location'
-                                                className='max-lg:size-6 '
-                                            />
-                                        </div>
                                     </div>
                                 </div>
                             );

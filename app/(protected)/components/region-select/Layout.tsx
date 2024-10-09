@@ -11,14 +11,15 @@ import { toast } from "react-toastify";
 
 // * components
 import { Button } from "@/components/ui/button";
-import RegionSelect from "./Select";
 import DesktopRegionSelect from "./select/desktop/Layout";
 import MobileRegionSelect from "./select/mobile/Layout";
 
 // * etc
 import { locationState } from "../../_store/location";
 import { polygonState } from "../../_store/region";
-import { API_RESION_POLYGON } from "../../_api";
+import { API_RESION_POLYGON, API_SUMMARY_RANK_INFO } from "../../_api";
+import { generateRegionRank } from "../../_utils/rank";
+import { summaryDataState } from "../../_store/summary";
 
 const RegionSelectorLayout = ({
     depth = 3,
@@ -38,6 +39,7 @@ const RegionSelectorLayout = ({
     const [selectedSigugun, setSelectedSigugun] = useState<any>(null);
     const [selectedDong, setSelectedDong] = useState<any>(null);
     const [polygon, setPolygon]: any = useAtom(polygonState);
+    const [, setSummaryData] = useAtom(summaryDataState);
 
     const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 });
     const isMobile = useMediaQuery({ maxWidth: 1224 });
@@ -106,6 +108,23 @@ const RegionSelectorLayout = ({
                 });
         }
     }, [location]);
+
+    useEffect(() => {
+        if (location.code !== null && polygon !== null) {
+            API_SUMMARY_RANK_INFO({
+                donCd: _.join(_.slice(location.code, 0, 8), ""),
+            })
+                .then((res) => {
+                    setSummaryData(generateRegionRank(res.data, true));
+                })
+                .catch((err) => {
+                    console.log(err);
+                    toast.error("선택한 동네의 정보를 찾지 못했습니다.", {
+                        position: "top-right",
+                    });
+                });
+        }
+    }, [polygon]);
 
     // useEffect(() => {
     //     if (polygon !== null) {

@@ -10,11 +10,20 @@ import { menuState } from "@/app/(protected)/_store/menu";
 import Icon from "../../common/Icon";
 import { useResetAtom } from "jotai/utils";
 
-const MobileRegionMidpointHeader = ({ setOpen }: any) => {
+const MobileRegionMidpointHeader = ({ stepFlow }: any) => {
     const resetMenus = useResetAtom(menuState);
     return (
         <div className='fixed w-full flex justify-center items-center py-4 border-b-[1px] border-gray-300 bg-white'>
-            <button className='absolute left-4' onClick={resetMenus}>
+            <button
+                className='absolute left-4'
+                onClick={() => {
+                    if (stepFlow.step === 0) {
+                        resetMenus();
+                    } else {
+                        stepFlow.back();
+                    }
+                }}
+            >
                 <Icon type='ic_arrow' />
             </button>
 

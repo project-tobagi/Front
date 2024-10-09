@@ -17,11 +17,11 @@ const useStepFlow = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const next = () => {
-        setStep((prev) => (prev < 3 ? prev + 1 : 0));
+        setStep((prev) => (prev < 4 ? prev + 1 : 0));
     };
 
     const back = () => {
-        setStep((prev) => (prev > 0 ? prev - 1 : 3));
+        setStep((prev) => (prev > 0 ? prev - 1 : 4));
     };
 
     const reset = () => {
@@ -52,6 +52,8 @@ const RegionMidpointLayout = () => {
     const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 });
     const isMobile = useMediaQuery({ maxWidth: 1224 });
 
+    const [placeResult, setPlaceResult] = useState(null);
+
     if (isDesktopOrLaptop) {
         return (
             <div className='flex h-[520px] max-lg:h-full max-lg:justify-center max-lg:w-full'>
@@ -81,14 +83,24 @@ const RegionMidpointLayout = () => {
                     )}
 
                     <MidpointLayout stepFlow={stepFlow} />
-                    <PlaceLayout stepFlow={stepFlow} />
+                    <PlaceLayout
+                        stepFlow={stepFlow}
+                        placeResult={placeResult}
+                        setPlaceResult={setPlaceResult}
+                    />
                 </div>
             </div>
         );
     }
 
     if (isMobile) {
-        return <MobileRegionMidpointLayout stepFlow={stepFlow} />;
+        return (
+            <MobileRegionMidpointLayout
+                stepFlow={stepFlow}
+                placeResult={placeResult}
+                setPlaceResult={setPlaceResult}
+            />
+        );
     }
 };
 

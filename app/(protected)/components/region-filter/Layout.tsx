@@ -1,7 +1,7 @@
 "use client";
 
 // * basic
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // * install libraries
 import { useMediaQuery } from "react-responsive";
@@ -17,11 +17,11 @@ const useStepFlow = () => {
     const [step, setStep] = useState<number>(0);
 
     const next = () => {
-        setStep((prev) => (prev < 3 ? prev + 1 : 0));
+        setStep((prev) => (prev < 4 ? prev + 1 : 0));
     };
 
     const back = () => {
-        setStep((prev) => (prev > 0 ? prev - 1 : 3));
+        setStep((prev) => (prev > 0 ? prev - 1 : 4));
     };
     const reset = () => {
         setStep(0);

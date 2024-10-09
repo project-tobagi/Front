@@ -10,13 +10,17 @@ import {
 } from "react-kakao-maps-sdk";
 
 // * install libraries
+import _ from "lodash";
 import { useMediaQuery } from "react-responsive";
+import { useAtom, useAtomValue } from "jotai";
+
+// * state
+import { regionSummaryVisible } from "../../_store/visible";
+import { menuState } from "../../_store/menu";
 
 // * components
 import RegionOverlay from "./mapOverlay";
 import MidPointOverlay from "./MidPointOverlay";
-import { useAtom } from "jotai";
-import { regionSummaryVisible } from "../../_store/visible";
 
 const Maps = (props: any) => {
     const {
@@ -34,6 +38,16 @@ const Maps = (props: any) => {
     const [level, setLevel] = useState(defaultLevel);
     const isDesktop = useMediaQuery({ query: "(min-width: 1224px)" });
     const [, summaryVisible] = useAtom(regionSummaryVisible);
+    const menus = useAtomValue(menuState);
+    function updateMarkerImage(active: boolean) {
+        return active
+            ? null
+            : ({
+                  src: "/marker.png",
+                  size: { width: 70, height: 80 },
+                  options: { offset: { x: 33, y: 95 } },
+              } as any);
+    }
     return (
         <Map // 지도를 표시할 Container
             id='map'
@@ -65,20 +79,13 @@ const Maps = (props: any) => {
                     // lng: 127.40170624974152,
                     // lat: 36.4376092055655,
                 }}
-                image={{
-                    src: "/marker.png",
-                    size: { width: 70, height: 80 },
-                    options: {
-                        offset: {
-                            x: 33,
-                            y: 95,
-                        },
-                    },
-                }}
+                // 중간지점 찾기만 marker 기본값 / 나머지 메뉴들 커스텀 marker
+                image={updateMarkerImage(_.find(menus, { id: 2 }).active)}
                 onClick={() => {
                     summaryVisible(true);
                 }}
             />
+
             {polygon !== null && (
                 <Polygon
                     path={polygon}

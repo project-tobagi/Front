@@ -5,11 +5,12 @@ import _ from "lodash";
 import { CONDITION_TYPES } from "./constants";
 
 interface Rank {
-    donCd: string;
-    category: string;
-    rank: number;
-    storeType: string;
-    count: number;
+    donCd?: string;
+    category?: string;
+    rank?: number;
+    storeType?: string;
+    storeTypeNm?: string;
+    count?: number;
 }
 
 const switchRankText = (category: any) => {
@@ -68,6 +69,7 @@ const processRankCategory = (rank: any) => {
                             category: values[0].category,
                             rank: values[0].rank,
                             storeType: values[0].storeType,
+                            storeTypeNm: values[0].storeTypeNm,
                             count: values[0].count,
                         },
                     };
@@ -82,7 +84,10 @@ const processRankCategory = (rank: any) => {
                     _.map(group, (item) => switchRankText(item.value.category))
                 ),
                 storeType: _.uniq(_.map(group, (item) => item.value.storeType)),
-                count: _.sumBy(group, (item) => item.value.count),
+                storeTypeNm: _.uniq(
+                    _.map(group, (item) => item.value.storeTypeNm)
+                ),
+                count: _.uniq(_.map(group, (item) => item.value.count)),
                 donCd: group[0].value.donCd,
             }))
             .value(),
@@ -92,8 +97,15 @@ const processRankCategory = (rank: any) => {
     );
 };
 
-export const generateRegionRank = (rankList: Rank[]) => {
-    return _.map(rankList, (item: any) => {
-        return { label: item.label, value: processRankCategory(item.list) };
-    });
+export const generateRegionRank = (
+    rankList: Rank | Rank[],
+    isSingle: boolean = false
+) => {
+    if (isSingle) {
+        return processRankCategory(rankList);
+    } else {
+        return _.map(rankList, (item: any) => {
+            return { label: item.label, value: processRankCategory(item.list) };
+        });
+    }
 };

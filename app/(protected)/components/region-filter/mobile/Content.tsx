@@ -10,6 +10,7 @@ import _ from "lodash";
 // * state
 import {
     filteredRegionListState,
+    polygonState,
     regionDataState,
 } from "@/app/(protected)/_store/region";
 
@@ -20,8 +21,9 @@ import Descriptions from "../../region-midpoint/Descriptions";
 
 // * etc
 import { CONDITION_TYPES } from "@/app/(protected)/_utils/constants";
-import { API_RANK_INFO } from "@/app/(protected)/_api";
+import { API_RANK_INFO, API_RESION_POLYGON } from "@/app/(protected)/_api";
 import { generateRegionRank } from "@/app/(protected)/_utils/rank";
+import { locationState } from "@/app/(protected)/_store/location";
 
 const MobileRegionFilterContent = ({
     stepFlow,
@@ -36,6 +38,10 @@ const MobileRegionFilterContent = ({
     const [filteredRegionList, setFilteredRegionList] = useAtom(
         filteredRegionListState
     );
+
+    console.log(filteredRegionList);
+
+    const [, setLocation]: any = useAtom<any>(locationState);
     if (loading) {
         return <div>로딩중...</div>;
     }
@@ -54,6 +60,7 @@ const MobileRegionFilterContent = ({
         return params;
     };
 
+    // 필터에 해당되는 동네 찾기
     const handleClickFilterRegion = async () => {
         try {
             const res = await API_RANK_INFO(filterParams());
@@ -77,6 +84,18 @@ const MobileRegionFilterContent = ({
         } catch {
             console.log("동네 필터 실패");
         }
+    };
+
+    const handleClickDetailRegion = async (item: any) => {
+        try {
+            stepFlow.next();
+            setLocation({
+                sido: selectedSido.si,
+                sigugun: selectedSigugun.gu,
+                dong: item.label,
+                code: `${item.value[0].donCd}00`,
+            });
+        } catch {}
     };
 
     // 동네찾기 할 지역 설정 (시, 시군구)
@@ -188,7 +207,12 @@ const MobileRegionFilterContent = ({
                                 generateRegionRank(filteredRegionList),
                                 (item: any) => {
                                     return (
-                                        <li className='w-full h-44 ring-1 ring-gray-300 rounded-lg p-4 flex flex-col gap-6'>
+                                        <li
+                                            onClick={() => {
+                                                handleClickDetailRegion(item);
+                                            }}
+                                            className='w-full h-44 ring-1 ring-gray-300 hover:ring-black rounded-lg p-4 flex flex-col gap-6 cursor-pointer'
+                                        >
                                             <div className='flex gap-2'>
                                                 <h1 className='bg-black rounded-full text-white px-2'>
                                                     {item.label}
