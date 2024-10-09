@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Script from "next/script";
 
 // * install libraries
-import axios from "axios";
+import { useUpdateEffect } from "react-use";
 import _ from "lodash";
 import { useAtom, useAtomValue } from "jotai";
 import { toast } from "react-toastify";
@@ -19,11 +19,11 @@ import {
 
 // * components
 import Maps from "./Maps";
-import { API_RESION_POLYGON } from "../../_api";
 
 // * etc
 import { getCoordinates } from "../../_api/map";
 import { polygonState } from "../../_store/region";
+import { menuState } from "../../_store/menu";
 
 /**
  * @param location '', 선택한 동네 (ex:대구광역시 북구 태전동)
@@ -34,9 +34,8 @@ import { polygonState } from "../../_store/region";
 const KakaoMapLayout = () => {
     const midPointPlace = useAtomValue<any>(midPointPlaceState);
 
-    const [formData, setFormData] = useState({ start: "", end: "" });
-    const [places, setPlaces]: any = useState([]);
-    const [subwayStation, setSubwayStation] = useState(null);
+    const menus = useAtomValue(menuState);
+
     const [loaded, setLoaded] = useState(false);
     const [polygon, setPolygon]: any = useAtom(polygonState);
     const [overlayCoordinates, setOverlayCoordinates] = useState<any>(null);
@@ -120,6 +119,12 @@ const KakaoMapLayout = () => {
         );
     }, [midPointPlace]);
 
+    useUpdateEffect(() => {
+        setOverlayCoordinates(null);
+        setOverlayRegionVisible(false);
+        setOverlayMidpointVisible(false);
+    }, [menus]);
+
     return (
         <div className='w-full relative'>
             <Script
@@ -136,8 +141,6 @@ const KakaoMapLayout = () => {
                     <Maps
                         coordinates={coordinates}
                         midPoint={midPointPlace}
-                        places={places}
-                        subwayStation={subwayStation}
                         setMap={setMap}
                         overlayRegionVisible={overlayRegionVisible}
                         setOverlayRegionVisible={setOverlayRegionVisible}

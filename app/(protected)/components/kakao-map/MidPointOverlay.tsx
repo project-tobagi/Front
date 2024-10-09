@@ -35,7 +35,7 @@ const MidPointOverlay = ({ coordinates, visible, setVisible }: any) => {
         )}`;
     };
 
-    if (coordinates !== null && visible) {
+    if (midPoint !== null && coordinates !== null && visible) {
         return (
             <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
                 // 커스텀 오버레이가 표시될 위치입니다
@@ -55,7 +55,7 @@ const MidPointOverlay = ({ coordinates, visible, setVisible }: any) => {
                 >
                     <div className='flex justify-between '>
                         <div className='flex items-center gap-2'>
-                            <h1 title={midPoint.place_name}>
+                            <h1 title={midPoint?.place_name}>
                                 {_.truncate(midPoint.place_name, {
                                     length: 12,
                                 })}

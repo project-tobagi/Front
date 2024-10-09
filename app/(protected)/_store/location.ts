@@ -1,15 +1,16 @@
+import { atomWithReset } from "jotai/utils";
 import { atom } from "jotai";
 
-export const locationState = atom({
+export const locationState = atomWithReset({
     sido: null,
     sigugun: null,
     dong: null,
     code: null,
 });
 
-export const midPointState = atom(null);
-export const midPointPlaceState = atom(null);
+export const midPointState = atomWithReset(null);
+export const midPointPlaceState = atomWithReset(null);
 
-export const addressState = atom(null);
+export const addressState = atomWithReset(null);
 
-export const relatedSearchListState = atom([]);
+export const relatedSearchListState = atomWithReset([]);

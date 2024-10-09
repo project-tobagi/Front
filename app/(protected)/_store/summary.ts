@@ -1,3 +1,4 @@
 import { atom } from "jotai";
+import { atomWithReset } from "jotai/utils";
 
-export const summaryDataState = atom<any>(null);
+export const summaryDataState = atomWithReset<any>(null);

@@ -20,6 +20,8 @@ import { polygonState } from "../../_store/region";
 import { API_RESION_POLYGON, API_SUMMARY_RANK_INFO } from "../../_api";
 import { generateRegionRank } from "../../_utils/rank";
 import { summaryDataState } from "../../_store/summary";
+import { useUpdateEffect } from "react-use";
+import { menuState } from "../../_store/menu";
 
 const RegionSelectorLayout = ({
     depth = 3,
@@ -40,6 +42,7 @@ const RegionSelectorLayout = ({
     const [selectedDong, setSelectedDong] = useState<any>(null);
     const [polygon, setPolygon]: any = useAtom(polygonState);
     const [, setSummaryData] = useAtom(summaryDataState);
+    const menus = useAtomValue(menuState);
 
     const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 });
     const isMobile = useMediaQuery({ maxWidth: 1224 });
@@ -126,12 +129,9 @@ const RegionSelectorLayout = ({
         }
     }, [polygon]);
 
-    // useEffect(() => {
-    //     if (polygon !== null) {
-    //         setOpen(false);
-    //         setLoading(false);
-    //     }
-    // }, [polygon]);
+    useUpdateEffect(() => {
+        setSearchContents(null);
+    }, [menus]);
 
     if (open && isDesktopOrLaptop) {
         return (
