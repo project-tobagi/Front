@@ -230,7 +230,7 @@ const MidpointForm = ({ stepFlow }: any) => {
         // header
         <div
             className={[
-                "lg:h-full max-lg:h-[calc(100%-200px)] flex gap-6 flex-col relative",
+                "lg:h-full max-lg:h-[calc(100%-250px)] flex gap-6 flex-col relative",
                 stepFlow.loading && "opacity-40",
             ]
                 .filter(Boolean)

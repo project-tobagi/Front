@@ -18,7 +18,7 @@ const ResultLayout = ({ stepFlow }: any) => {
     const address = useAtomValue<any>(addressState);
 
     return (
-        <div className='lg:h-full max-lg:h-[calc(100%-200px)]  flex flex-col'>
+        <div className='lg:h-full max-lg:h-[calc(100%-250px)]  flex flex-col'>
             <Descriptions
                 title='가장 빠르게 갈 수 있는 중간 지점을 찾았어요!'
                 subTitle=''

@@ -112,7 +112,7 @@ const MobileRegionFilterContent = ({
     // 동네찾기 할 지역 설정 (시, 시군구)
     if (stepFlow.step === 0) {
         return (
-            <div className='h-[calc(100%-200px)] mt-16'>
+            <div className='h-[calc(100%-250px)] mt-16'>
                 <div className='h-full'>
                     <Descriptions
                         title='관심있는 지역은 어디인가요?'
@@ -141,7 +141,7 @@ const MobileRegionFilterContent = ({
 
     if (stepFlow.step === 1) {
         return (
-            <div className='h-[calc(100%-200px)] mt-16'>
+            <div className='h-[calc(100%-250px)] mt-16'>
                 <div className='h-full'>
                     <Descriptions
                         title='관심있는 시/군/구는 어디인가요?'
@@ -176,7 +176,7 @@ const MobileRegionFilterContent = ({
     // 생활편의, 치안 등 조건설정
     if (stepFlow.step === 2) {
         return (
-            <div className='h-[calc(100%-200px)] mt-16 overflow-y-auto'>
+            <div className='h-[calc(100%-250px)] mt-16 overflow-y-auto'>
                 <Descriptions
                     title='중요하게 생각하는 동네의 조건을 설정해주세요.'
                     subTitle=''
@@ -205,7 +205,7 @@ const MobileRegionFilterContent = ({
     // 동네찾기 결과
     if (stepFlow.step === 3) {
         return (
-            <div className='h-[calc(100%-200px)]  overflow-y-auto mt-16'>
+            <div className='h-[calc(100%-250px)]  overflow-y-auto mt-16'>
                 <Descriptions
                     title=' 동네 탐색을 완료했어요!'
                     subTitle='설정한 조건에 일치하는 동네 탐색을 완료했어요.

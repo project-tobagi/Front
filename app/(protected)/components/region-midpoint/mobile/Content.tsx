@@ -13,7 +13,7 @@ const MobileRegionMidpointContent = ({
         <div className='flex h-[520px] mt-16  max-lg:h-full '>
             <div className='w-[370px] max-lg:w-full h-full relative'>
                 {stepFlow.loading && (
-                    <div className='absolute w-full flex items-center justify-center z-50 h-[calc(100%-200px)] mt-16'>
+                    <div className='absolute w-full flex items-center justify-center z-50 h-[calc(100%-250px)] mt-16'>
                         <div role='status'>
                             <svg
                                 aria-hidden='true'
