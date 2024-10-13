@@ -78,7 +78,7 @@ const MobileRegionSelectContent = ({
 
     if (step === 0) {
         return (
-            <div className='h-[calc(100%-200px)] mt-16'>
+            <div className='h-[calc(100%-150px)] mt-16'>
                 <div className='h-full'>
                     <Descriptions
                         title='관심있는 도/특별시/광역시는 어디인가요?'
@@ -89,7 +89,7 @@ const MobileRegionSelectContent = ({
                             return (
                                 <li
                                     key={index}
-                                    className='p-4 hover:bg-gray-100 hover:text-[15px] rounded-xl cursor-pointer'
+                                    className='p-4 hover:bg-gray-100 max-lg:text-xs hover:text-[11px] rounded-xl cursor-pointer'
                                     onClick={() => {
                                         setStep(1);
                                         setSelectedSido(data);
@@ -107,7 +107,7 @@ const MobileRegionSelectContent = ({
 
     if (step === 1) {
         return (
-            <div className='h-[calc(100%-165px)] mt-16'>
+            <div className='h-[calc(100%-150px)] mt-16'>
                 <div className='h-full'>
                     <Descriptions
                         title='관심있는 시/군/구는 어디인가요?'
@@ -120,7 +120,7 @@ const MobileRegionSelectContent = ({
                                 return (
                                     <li
                                         key={index}
-                                        className='p-4 hover:bg-gray-100 hover:text-[15px] rounded-xl cursor-pointer'
+                                        className='p-4 hover:bg-gray-100 max-lg:text-xs hover:text-[11px] rounded-xl cursor-pointer'
                                         onClick={() => {
                                             setStep(2);
                                             setSelectedSigugun(data);
@@ -139,7 +139,7 @@ const MobileRegionSelectContent = ({
 
     if (step === 2) {
         return (
-            <div className='h-[calc(100%-165px)] mt-16'>
+            <div className='h-[calc(100%-150px)] mt-16'>
                 <div className='h-full'>
                     <Descriptions
                         title=' 관심있는 동네는 어디인가요?'
@@ -152,7 +152,7 @@ const MobileRegionSelectContent = ({
                                 return (
                                     <li
                                         key={index}
-                                        className='p-4 hover:bg-gray-100 hover:text-[15px] rounded-xl cursor-pointer'
+                                        className='p-4 hover:bg-gray-100 max-lg:text-xs hover:text-[11px] rounded-xl cursor-pointer'
                                         onClick={() => {
                                             setLoading(true);
                                             setStep(0);

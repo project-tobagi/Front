@@ -25,11 +25,11 @@ const ResultLayout = ({ stepFlow }: any) => {
             />
 
             <div className='flex flex-col justify-between h-full max-lg:px-6'>
-                <div className='ring-1 ring-[#00A2FF] p-6 mt-6  rounded-lg min-h-[140px]'>
+                <div className='ring-1 ring-[#00A2FF] p-6 mt-6  rounded-lg min-h-[100px]'>
                     <div>
                         <ul className='grid gap-2'>
-                            <li className='flex items-center gap-2 truncate pl-0.5'>
-                                <h1 className='px-1 h-4 flex items-center ring-1 ring-black rounded-md text-xs'>
+                            <li className='flex items-center gap-2 truncate pl-0.5 text-xs'>
+                                <h1 className='px-1 h-4 flex items-center ring-1 ring-black rounded-md '>
                                     도로명
                                 </h1>
                                 <p title={address?.road_address_name}>
@@ -47,8 +47,8 @@ const ResultLayout = ({ stepFlow }: any) => {
                                     <Icon type='ic_copy_paste' />
                                 </button>
                             </li>
-                            <li className='flex items-center gap-2 truncate pl-0.5'>
-                                <h1 className='px-1 h-4 flex items-center ring-1  ring-black rounded-md text-xs'>
+                            <li className='flex items-center gap-2 truncate pl-0.5 text-xs'>
+                                <h1 className='px-1 h-4 flex items-center ring-1  ring-black rounded-md '>
                                     지번
                                 </h1>
                                 <p
@@ -69,8 +69,8 @@ const ResultLayout = ({ stepFlow }: any) => {
                                     <Icon type='ic_copy_paste' />
                                 </button>
                             </li>
-                            <li className='flex items-center gap-2 pl-0.5'>
-                                <h1 className='px-1 h-4 flex items-center ring-1 ring-black rounded-md text-xs'>
+                            <li className='flex items-center gap-2 pl-0.5 text-xs'>
+                                <h1 className='px-1 h-4 flex items-center ring-1 ring-black rounded-md '>
                                     우편번호
                                 </h1>
                                 <p>{address?.zone_no}</p>

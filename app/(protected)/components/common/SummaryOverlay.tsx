@@ -17,8 +17,6 @@ const SummaryOverlay = () => {
     const location = useAtomValue<any>(locationState);
     const summaryData = useAtomValue(summaryDataState);
 
-    console.log(summaryData);
-
     return (
         <div
             className={`
@@ -55,11 +53,11 @@ const SummaryOverlay = () => {
                         return (
                             <div
                                 key={`data-${data.rank}`}
-                                className='flex flex-col justify-center text-center gap-2'
+                                className='flex flex-col justify-center text-start gap-2'
                             >
-                                <div className='flex gap-3 justify-start items-center font-bold text-lg'>
+                                <div className='flex gap-3 font-bold text-sm'>
                                     <Icon
-                                        className='w-8 h-8'
+                                        className='w-6 h-6'
                                         type={
                                             data.rank === 1
                                                 ? "ic_good"
@@ -78,7 +76,7 @@ const SummaryOverlay = () => {
                                             : " 나빠요."}
                                     </h1>
                                 </div>
-                                <div className='text-sm flex gap-1 justify-start ml-11'>
+                                <div className='text-sm ml-9 flex flex-wrap'>
                                     {_.map(
                                         data.category,
                                         (num, index: number) => {

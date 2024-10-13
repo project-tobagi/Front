@@ -62,21 +62,34 @@ const MobileRegionFilterContent = ({
     const handleClickFilterRegion = async () => {
         try {
             const res = await API_RANK_INFO(filterParams());
+
             if (res !== null && res !== undefined) {
                 setFilteredRegionList(() => {
+                    let index = 0;
                     return _.map(
                         _.groupBy(res.data, "donCd"),
-                        (list, label) => ({
-                            label: _.find(selectedSigugun.dongList, (dong) => {
-                                return (
-                                    _.slice(dong.code, 0, 8).join("") === label
-                                );
-                            })?.dong,
-                            list,
-                        })
+                        (list: any, label: any) => {
+                            const result = {
+                                label:
+                                    _.find(
+                                        selectedSigugun.dongList,
+                                        (dong: any) => {
+                                            return (
+                                                _.slice(dong.code, 0, 8).join(
+                                                    ""
+                                                ) === label
+                                            );
+                                        }
+                                    )?.dong ||
+                                    selectedSigugun.dongList[index]?.dong ||
+                                    "알 수 없는 동",
+                                list,
+                            };
+                            index++;
+                            return result;
+                        }
                     );
                 });
-
                 stepFlow.next();
             }
         } catch {
@@ -105,12 +118,12 @@ const MobileRegionFilterContent = ({
                         title='관심있는 지역은 어디인가요?'
                         subTitle=''
                     />
-                    <ul className='h-[calc(100%-80px)] overflow-y-auto mx-3 my-1'>
+                    <ul className='h-[calc(100%-50px)] overflow-y-auto mx-3 my-1'>
                         {_.map(regionData, (data: any, index: number) => {
                             return (
                                 <li
                                     key={index}
-                                    className='p-4 hover:bg-gray-100 hover:text-[15px] rounded-xl cursor-pointer'
+                                    className='p-4 hover:bg-gray-100 max-lg:text-xs hover:text-[11px] rounded-xl cursor-pointer'
                                     onClick={() => {
                                         stepFlow.next();
                                         setSelectedSido(data);
@@ -136,14 +149,14 @@ const MobileRegionFilterContent = ({
                             높아져요!'
                     />
 
-                    <ul className='h-[calc(100%-80px)] overflow-y-auto mx-3 my-1'>
+                    <ul className='h-[calc(100%-60px)] overflow-y-auto mx-3 my-1'>
                         {_.map(
                             selectedSido.guList,
                             (data: any, index: number) => {
                                 return (
                                     <li
                                         key={index}
-                                        className='p-4 hover:bg-gray-100 hover:text-[15px] rounded-xl cursor-pointer'
+                                        className='p-4 hover:bg-gray-100 max-lg:text-xs hover:text-[11px] rounded-xl cursor-pointer'
                                         onClick={() => {
                                             stepFlow.next();
                                             setSelectedSigugun(data);
@@ -200,7 +213,7 @@ const MobileRegionFilterContent = ({
                 />
                 <div className='p-5 '>
                     <div>
-                        <ul className='grid gap-3 '>
+                        <ul className='grid gap-3 text-sm'>
                             {_.map(
                                 generateRegionRank(filteredRegionList),
                                 (item: any, index: number) => {
@@ -210,7 +223,7 @@ const MobileRegionFilterContent = ({
                                             onClick={() => {
                                                 handleClickDetailRegion(item);
                                             }}
-                                            className='w-full h-44 ring-1 ring-gray-300 hover:ring-black rounded-lg p-4 flex flex-col gap-6 cursor-pointer'
+                                            className='w-full min-h-32 ring-1 ring-gray-300 hover:ring-black rounded-lg p-4 flex flex-col gap-6 cursor-pointer'
                                         >
                                             <div className='flex gap-2'>
                                                 <h1 className='bg-black rounded-full text-white px-2'>
@@ -223,8 +236,8 @@ const MobileRegionFilterContent = ({
                                                 </p>
                                             </div>
 
-                                            <div className='overflow-y-auto'>
-                                                <ul className='flex flex-col gap-3 text-sm '>
+                                            <div className=''>
+                                                <ul className='flex flex-col gap-3 text-xs '>
                                                     {_.map(
                                                         item.value,
                                                         (data: any) => {

@@ -43,7 +43,7 @@ const RegionFilterSliders = ({ conditions, setConditions }: any) => {
     ]);
 
     return (
-        <div className='grid max-lg:gap-3 lg:gap-2'>
+        <div className='grid max-lg:gap-3 max-lg:text-xs lg:gap-2'>
             {_.map(conditions, (condition: any) => {
                 return (
                     <div
