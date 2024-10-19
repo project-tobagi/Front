@@ -112,13 +112,13 @@ const MobileRegionFilterContent = ({
     // 동네찾기 할 지역 설정 (시, 시군구)
     if (stepFlow.step === 0) {
         return (
-            <div className='h-[calc(100%-250px)] mt-16'>
+            <div className='h-full mt-16 pb-[250px]'>
                 <div className='h-full'>
                     <Descriptions
                         title='관심있는 지역은 어디인가요?'
                         subTitle=''
                     />
-                    <ul className='h-[calc(100%-50px)] overflow-y-auto mx-3 my-1'>
+                    <ul className='h-full overflow-y-auto mx-3 my-1'>
                         {_.map(regionData, (data: any, index: number) => {
                             return (
                                 <li

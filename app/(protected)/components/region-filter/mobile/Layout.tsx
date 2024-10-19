@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 // * components
 import MobileRegionFilterHeader from "./Header";
 import MobileRegionFilterContent from "./Content";
+import Bottom from "../../layout/Bottom";
 import Icon from "../../common/Icon";
 import { useAtom, useAtomValue } from "jotai";
 import { overlayVisibleState } from "@/app/(protected)/_store/visible";
@@ -36,6 +37,8 @@ const MobileRegionFilterLayout = ({
                     selectedSigugun={selectedSigugun}
                     setSelectedSigugun={setSelectedSigugun}
                 />
+                {/* bottom */}
+                {/* <Bottom /> */}
             </div>
         );
     } else {
