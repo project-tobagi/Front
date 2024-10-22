@@ -18,6 +18,7 @@ import {
 import RegionFilterSliders from "../step-2/Sliders";
 import Icon from "../../common/Icon";
 import Descriptions from "../../region-midpoint/Descriptions";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 // * etc
 import { CONDITION_TYPES } from "@/app/(protected)/_utils/constants";
@@ -205,7 +206,7 @@ const MobileRegionFilterContent = ({
     // 동네찾기 결과
     if (stepFlow.step === 3) {
         return (
-            <div className='h-[calc(100%-250px)]  overflow-y-auto mt-16'>
+            <ScrollArea className='h-[calc(100%-250px)]  overflow-y-auto mt-16 '>
                 <Descriptions
                     title=' 동네 탐색을 완료했어요!'
                     subTitle='설정한 조건에 일치하는 동네 탐색을 완료했어요.
@@ -290,7 +291,9 @@ const MobileRegionFilterContent = ({
                         </ul>
                     </div>
                 </div>
-            </div>
+
+                <div className='absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none'></div>
+            </ScrollArea>
         );
     }
 };

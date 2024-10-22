@@ -11,7 +11,7 @@ import { locationState } from "@/app/(protected)/_store/location";
 
 // * components
 import RegionCard from "./RegioCard";
-import Icon from "../../common/Icon";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 // * etc
 import { generateRegionRank } from "@/app/(protected)/_utils/rank";
@@ -33,7 +33,6 @@ const Step3 = ({ stepFlow, selectedSido, selectedSigugun }: any) => {
             });
         } catch {}
     };
-
     return (
         // header
         <div className='h-[calc(100%-25px)] flex gap-6 flex-col'>
@@ -48,7 +47,7 @@ const Step3 = ({ stepFlow, selectedSido, selectedSigugun }: any) => {
             </div>
 
             {/* contents */}
-            <div className='flex overflow-y-auto flex-col gap-2 h-full'>
+            <ScrollArea className='h-full'>
                 {_.map(
                     generateRegionRank(filteredRegionList),
                     (item: any, index: number) => {
@@ -66,7 +65,9 @@ const Step3 = ({ stepFlow, selectedSido, selectedSigugun }: any) => {
                         );
                     }
                 )}
-            </div>
+
+                <div className='absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none'></div>
+            </ScrollArea>
             {/* buttons */}
             <div className='flex justify-center items-end'>
                 <Button

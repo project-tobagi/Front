@@ -19,7 +19,7 @@ const RegionCard = ({
             onClick={() => {
                 handleClickDetailRegion(item);
             }}
-            className=' ring-1 cursor-pointer ring-gray-300 hover:ring-blue-400 rounded-lg py-2 px-2 m-1'
+            className=' ring-1 cursor-pointer ring-gray-300 hover:ring-blue-400 rounded-lg py-2 px-2  mt-3 m-1'
         >
             <div className='h-full relative flex gap-2 flex-col justify-between'>
                 {/* header */}
@@ -32,7 +32,7 @@ const RegionCard = ({
 
                 {/* contents */}
                 <div className=''>
-                    <ul className='flex flex-col gap-1 text-xs'>
+                    <ul className='flex flex-col gap-1 text-xs leading-5'>
                         {_.map(item.value, (data: any) => {
                             return (
                                 <li

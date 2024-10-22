@@ -76,27 +76,25 @@ const SummaryOverlay = () => {
                                             : " 나빠요."}
                                     </h1>
                                 </div>
-                                <div className='text-sm ml-9 flex flex-wrap'>
+                                <div className='text-sm ml-9 flex gap-1.5 flex-wrap text-gray-400'>
                                     {_.map(
-                                        data.category,
+                                        data.storeTypeNm,
                                         (num, index: number) => {
-                                            return (
-                                                <p key={index}>
-                                                    {data.storeTypeNm[index] +
-                                                        data.count[index]}
-                                                    개
-                                                    {Number(
-                                                        data.category.length
-                                                    ) -
-                                                        1 !==
-                                                    index
-                                                        ? ","
-                                                        : ""}
-                                                </p>
-                                            );
+                                            if (data.count[index] > 0) {
+                                                return (
+                                                    <p key={index}>
+                                                        {data.storeTypeNm[
+                                                            index
+                                                        ] + data.count[index]}
+                                                        개
+                                                    </p>
+                                                );
+                                            }
                                         }
                                     )}
-                                    있어요
+                                    {_.every(data.count, (item) => item === 0)
+                                        ? ""
+                                        : "있어요."}
                                 </div>
                             </div>
                         );

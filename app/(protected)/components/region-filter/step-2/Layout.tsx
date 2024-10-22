@@ -51,11 +51,13 @@ const Step2 = ({
                     return _.map(
                         _.groupBy(res.data, "donCd"),
                         (list, label) => ({
-                            label: _.find(selectedSigugun.dongList, (dong) => {
-                                return (
-                                    _.slice(dong.code, 0, 8).join("") === label
-                                );
-                            })?.dong,
+                            label:
+                                _.find(selectedSigugun.dongList, (dong) => {
+                                    return (
+                                        _.slice(dong.code, 0, 8).join("") ===
+                                        label
+                                    );
+                                })?.dong ?? "알 수 없음",
                             list,
                         })
                     );

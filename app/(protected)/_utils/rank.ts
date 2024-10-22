@@ -57,38 +57,39 @@ const processRankCategory = (rank: any) => {
                     });
                 })
             )
-                .flatten() // 중첩 배열을 평탄화
-                .groupBy("key") // key로 그룹화
+                .flatten()
+                .groupBy("key")
                 .map((group, key) => {
-                    const values = _.map(group, "value");
-
                     return {
                         key,
-                        value: {
-                            donCd: values[0].donCd,
-                            category: values[0].category,
-                            rank: values[0].rank,
-                            storeType: values[0].storeType,
-                            storeTypeNm: values[0].storeTypeNm,
-                            count: values[0].count,
-                        },
+                        value: _.map(group, "value"),
                     };
                 })
                 .value()
         )
-            .groupBy((item) => item.value.rank)
+            .groupBy((item) => item.value[0].rank)
             .map((group, rank) => ({
                 rank: Number(rank),
                 rankTxt: processRankValue(Number(rank)),
                 category: _.uniq(
-                    _.map(group, (item) => switchRankText(item.value.category))
+                    _.flatMap(group, (item) =>
+                        _.map(item.value, (v) => switchRankText(v.category))
+                    )
                 ),
-                storeType: _.uniq(_.map(group, (item) => item.value.storeType)),
+                storeType: _.uniq(
+                    _.flatMap(group, (item) =>
+                        _.map(item.value, (v) => v.storeType)
+                    )
+                ),
                 storeTypeNm: _.uniq(
-                    _.map(group, (item) => item.value.storeTypeNm)
+                    _.flatMap(group, (item) =>
+                        _.map(item.value, (v) => v.storeTypeNm)
+                    )
                 ),
-                count: _.map(group, (item) => item.value.count),
-                donCd: group[0].value.donCd,
+                count: _.flatMap(group, (item) =>
+                    _.map(item.value, (v) => v.count)
+                ),
+                donCd: group[0].value[0].donCd,
             }))
             .value(),
         (rankItem: any) => {

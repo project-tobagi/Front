@@ -138,7 +138,8 @@ const Header = () => {
                 </div>
 
                 {/* profile/notification */}
-                <div className='flex gap-3 max-lg:hidden'>
+                <div></div>
+                {/* <div className='flex gap-3 max-lg:hidden'>
                     <button
                         onClick={() => {
                             setOpenLogin(true);
@@ -149,7 +150,7 @@ const Header = () => {
                             로그인
                         </h1>
                     </button>
-                </div>
+                </div> */}
 
                 <LoginDialog visible={openLogin} setVisible={setOpenLogin} />
             </div>

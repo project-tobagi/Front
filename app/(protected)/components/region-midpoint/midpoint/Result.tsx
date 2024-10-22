@@ -25,7 +25,7 @@ const ResultLayout = ({ stepFlow }: any) => {
             />
 
             <div className='flex flex-col justify-between h-full max-lg:px-6'>
-                <div className='ring-1 ring-[#00A2FF] p-6 mt-6  rounded-lg min-h-[100px]'>
+                <div className='ring-1 ring-[#00A2FF] p-4 mt-6  rounded-lg min-h-[100px]'>
                     <div>
                         <ul className='grid gap-2'>
                             <li className='flex items-center gap-2 truncate pl-0.5 text-xs'>

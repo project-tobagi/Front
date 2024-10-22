@@ -41,11 +41,11 @@ const Category = ({
                 subTitle={`중간 지점 근처에서 탐색해보고픈\n카테고리를 선택해주세요.`}
             />
 
-            <div className='flex flex-col max-lg:h-[calc(100%-300px)]  justify-between max-lg:px-6'>
-                <div className='max-lg:hidden  ring-1 ring-[#00A2FF] p-6 mt-6  rounded-lg min-h-[140px] '>
+            <div className='flex flex-col max-lg:h-[calc(100%-300px)]  justify-between max-lg:px-6 lg:h-full'>
+                <div className='max-lg:hidden  ring-1 ring-[#00A2FF] p-4 mt-6  rounded-lg min-h-[100px] '>
                     <div>
                         <ul className='grid gap-2'>
-                            <li className='flex items-center gap-2 truncate pl-0.5'>
+                            <li className='flex items-center gap-2 truncate pl-0.5 text-xs'>
                                 <h1 className='px-1 h-4 flex items-center ring-1 ring-black rounded-md text-xs'>
                                     도로명
                                 </h1>
@@ -64,7 +64,7 @@ const Category = ({
                                     <Icon type='ic_copy_paste' />
                                 </button>
                             </li>
-                            <li className='flex items-center gap-2 truncate pl-0.5'>
+                            <li className='flex items-center gap-2 truncate pl-0.5 text-xs'>
                                 <h1 className='px-1 h-4 flex items-center ring-1  ring-black rounded-md text-xs'>
                                     지번
                                 </h1>
@@ -86,8 +86,8 @@ const Category = ({
                                     <Icon type='ic_copy_paste' />
                                 </button>
                             </li>
-                            <li className='flex items-center gap-2 pl-0.5'>
-                                <h1 className='px-1 h-4 flex items-center ring-1 ring-black rounded-md text-xs'>
+                            <li className='flex items-center gap-2 pl-0.5 text-xs'>
+                                <h1 className='px-1 h-4 flex items-center  ring-1 ring-black rounded-md text-xs'>
                                     우편번호
                                 </h1>
                                 <p>{address?.zone_no}</p>
@@ -108,7 +108,7 @@ const Category = ({
                 </div>
 
                 <div className='px-8 max-lg:px-2 max-lg:py-6 max-lg:mt-4 overflow-y-auto'>
-                    <ul className='flex flex-wrap  justify-center items-center gap-3 '>
+                    <ul className='flex flex-wrap  justify-center items-center gap-3 p-1 '>
                         {_.map(CATEGORY_GROUP_CODES, (item: any) => {
                             return (
                                 <li

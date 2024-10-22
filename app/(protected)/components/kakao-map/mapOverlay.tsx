@@ -33,7 +33,7 @@ const RegionOverlay = ({ coordinates, visible, setVisible }: any) => {
                 {/* 커스텀 오버레이에 표시할 내용입니다 */}
                 <div
                     id='speechBubble'
-                    className='relative label bg-white w-[300px] h-[250px] rounded-2xl shadow-[0px_8px_16.8px_0px_#0000001A] p-3 '
+                    className='relative label bg-white w-[300px] min-h-[250px] rounded-2xl shadow-[0px_8px_16.8px_0px_#0000001A] p-3 '
                 >
                     <div className='relative flex justify-between'>
                         <div className='flex items-center gap-1'>
@@ -54,12 +54,12 @@ const RegionOverlay = ({ coordinates, visible, setVisible }: any) => {
                     </div>
 
                     {/* contents */}
-                    <div className='mt-10 lg:mt-5 flex flex-col gap-8 lg:gap-2 max-w-lg m-auto '>
+                    <div className='mt-10 lg:mt-5 flex flex-col gap-12 lg:gap-2 max-w-lg m-auto '>
                         {_.map(summaryData, (data, index: number) => {
                             return (
                                 <div
                                     key={`data-${data.rank}`}
-                                    className='flex flex-col justify-center text-center gap-2'
+                                    className='flex flex-col justify-center text-center gap-1'
                                 >
                                     <div className='flex overflow-x-auto gap-3 lg:gap-2 justify-start items-center font-bold text-lg lg:text-xs '>
                                         <Icon
@@ -82,28 +82,34 @@ const RegionOverlay = ({ coordinates, visible, setVisible }: any) => {
                                                 : " 나빠요."}
                                         </h1>
                                     </div>
-                                    <div className='text-sm lg:text-xs flex gap-1 justify-start ml-11 lg:ml-7 '>
+                                    <div className='text-sm lg:text-xs flex gap-1 justify-start ml-11 lg:ml-7 flex-wrap text-gray-400'>
                                         {_.map(
-                                            data.category,
+                                            data.storeTypeNm,
                                             (num, index: number) => {
-                                                return (
-                                                    <p className='' key={index}>
-                                                        {data.storeTypeNm[
-                                                            index
-                                                        ] + data.count[index]}
-                                                        개
-                                                        {Number(
-                                                            data.category.length
-                                                        ) -
-                                                            1 !==
-                                                        index
-                                                            ? ","
-                                                            : ""}
-                                                    </p>
-                                                );
+                                                if (data.count[index] > 0) {
+                                                    return (
+                                                        <p
+                                                            className=''
+                                                            key={index}
+                                                        >
+                                                            {data.storeTypeNm[
+                                                                index
+                                                            ] +
+                                                                data.count[
+                                                                    index
+                                                                ]}
+                                                            개
+                                                        </p>
+                                                    );
+                                                }
                                             }
                                         )}
-                                        있어요
+                                        {_.every(
+                                            data.count,
+                                            (item) => item === 0
+                                        )
+                                            ? ""
+                                            : "있어요."}
                                     </div>
                                 </div>
                             );

@@ -55,7 +55,10 @@ const MidPointOverlay = ({ coordinates, visible, setVisible }: any) => {
                 >
                     <div className='flex justify-between '>
                         <div className='flex items-center gap-2'>
-                            <h1 title={midPoint?.place_name}>
+                            <h1
+                                className='text-sm'
+                                title={midPoint?.place_name}
+                            >
                                 {_.truncate(midPoint.place_name, {
                                     length: 12,
                                 })}
