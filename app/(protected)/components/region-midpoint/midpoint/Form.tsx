@@ -162,10 +162,16 @@ const MidpointForm = ({ stepFlow }: any) => {
                         stepFlow.loadingEnd();
                     },
                     (error) => {
-                        console.log(error.message);
+                        setTimeout(() => {
+                            stepFlow.loadingEnd();
+                            toast.warn("위치정보 동의를 확인해주세요.", {
+                                position: "top-right",
+                            });
+                        }, 1500);
                     }
                 );
             } else {
+                stepFlow.loadingEnd();
                 console.log("Geolocation is not supported by this browser.");
             }
         } catch (error) {

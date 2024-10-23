@@ -3,7 +3,7 @@
 // * install libraries
 import _ from "lodash";
 import { useAtomValue } from "jotai";
-import { Audio, Oval, Puff } from "react-loader-spinner";
+import { Audio, ColorRing, Oval, Puff } from "react-loader-spinner";
 
 // * state
 import { regionDataState } from "@/app/(protected)/_store/region";
@@ -54,15 +54,20 @@ const MobileRegionSelectContent = ({
             <div className='h-[calc(100%-165px)] p-5 mt-16'>
                 {/* loading 화면 */}
 
-                <Oval
+                <ColorRing
                     visible={true}
                     height='100'
                     width='100'
-                    color='#858585'
-                    secondaryColor='#e3e3e3'
-                    ariaLabel='puff-loading'
+                    ariaLabel='color-ring-loading'
                     wrapperStyle={{}}
                     wrapperClass='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 '
+                    colors={[
+                        "#e15b64",
+                        "#f47e60",
+                        "#f8b26a",
+                        "#abbd81",
+                        "#849b87",
+                    ]}
                 />
                 <div className='h-full text-xl max-sm:text-base font-semibold'>
                     {selectedSido?.si +
