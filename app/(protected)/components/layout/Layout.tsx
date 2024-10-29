@@ -17,15 +17,22 @@ import DividePanel from "../common/divides/DividePanel";
 const Layout = ({ children }: any) => {
     const [innerHeight, setInnerHeight] = useState<string | number>("");
     useEffect(() => {
-        if (typeof window !== "undefined") {
-            setInnerHeight(window.innerHeight);
-        }
+        // if (typeof window !== "undefined") {
+        //     setInnerHeight(window.innerHeight);
+        // }
+
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty("--vh", `${vh}px`);
+        window.addEventListener("resize", () => {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty("--vh", `${vh}px`);
+        });
     }, []);
 
     return (
         <div
-            className='container-none'
-            style={{ height: innerHeight ? `${innerHeight}px` : "100vh" }}
+            className='container-none h-[calc(var(--vh,1vh)*100)]'
+            // style={{ height: innerHeight ? `${innerHeight}px` : "100vh" }}
         >
             <ToastContainer pauseOnFocusLoss={false} autoClose={3000} />
             <Header />
