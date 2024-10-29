@@ -24,7 +24,7 @@ const Layout = ({ children }: any) => {
 
     return (
         <div
-            className='overflow-hidden container-none'
+            className='container-none'
             style={{ height: innerHeight ? `${innerHeight}px` : "100vh" }}
         >
             <ToastContainer pauseOnFocusLoss={false} autoClose={3000} />
