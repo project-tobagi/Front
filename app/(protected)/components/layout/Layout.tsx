@@ -13,7 +13,7 @@ import DividePanel from "../common/divides/DividePanel";
 
 const Layout = ({ children }: any) => {
     return (
-        <div className='h-screen'>
+        <div className='min-h-[100vh]'>
             <ToastContainer pauseOnFocusLoss={false} autoClose={3000} />
             <Header />
 
