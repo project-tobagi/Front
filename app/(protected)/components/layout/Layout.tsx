@@ -1,5 +1,8 @@
 "use client";
 
+// * basic
+import { useState, useEffect } from "react";
+
 // * install libraries
 import { ToastContainer } from "react-toastify";
 
@@ -12,8 +15,18 @@ import DivideGroup from "../common/divides/DivideGroup";
 import DividePanel from "../common/divides/DividePanel";
 
 const Layout = ({ children }: any) => {
+    const [innerHeight, setInnerHeight] = useState<string | number>("");
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            setInnerHeight(window.innerHeight);
+        }
+    }, []);
+
     return (
-        <div className='h-full overflow-hidden container-none'>
+        <div
+            className='overflow-hidden container-none'
+            style={{ height: innerHeight ? `${innerHeight}px` : "100vh" }}
+        >
             <ToastContainer pauseOnFocusLoss={false} autoClose={3000} />
             <Header />
 
