@@ -67,7 +67,7 @@ const Header = () => {
     return (
         <div
             className={[
-                "pt-4 px-4  max-lg:absolute lg:top-4 z-50 max-lg:w-full",
+                "h-16 pt-4 px-4  max-lg:absolute lg:top-4 z-50 max-lg:w-full",
                 openDropDown && "max-lg:p-0",
             ]
                 .filter(Boolean)
