@@ -113,7 +113,7 @@ const MobileRegionFilterContent = ({
     // 동네찾기 할 지역 설정 (시, 시군구)
     if (stepFlow.step === 0) {
         return (
-            <div className='flex-1 mb-28 overflow-y-auto'>
+            <div className='h-full flex-1 mb-28 overflow-y-auto'>
                 <ul className='mx-3 my-1'>
                     {_.map(regionData, (data: any, index: number) => {
                         return (

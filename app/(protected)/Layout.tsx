@@ -25,17 +25,23 @@ const Protected = ({ children }: any) => {
     // }, []);
 
     useEffect(() => {
-        // console.log(API_STATION_STATUS(52111, 3));
-        // console.log(API_RESION_POLYGON(1114010500));
-    }, []);
-
-    useEffect(() => {
         // 법정동 정보 초기 로드
         // console.log(API_RANK_INFO());
         generateAreaData(setRegionData);
+
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty("--vh", `${vh}px`);
+        window.addEventListener("resize", () => {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty("--vh", `${vh}px`);
+        });
     }, []);
 
-    return <div className='overflow-hidden'>{children}</div>;
+    return (
+        <div className='container-none overflow-hidden h-[calc(var(--vh,1vh)*100)]'>
+            {children}
+        </div>
+    );
 };
 
 export default Protected;
