@@ -17,7 +17,7 @@ const Layout = ({ children }: any) => {
             <ToastContainer pauseOnFocusLoss={false} autoClose={3000} />
             <Header />
 
-            <div className=' p-4 max-lg:p-0'>
+            <div className='p-4 max-lg:p-0'>
                 <DivideGroup>
                     <DividePanel>
                         <Left />
