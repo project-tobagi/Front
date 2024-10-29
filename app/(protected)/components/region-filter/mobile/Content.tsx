@@ -113,63 +113,46 @@ const MobileRegionFilterContent = ({
     // 동네찾기 할 지역 설정 (시, 시군구)
     if (stepFlow.step === 0) {
         return (
-            <div className='h-full mt-16 pb-[250px]'>
-                <div className='h-full'>
-                    <Descriptions
-                        title='관심있는 지역은 어디인가요?'
-                        subTitle=''
-                    />
-                    <ul className='h-full overflow-y-auto mx-3 my-1'>
-                        {_.map(regionData, (data: any, index: number) => {
-                            return (
-                                <li
-                                    key={index}
-                                    className='p-4 hover:bg-gray-100 max-lg:text-xs hover:text-[11px] rounded-xl cursor-pointer'
-                                    onClick={() => {
-                                        stepFlow.next();
-                                        setSelectedSido(data);
-                                    }}
-                                >
-                                    {data.si}
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </div>
+            <div className='flex-1 mb-28 overflow-y-auto'>
+                <ul className='mx-3 my-1'>
+                    {_.map(regionData, (data: any, index: number) => {
+                        return (
+                            <li
+                                key={index}
+                                className='p-4 hover:bg-gray-100 max-lg:text-xs hover:text-[11px] rounded-xl cursor-pointer'
+                                onClick={() => {
+                                    stepFlow.next();
+                                    setSelectedSido(data);
+                                }}
+                            >
+                                {data.si}
+                            </li>
+                        );
+                    })}
+                </ul>
             </div>
         );
     }
 
     if (stepFlow.step === 1) {
         return (
-            <div className='h-[calc(100%-250px)] mt-16'>
-                <div className='h-full'>
-                    <Descriptions
-                        title='관심있는 시/군/구는 어디인가요?'
-                        subTitle=' 자세하게 선택할수록 원하는 동네를 찾을 확률이
-                            높아져요!'
-                    />
-
-                    <ul className='h-[calc(100%-60px)] overflow-y-auto mx-3 my-1'>
-                        {_.map(
-                            selectedSido.guList,
-                            (data: any, index: number) => {
-                                return (
-                                    <li
-                                        key={index}
-                                        className='p-4 hover:bg-gray-100 max-lg:text-xs hover:text-[11px] rounded-xl cursor-pointer'
-                                        onClick={() => {
-                                            stepFlow.next();
-                                            setSelectedSigugun(data);
-                                        }}
-                                    >
-                                        {data.gu}
-                                    </li>
-                                );
-                            }
-                        )}
-                    </ul>
-                </div>
+            <div className='flex-1 mb-28 overflow-y-auto'>
+                <ul className='mx-3 my-1'>
+                    {_.map(selectedSido.guList, (data: any, index: number) => {
+                        return (
+                            <li
+                                key={index}
+                                className='p-4 hover:bg-gray-100 max-lg:text-xs hover:text-[11px] rounded-xl cursor-pointer'
+                                onClick={() => {
+                                    stepFlow.next();
+                                    setSelectedSigugun(data);
+                                }}
+                            >
+                                {data.gu}
+                            </li>
+                        );
+                    })}
+                </ul>
             </div>
         );
     }
@@ -177,11 +160,7 @@ const MobileRegionFilterContent = ({
     // 생활편의, 치안 등 조건설정
     if (stepFlow.step === 2) {
         return (
-            <div className='h-[calc(100%-250px)] mt-16 overflow-y-auto'>
-                <Descriptions
-                    title='중요하게 생각하는 동네의 조건을 설정해주세요.'
-                    subTitle=''
-                />
+            <div className='flex-1 mb-28 '>
                 <div className='px-8 py-6'>
                     <RegionFilterSliders
                         conditions={conditions}
@@ -206,13 +185,8 @@ const MobileRegionFilterContent = ({
     // 동네찾기 결과
     if (stepFlow.step === 3) {
         return (
-            <ScrollArea className='h-[calc(100%-250px)]  overflow-y-auto mt-16 '>
-                <Descriptions
-                    title=' 동네 탐색을 완료했어요!'
-                    subTitle='설정한 조건에 일치하는 동네 탐색을 완료했어요.
-                            동네별 요약 정보를 확인해보세요!'
-                />
-                <div className='p-5 '>
+            <ScrollArea className='flex-1 mb-28 overflow-y-auto'>
+                <div className='p-5'>
                     <div>
                         <ul className='grid gap-3 text-sm'>
                             {_.map(

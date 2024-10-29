@@ -13,7 +13,7 @@ import { useResetAtom } from "jotai/utils";
 const MobileRegionFilterHeader = ({ stepFlow }: any) => {
     const resetMenus = useResetAtom(menuState);
     return (
-        <div className='fixed w-full flex justify-center items-center py-4 border-b-[1px] border-gray-300 bg-white '>
+        <div className='w-full flex justify-center items-center py-4 border-b-[1px] border-gray-300 bg-white'>
             <button
                 className='absolute left-4'
                 onClick={() => {
