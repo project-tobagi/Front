@@ -24,7 +24,7 @@ const Layout = ({ children }: any) => {
                 <DivideGroup>
                     <DividePanel>
                         <Left />
-                        <Bottom />
+                        {/* <Bottom /> */}
                     </DividePanel>
 
                     <DividePanel className='w-full h-full'>
