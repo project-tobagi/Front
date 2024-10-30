@@ -50,7 +50,7 @@ const MobileRegionFilterLayout = ({
     }, [stepFlow.step]);
     if (stepFlow.step !== 4) {
         return (
-            <div className='absolute top-0 left-0 bg-white w-screen h-full overflow-hidden flex flex-col'>
+            <div className='absolute top-0 left-0 bg-white w-screen h-full overflow-hidden flex flex-col '>
                 {/* header */}
                 <MobileRegionFilterHeader stepFlow={stepFlow} />
                 <Descriptions title={title} subTitle={subTitle} />
