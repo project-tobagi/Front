@@ -15,17 +15,8 @@ import DivideGroup from "../common/divides/DivideGroup";
 import DividePanel from "../common/divides/DividePanel";
 
 const Layout = ({ children }: any) => {
-    useEffect(() => {
-        let vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty("--vh", `${vh}px`);
-
-        window.addEventListener("resize", () => {
-            let vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty("--vh", `${vh}px`);
-        });
-    }, []);
     return (
-        <div className='h-full max-lg:h-[calc(var(--var,1vh)*100vh)]'>
+        <div className='h-full'>
             <ToastContainer pauseOnFocusLoss={false} autoClose={3000} />
             <Header />
 

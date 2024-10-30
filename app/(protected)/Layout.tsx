@@ -31,6 +31,7 @@ const Protected = ({ children }: any) => {
 
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty("--vh", `${vh}px`);
+
         window.addEventListener("resize", () => {
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty("--vh", `${vh}px`);
@@ -38,7 +39,7 @@ const Protected = ({ children }: any) => {
     }, []);
 
     return (
-        <div className='container-none overflow-hidden h-[calc(var(--vh,1vh)*100)]'>
+        <div className='container-none overflow-hidden h-full max-lg:h-[calc(var(--var,1vh)*100vh)]'>
             {children}
         </div>
     );
