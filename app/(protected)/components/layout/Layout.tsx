@@ -16,11 +16,11 @@ import DividePanel from "../common/divides/DividePanel";
 
 const Layout = ({ children }: any) => {
     return (
-        <div className='h-full overflow-hidden'>
+        <div className='h-full overflow-hidden '>
             <ToastContainer pauseOnFocusLoss={false} autoClose={3000} />
             <Header />
 
-            <div className='p-4 max-lg:p-0 h-full'>
+            <div className='p-4 max-lg:p-0 h-full overflow-hidden'>
                 <DivideGroup>
                     <DividePanel>
                         <Left />

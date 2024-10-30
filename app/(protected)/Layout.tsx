@@ -39,7 +39,7 @@ const Protected = ({ children }: any) => {
     }, []);
 
     return (
-        <div className='container-none overflow-hidden h-full max-lg:h-[calc(var(--vh,1vh)*100vh)]'>
+        <div className='container-none overflow-hidden h-full  max-lg:h-[calc(var(--vh,1vh)*100)]'>
             {children}
         </div>
     );
