@@ -39,7 +39,7 @@ const MobileRegionSelect = ({
 }: RegionSelect) => {
     const [step, setStep] = useState(0);
     return (
-        <div className='absolute top-0 left-0 bg-white overflow-hidden'>
+        <div className='absolute top-0 left-0 bg-white overflow-hidden w-screen h-full '>
             {/* header */}
             <MobileRegionSelectHeader setOpen={setOpen} />
 
