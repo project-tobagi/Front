@@ -91,6 +91,10 @@
     font-family: "Pretendard-Regular", "Pretendard-Medium", "Pretendard-Bold",
         "Spoqa Han Sans Neo", "sans-serif";
 }
+body,
+html {
+    height: 100%;
+}
 
 input[type="radio"] {
     appearance: none;
