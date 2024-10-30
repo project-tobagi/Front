@@ -95,7 +95,7 @@ const Contents = ({ children }: any) => {
     }, [menus]);
 
     return (
-        <div className='relative'>
+        <div className='relative h-full'>
             {_.map(menus, (menu: any) => {
                 const currentContents = _.find(menuComponents, {
                     id: menu.id,
