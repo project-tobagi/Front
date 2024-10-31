@@ -45,6 +45,12 @@ const MobileRegionFilterContent = ({
     );
 
     const [, setLocation]: any = useAtom<any>(locationState);
+
+    useEffect(() => {
+        setQueryClass((prev) => {
+            return isChormeBrowser() ? "h-full overflow-y-auto mb-48" : prev;
+        });
+    }, []);
     if (loading) {
         return <div>로딩중...</div>;
     }
@@ -113,12 +119,6 @@ const MobileRegionFilterContent = ({
             });
         } catch {}
     };
-
-    useEffect(() => {
-        setQueryClass((prev) => {
-            return isChormeBrowser() ? "h-full overflow-y-auto mb-48" : prev;
-        });
-    }, []);
 
     // 동네찾기 할 지역 설정 (시, 시군구)
     if (stepFlow.step === 0) {
