@@ -10,6 +10,8 @@ import { regionDataState } from "@/app/(protected)/_store/region";
 
 // * components
 import Descriptions from "../../../region-midpoint/Descriptions";
+import { useEffect, useState } from "react";
+import { isChormeBrowser } from "@/app/(protected)/_utils/chrome";
 
 interface RegionSelect {
     loading: any;
@@ -48,6 +50,17 @@ const MobileRegionSelectContent = ({
     setSelectedDong,
 }: RegionSelect) => {
     const regionData = useAtomValue(regionDataState);
+    const [queryClass, setQueryClass] = useState(
+        "h-[calc(100%-170px)] overflow-y-auto  mt-16"
+    );
+
+    useEffect(() => {
+        setQueryClass((prev) => {
+            return isChormeBrowser()
+                ? "h-[calc(100%-250px)]  overflow-y-auto mt-16"
+                : prev;
+        });
+    }, []);
 
     if (loading) {
         return (
@@ -83,36 +96,34 @@ const MobileRegionSelectContent = ({
 
     if (step === 0) {
         return (
-            <div className='h-[calc(100%-150px)] mt-16'>
-                <div className='h-full'>
-                    <Descriptions
-                        title='관심있는 도/특별시/광역시는 어디인가요?'
-                        subTitle=''
-                    />
-                    <ul className='h-[calc(100%-80px)] overflow-y-auto mx-3 my-1'>
-                        {_.map(regionData, (data: any, index: number) => {
-                            return (
-                                <li
-                                    key={index}
-                                    className='p-4 hover:bg-gray-100 max-lg:text-xs hover:text-[11px] rounded-xl cursor-pointer'
-                                    onClick={() => {
-                                        setStep(1);
-                                        setSelectedSido(data);
-                                    }}
-                                >
-                                    {data.si}
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </div>
+            <div className={queryClass}>
+                <Descriptions
+                    title='관심있는 도/특별시/광역시는 어디인가요?'
+                    subTitle=''
+                />
+                <ul className='mx-3 my-1'>
+                    {_.map(regionData, (data: any, index: number) => {
+                        return (
+                            <li
+                                key={index}
+                                className='p-4 hover:bg-gray-100 max-lg:text-xs hover:text-[11px] rounded-xl cursor-pointer'
+                                onClick={() => {
+                                    setStep(1);
+                                    setSelectedSido(data);
+                                }}
+                            >
+                                {data.si}
+                            </li>
+                        );
+                    })}
+                </ul>
             </div>
         );
     }
 
     if (step === 1) {
         return (
-            <div className='h-[calc(100%-150px)] mt-16'>
+            <div className={queryClass}>
                 <div className='h-full'>
                     <Descriptions
                         title='관심있는 시/군/구는 어디인가요?'
@@ -144,7 +155,7 @@ const MobileRegionSelectContent = ({
 
     if (step === 2) {
         return (
-            <div className='h-[calc(100%-150px)] mt-16'>
+            <div className={queryClass}>
                 <div className='h-full'>
                     <Descriptions
                         title=' 관심있는 동네는 어디인가요?'

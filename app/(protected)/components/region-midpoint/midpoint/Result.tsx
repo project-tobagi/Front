@@ -13,12 +13,13 @@ import Icon from "../../common/Icon";
 
 // * etc
 import { saveClipboardText } from "@/app/(protected)/_utils/clipboard";
+import { Button } from "@/components/ui/button";
 
 const ResultLayout = ({ stepFlow }: any) => {
     const address = useAtomValue<any>(addressState);
 
     return (
-        <div className='lg:h-full max-lg:h-[calc(100%-200px)]  flex flex-col'>
+        <div className='lg:h-full max-lg:h-[calc(100%-250px)]  flex flex-col'>
             <Descriptions
                 title='가장 빠르게 갈 수 있는 중간 지점을 찾았어요!'
                 subTitle=''
@@ -105,14 +106,17 @@ const ResultLayout = ({ stepFlow }: any) => {
                         뒤로
                     </button>
 
-                    <button
-                        className='rounded-full max-lg:fixed max-lg:mx-4 max-lg:left-0 max-lg:right-0 max-lg:rounded-xl  px-4 py-1 max-lg:py-2 bg-black text-white'
-                        onClick={() => {
-                            stepFlow.next();
-                        }}
-                    >
-                        주변 탐색하기
-                    </button>
+                    <div className='max-lg:fixed bottom-24 left-0 right-0 mx-4 flex justify-center  items-end '>
+                        <Button
+                            type='submit'
+                            className=' max-lg:w-full rounded-full px-3 max-lg:rounded-xl '
+                            onClick={() => {
+                                stepFlow.next();
+                            }}
+                        >
+                            주변 탐색하기
+                        </Button>
+                    </div>
                 </div>
             </div>
         </div>

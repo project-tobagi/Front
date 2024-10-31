@@ -15,6 +15,7 @@ import { CATEGORY_GROUP_CODES } from "@/app/(protected)/_utils/constants";
 
 // * etc
 import { saveClipboardText } from "@/app/(protected)/_utils/clipboard";
+import { Button } from "@/components/ui/button";
 
 const Category = ({
     stepFlow,
@@ -161,15 +162,20 @@ const Category = ({
                 </div>
 
                 {/* selectedCategory가 하나라도 있을때 버튼클릭가능 */}
-                <button
-                    className='lg:hidden fixed bottom-24 rounded-xl justify-end left-0 right-0 mx-4 py-2 bg-black text-white'
-                    onClick={() => {
-                        stepFlow.next();
-                        handleClickFindMidpointPlace();
-                    }}
-                >
-                    탐색시작
-                </button>
+
+                <div className='max-lg:fixed bottom-24 left-0 right-0 mx-4 flex justify-center  items-end '>
+                    <Button
+                        disabled={selectedCategory.length === 0}
+                        type='submit'
+                        className=' max-lg:w-full rounded-full px-3 max-lg:rounded-xl '
+                        onClick={() => {
+                            stepFlow.next();
+                            handleClickFindMidpointPlace();
+                        }}
+                    >
+                        탐색시작
+                    </Button>
+                </div>
             </div>
         </div>
     );
