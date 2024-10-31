@@ -1,7 +1,7 @@
 "use client";
 
 // * basic
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // * install libraries
 import { useAtom, useAtomValue } from "jotai";
@@ -25,6 +25,7 @@ import { CONDITION_TYPES } from "@/app/(protected)/_utils/constants";
 import { API_RANK_INFO, API_RESION_POLYGON } from "@/app/(protected)/_api";
 import { generateRegionRank } from "@/app/(protected)/_utils/rank";
 import { locationState } from "@/app/(protected)/_store/location";
+import { isChormeBrowser } from "@/app/(protected)/_utils/chrome";
 
 const MobileRegionFilterContent = ({
     stepFlow,
@@ -38,6 +39,9 @@ const MobileRegionFilterContent = ({
     const [conditions, setConditions] = useState(CONDITION_TYPES);
     const [filteredRegionList, setFilteredRegionList] = useAtom(
         filteredRegionListState
+    );
+    const [queryClass, setQueryClass] = useState(
+        "h-full overflow-y-auto mb-28"
     );
 
     const [, setLocation]: any = useAtom<any>(locationState);
@@ -110,10 +114,16 @@ const MobileRegionFilterContent = ({
         } catch {}
     };
 
+    useEffect(() => {
+        setQueryClass((prev) => {
+            return isChormeBrowser() ? "h-full overflow-y-auto mb-48" : prev;
+        });
+    }, []);
+
     // 동네찾기 할 지역 설정 (시, 시군구)
     if (stepFlow.step === 0) {
         return (
-            <div className='flex-1 mb-28 overflow-y-auto'>
+            <div className={queryClass}>
                 <ul className='mx-3 my-1'>
                     {_.map(regionData, (data: any, index: number) => {
                         return (
@@ -136,7 +146,7 @@ const MobileRegionFilterContent = ({
 
     if (stepFlow.step === 1) {
         return (
-            <div className='flex-1 mb-28 overflow-y-auto'>
+            <div className={queryClass}>
                 <ul className='mx-3 my-1'>
                     {_.map(selectedSido.guList, (data: any, index: number) => {
                         return (
@@ -160,7 +170,7 @@ const MobileRegionFilterContent = ({
     // 생활편의, 치안 등 조건설정
     if (stepFlow.step === 2) {
         return (
-            <div className='flex-1 mb-28 '>
+            <div className={queryClass}>
                 <div className='px-8 py-6'>
                     <RegionFilterSliders
                         conditions={conditions}
@@ -185,7 +195,7 @@ const MobileRegionFilterContent = ({
     // 동네찾기 결과
     if (stepFlow.step === 3) {
         return (
-            <ScrollArea className='flex-1 mb-28 overflow-y-auto'>
+            <ScrollArea className={queryClass}>
                 <div className='p-5'>
                     <div>
                         <ul className='grid gap-3 text-sm'>
