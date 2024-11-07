@@ -163,7 +163,7 @@ const Category = ({
 
                 {/* selectedCategory가 하나라도 있을때 버튼클릭가능 */}
 
-                <div className='max-lg:fixed bottom-24 left-0 right-0 mx-4 flex justify-center  items-end '>
+                <div className='lg:hidden max-lg:fixed bottom-24 left-0 right-0 mx-4 flex justify-center  items-end '>
                     <Button
                         disabled={selectedCategory.length === 0}
                         type='submit'

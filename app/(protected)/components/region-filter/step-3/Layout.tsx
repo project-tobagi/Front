@@ -10,7 +10,7 @@ import { filteredRegionListState } from "@/app/(protected)/_store/region";
 import { locationState } from "@/app/(protected)/_store/location";
 
 // * components
-import RegionCard from "./RegioCard";
+import RegionCard from "./RegionCard";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 // * etc

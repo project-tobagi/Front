@@ -242,26 +242,28 @@ const MobileRegionFilterContent = ({
                                                                                 : "ic_good"
                                                                         }
                                                                     />
-                                                                    <p>
-                                                                        {_.map(
-                                                                            data.category,
-                                                                            (
-                                                                                cate: any
-                                                                            ) => {
-                                                                                return (
-                                                                                    cate +
-                                                                                    ", "
-                                                                                );
-                                                                            }
-                                                                        )}
-                                                                    </p>
-                                                                    <p>
-                                                                        지수가
-                                                                        {"'" +
-                                                                            data.rankTxt +
-                                                                            "'"}
-                                                                        이에요.
-                                                                    </p>
+                                                                    <div className='flex flex-wrap'>
+                                                                        <p>
+                                                                            {_.map(
+                                                                                data.category,
+                                                                                (
+                                                                                    cate: any
+                                                                                ) => {
+                                                                                    return (
+                                                                                        cate +
+                                                                                        ", "
+                                                                                    );
+                                                                                }
+                                                                            )}
+                                                                        </p>
+                                                                        <p>
+                                                                            지수가
+                                                                            {"'" +
+                                                                                data.rankTxt +
+                                                                                "'"}
+                                                                            이에요.
+                                                                        </p>
+                                                                    </div>
                                                                 </li>
                                                             );
                                                         }

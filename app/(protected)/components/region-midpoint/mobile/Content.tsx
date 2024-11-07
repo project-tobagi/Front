@@ -14,7 +14,7 @@ const MobileRegionMidpointContent = ({
         <div className='flex h-[520px] mt-16  max-lg:h-full '>
             <div className='w-[370px] max-lg:w-full h-full relative'>
                 {stepFlow.loading && (
-                    <div className='absolute size-full flex items-center justify-center z-50'>
+                    <div className='absolute size-full  flex mt-36 justify-center z-50'>
                         <ColorRing
                             visible={true}
                             height='100'
