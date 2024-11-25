@@ -8,10 +8,9 @@ const defaultOptions = {
         "Content-Type": "application/json",
         // "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
         // "Accept-Encoding": "identity",
-        "Access-Control-Allow-Origin": "*",
+        // "Access-Control-Allow-Origin": "*",
         // Accept: 'application/json',
     },
-    withCredentials: true,
 };
 
 const axiosClient: any = axios.create(defaultOptions);
