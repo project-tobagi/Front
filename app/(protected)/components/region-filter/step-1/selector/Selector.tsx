@@ -85,7 +85,7 @@ const RegionSelectorLayout = ({
                         });
                     });
                 })
-                .catch((err) => {
+                .catch((err: any) => {
                     toast.error("선택한 동네의 영역을 찾지 못했습니다.", {
                         position: "top-right",
                     });
@@ -99,22 +99,23 @@ const RegionSelectorLayout = ({
         }
     }, [location]);
 
-    useEffect(() => {
-        if (location.code !== null && polygon !== null) {
-            API_SUMMARY_RANK_INFO({
-                donCd: _.join(_.slice(location.code, 0, 8), ""),
-            })
-                .then((res) => {
-                    setSummaryData(generateRegionRank(res.data, true));
-                })
-                .catch((err) => {
-                    console.log(err);
-                    toast.error("선택한 동네의 정보를 찾지 못했습니다.", {
-                        position: "top-right",
-                    });
-                });
-        }
-    }, [polygon]);
+    // ! 프로젝트 종료로 인한 API 비활성화
+    // useEffect(() => {
+    //     if (location.code !== null && polygon !== null) {
+    //         API_SUMMARY_RANK_INFO({
+    //             donCd: _.join(_.slice(location.code, 0, 8), ""),
+    //         })
+    //             .then((res) => {
+    //                 setSummaryData(generateRegionRank(res.data, true));
+    //             })
+    //             .catch((err) => {
+    //                 console.log(err);
+    //                 toast.error("선택한 동네의 정보를 찾지 못했습니다.", {
+    //                     position: "top-right",
+    //                 });
+    //             });
+    //     }
+    // }, [polygon]);
 
     useUpdateEffect(() => {
         setSearchContents(null);

@@ -9,14 +9,14 @@ export const menuState = atomWithReset<any>([
         active: true,
         disable: false,
     },
-    {
-        id: 1,
-        label: "동네찾기",
-        icon: "ic_menu",
-        activeIcon: "ic_menu_on",
-        active: false,
-        disable: false,
-    },
+    // {
+    //     id: 1,
+    //     label: "동네찾기",
+    //     icon: "ic_menu",
+    //     activeIcon: "ic_menu_on",
+    //     active: false,
+    //     disable: false,
+    // },
     {
         id: 2,
         label: "중간지점",

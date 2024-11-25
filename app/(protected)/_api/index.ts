@@ -1,12 +1,14 @@
 import axios from "../_utils/axios";
+import _ from "lodash";
 
-// // * Polygon API
-// export const API_RESION_POLYGON = (code: any) => {
-//     const res = axios.get(`/api/externalApi?path=region?dongCode=${code}`);
+// * Polygon API
+export const API_RESION_POLYGON = async (code: any) => {
+    code = _.join(_.slice(code, 0, 8), "");
+    const res = await axios.get(`/api/externalApi?dongCode=${code}`);
 
-//     console.log(res);
-//     return res;
-// };
+    return res.data.response.result.featureCollection.features[0].geometry
+        .coordinates;
+};
 
 // // * 교통정보
 // export const API_STATION_STATUS = (code: number, rank: number) => {
@@ -19,11 +21,20 @@ import axios from "../_utils/axios";
 // };
 
 // * Polygon API
-export const API_RESION_POLYGON = async (code: any) => {
-    const res = await axios.get(`/region?dongCode=${code}`);
+// export const API_RESION_POLYGON = async (code: any) => {
+//     const res = await axios.get(`/region?dongCode=${code}`);
 
-    return res;
-};
+//     return res;
+// };
+
+// * Polygon API
+// export const API_RESION_POLYGON = async (code: any) => {
+//     const res = await axios.get(
+//         `https://cors-anywhere.herokuapp.com/https://api.vworld.kr/req/data?service=data&request=GetFeature&data=LT_C_ADEMD_INFO&key=${process.env.POLYGON_API_KEY}&domain=http://localhost:3000&attrFilter=emd_cd:=:${code}`
+//     );
+
+//     return res;
+// };
 
 // HTTP 메서드: GET
 // 엔드포인트: /rank-info

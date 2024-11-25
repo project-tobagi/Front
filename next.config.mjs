@@ -12,6 +12,7 @@ const nextConfig = {
         KAKAO_REST_API_KEY: process.env.KAKAO_REST_API_KEY,
         DEPLOY_URL: process.env.DEPLOY_URL,
         DATA_API_KEY: process.env.DATA_API_KEY,
+        POLYGON_API_KEY: process.env.POLYGON_API_KEY,
     },
 };
 
