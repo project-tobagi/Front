@@ -6,6 +6,7 @@ export async function GET(request: any) {
     logger.info("polygon api key : ", process.env.POLYGON_API_KEY);
     const apiUrl = `https://api.vworld.kr/req/data?service=data&version=2.0&request=GetFeature&data=LT_C_ADEMD_INFO&key=${process.env.POLYGON_API_KEY}&domain=${process.env.API_URL}&attrFilter=emd_cd:=:${dongCode}`;
 
+    console.log(apiUrl);
     logger.info(apiUrl);
     try {
         const response = await fetch(apiUrl, {
