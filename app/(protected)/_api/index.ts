@@ -4,7 +4,9 @@ import _ from "lodash";
 // * Polygon API
 export const API_RESION_POLYGON = async (code: any) => {
     code = _.join(_.slice(code, 0, 8), "");
-    const res = await axios.get(`/api/externalApi?dongCode=${code}`);
+    const res = await axios.get(
+        `/api/polygon/req/data?service=data&version=2.0&request=GetFeature&data=LT_C_ADEMD_INFO&key=${process.env.POLYGON_API_KEY}&domain=${process.env.API_URL}&attrFilter=emd_cd:=:${code}`
+    );
 
     return res.data.response.result.featureCollection.features[0].geometry
         .coordinates;

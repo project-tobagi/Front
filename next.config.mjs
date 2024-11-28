@@ -14,6 +14,14 @@ const nextConfig = {
         DATA_API_KEY: process.env.DATA_API_KEY,
         POLYGON_API_KEY: process.env.POLYGON_API_KEY,
     },
+    async rewrites() {
+        return [
+            {
+                source: "/api/polygon/:path*",
+                destination: "https://api.vworld.kr/:path*",
+            },
+        ];
+    },
 };
 
 export default nextConfig;
